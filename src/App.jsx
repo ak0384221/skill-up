@@ -1,19 +1,18 @@
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import Normal from "./components/Normal";
 import { Outlet } from "react-router-dom";
-import AppContextProvider from "./Context/contextApi";
+import ParentContextProvider from "./Context/ParentContext";
 
 function App() {
   return (
     <>
-      <AppContextProvider>
+      <ParentContextProvider>
         <Header />
         <div className=" flex justify-center items-center  font-bold ">
           <Outlet />
         </div>
         <Footer />
-      </AppContextProvider>
+      </ParentContextProvider>
     </>
   );
 }
