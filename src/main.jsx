@@ -11,6 +11,7 @@ import Login from "./components/Login.jsx";
 import Normal from "./components/Normal.jsx";
 import ProtectedRoutes from "./routes/ProtectedRoutes.jsx";
 import NotLoggedIn from "./Errors/NotLoggedIn.jsx";
+import SignUpForm from "./components/SignUp.jsx";
 
 const routes = createBrowserRouter([
   {
@@ -19,6 +20,7 @@ const routes = createBrowserRouter([
     children: [
       { path: "/normal", element: <Normal /> },
       { path: "/login", element: <Login /> },
+      { path: "/signup", element: <SignUpForm /> },
 
       {
         element: <ProtectedRoutes />,
@@ -26,7 +28,6 @@ const routes = createBrowserRouter([
           { path: "/posts", element: <Posts /> },
           { path: "/reels", element: <Reels /> },
           { path: "/images", element: <Images /> },
-
           { path: "/create-post", element: <CreatePost /> },
         ],
       },

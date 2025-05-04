@@ -1,4 +1,9 @@
-export default function Button({ title = "Click me", variant = "blue" }) {
+export default function Button({
+  children,
+  variant = "",
+  className = "",
+  ...props
+}) {
   function getBtnColor() {
     switch (variant) {
       case "green":
@@ -13,9 +18,9 @@ export default function Button({ title = "Click me", variant = "blue" }) {
   }
   return (
     <button
-      className={` px-4 py-1.5 cursor-pointer rounded-sm hover:rounded-md ${getBtnColor()}  text-white font-[500] active:scale-105 transition-all font-Inter tracking-wide text-sm m-2 `}
+      className={`cursor-pointer rounded-sm ${getBtnColor()}  text-white font-[500] active:scale-99 transition-all font-Inter tracking-wide text-sm hover:opacity-90  my-3 ${className}`}
     >
-      {title}
+      {children}
     </button>
   );
 }
