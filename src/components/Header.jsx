@@ -1,6 +1,9 @@
+import { useContext } from "react";
 import { FaHome, FaPen, FaVideo, FaImage, FaSignOutAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../Context/AuthContext";
 export default function Header() {
+  const { logOutAuth } = useContext(AuthContext);
   return (
     <>
       <header className=" p-4  flex justify-between items-center">
@@ -29,7 +32,7 @@ export default function Header() {
 
         {/* Logout */}
         <div className="text-black hover:text-blue-500 cursor-pointer">
-          <FaSignOutAlt className="text-2xl" />
+          <FaSignOutAlt onClick={logOutAuth} className="text-2xl" />
           <span className="sr-only">Logout</span>
         </div>
       </header>

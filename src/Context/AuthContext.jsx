@@ -1,25 +1,97 @@
-import { createContext } from "react";
+import { createContext, useEffect, useState } from "react";
 import auth from "../firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signOut,
+} from "firebase/auth";
 
-const AuthContext = createContext([]);
+import { GoogleAuthProvider } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+
+export const AuthContext = createContext([]);
 export default function AuthContextProvider({ children }) {
-  function logIn() {
+  const [currentUser, setCurrentUser] = useState(null);
+  const [authorized, setAuthorized] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log(user);
+        console.log(authorized);
+        setAuthorized(true);
+        setCurrentUser(user);
+        console.log(authorized);
+        navigate("/posts");
+      } else {
+        setAuthorized(false);
+        setCurrentUser(false);
+      }
+    });
+    return () => {
+      console.log("auth is quitting subscription");
+      unsubscribe();
+    };
+  }, []);
+
+  function logInAuth(email, password) {
     //then use the user
+    console.log(email, password);
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        console.log(userCredential);
+        return userCredential;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
-  function signup(username, email, password) {
+  function signUpAuth(username, email, password) {
+    console.log(username, email, password);
+    return createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        console.log(userCredential);
+        setCurrentUser();
+
+        return userCredential;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     //create a User
   }
 
   function logInWithGoogle() {
     //login with google
+    const provider = new GoogleAuthProvider();
+    return signInWithPopup(auth, provider)
+      .then((userCredential) => {
+        console.log(userCredential);
+        return userCredential;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
-  function logOut() {}
+  function logOutAuth() {
+    return signOut(auth)
+      .then(() => {
+        console.log("logging out... ");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   return (
-    <AuthContext.Provider value={{ title: "123" }}>
+    <AuthContext.Provider
+      value={{ authorized, logInWithGoogle, signUpAuth, logInAuth, logOutAuth }}
+    >
       {children}
     </AuthContext.Provider>
   );

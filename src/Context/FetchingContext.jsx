@@ -1,5 +1,5 @@
 import { createContext } from "react";
-const FetchingContext = createContext([]);
+export const FetchingContext = createContext([]);
 
 export default function FetchingContextProvider({ children }) {
   return (

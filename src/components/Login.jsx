@@ -2,7 +2,15 @@ import Button from "../shared/Button";
 import { FcGoogle } from "react-icons/fc";
 import { SiFacebook } from "react-icons/si";
 import { AiFillGithub } from "react-icons/ai";
+import { Form } from "react-router-dom";
+import { useContext, useRef } from "react";
+import { AuthContext } from "../Context/AuthContext";
+import { logInFormHandler } from "../utils/helperFunctions";
+
 export default function Login() {
+  const { logInAuth, logInWithGoogle } = useContext(AuthContext);
+  const emailRef = useRef();
+  const passRef = useRef();
   return (
     <div className=" flex items-center justify-center px-2 border-1 border-[#d4d4d4] my-7 rounded-sm w-4/5">
       <div className="max-w-md w-full bg-white rounded-2xl shadow-lg px-6 py-8">
@@ -10,7 +18,14 @@ export default function Login() {
           Login to your account
         </h2>
 
-        <form className="space-y-5">
+        <Form
+          method="post"
+          action="#"
+          onSubmit={(evt) => {
+            logInFormHandler(evt, emailRef, passRef, logInAuth);
+          }}
+          className="space-y-5"
+        >
           <div>
             <label
               htmlFor="email"
@@ -19,6 +34,7 @@ export default function Login() {
               Email address
             </label>
             <input
+              ref={emailRef}
               id="email"
               type="email"
               className="w-full px-4 py-2 border-1 border-[#c7c7c7] rounded-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -33,6 +49,7 @@ export default function Login() {
               Password
             </label>
             <input
+              ref={passRef}
               id="password"
               type="password"
               className="w-full px-4 py-2 border-1  border-[#c7c7c7] rounded-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -41,7 +58,7 @@ export default function Login() {
           </div>
           <div className="flex items-center justify-between text-sm">
             <label className="flex items-center text-[#424242]">
-              <input type="checkbox" className="form-checkbox mr-2" />
+              <input type="checkbox" className="Form-checkbox mr-2" />
               Remember me
             </label>
             <a href="#" className="text-blue-500 hover:underline">
@@ -51,7 +68,7 @@ export default function Login() {
           <Button className={`w-full h-10`} variant="blue">
             Click me
           </Button>
-        </form>
+        </Form>
 
         <p className="mt-6 text-center text-sm text-[#303030]">
           Don’t have an account?
@@ -63,7 +80,10 @@ export default function Login() {
           </a>
         </p>
         <div className=" flex  gap-2 justify-center my-2">
-          <FcGoogle className="size-6 cursor-pointer hover:scale-115 transition-all " />
+          <FcGoogle
+            onClick={logInWithGoogle}
+            className="size-6 cursor-pointer hover:scale-115 transition-all "
+          />
           <SiFacebook className="size-6 cursor-pointer hover:scale-115 transition-all " />
           <AiFillGithub className="size-6 cursor-pointer hover:scale-115 transition-all " />
         </div>
