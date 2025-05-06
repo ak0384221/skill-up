@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect } from "react";
-import { addDoc, deleteDoc, doc, getDocs } from "firebase/firestore";
+import { addDoc, deleteDoc, doc, getDocs, updateDoc } from "firebase/firestore";
 import { postDataRef } from "../firebase";
 import { useState } from "react";
 import { AuthContext } from "./AuthContext";
@@ -67,9 +67,42 @@ export default function FetchingContextProvider({ children }) {
         console.log(err);
       });
   }
+  function updatepost(postId, updatedData) {
+    const singlePostRef = doc(postDataRef, postId);
+    return updateDoc(singlePostRef, updatedData)
+      .then(() => {
+        console.log("post sucessfully updated");
+        setPostList((prevDocs) =>
+          prevDocs.map((pDoc) =>
+            pDoc.id === postId ? { ...pDoc, title: updatedData.title } : pDoc
+          )
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function handleTitleChange(evt) {
+    setEditTitle(evt.target.value);
+  }
+
+  function handleSave() {
+    // Replace this with your actual Firestore update function
+    console.log("Saving updated title:", editTitle);
+    updatepost(post.id, { title: editTitle })
+      .then(() => {
+        setIsEditing(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   return (
-    <FetchingContext.Provider value={{ uploadPost, removePost, postList }}>
+    <FetchingContext.Provider
+      value={{ updatepost, uploadPost, removePost, postList }}
+    >
       {children}
     </FetchingContext.Provider>
   );
