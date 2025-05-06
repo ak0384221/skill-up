@@ -1,10 +1,10 @@
 import { useContext, useState } from "react";
 import { FetchingContext } from "../../Context/FetchingContext";
+import { IoCloudDoneSharp } from "react-icons/io5";
 
-export default function MainPost({ post }) {
+export default function MainPost({ post, isEditing, setIsEditing }) {
   const { updatepost } = useContext(FetchingContext);
   const [editTitle, setEditTitle] = useState(post.title);
-  const [isEditing, setIsEditing] = useState(false);
 
   function handleTitleChange(evt) {
     setEditTitle(evt.target.value);
@@ -34,22 +34,16 @@ export default function MainPost({ post }) {
               value={editTitle}
               onChange={handleTitleChange}
             ></textarea>
-            <button
-              className="mt-1 px-3 py-1 bg-blue-600 rounded"
-              onClick={handleSave}
-            >
-              update
-            </button>
+            <div className="w-full  flex justify-end items-center ">
+              <IoCloudDoneSharp
+                className=" text-4xl cursor-pointer rounded-full hover:bg-white transition-colors  p-1 text-blue-500"
+                onClick={handleSave}
+              />
+            </div>
           </>
         ) : (
           <>
             <p>{post.title}</p>
-            <button
-              className="mt-1 px-3 py-1 bg-gray-700 rounded"
-              onClick={() => setIsEditing(true)}
-            >
-              Edit
-            </button>
           </>
         )}
       </div>

@@ -2,9 +2,10 @@ import { useContext } from "react";
 import { RxCross2 } from "react-icons/rx";
 import { FetchingContext } from "../../Context/FetchingContext";
 import { RiEdit2Fill } from "react-icons/ri";
+import { LiaUndoAltSolid } from "react-icons/lia";
 
-export default function TopMostInfoCard({ post }) {
-  const { removePost, setIsEditing } = useContext(FetchingContext);
+export default function TopMostInfoCard({ post, isEditing, setIsEditing }) {
+  const { removePost } = useContext(FetchingContext);
   return (
     <div className="upper-Info-Card flex p-2  w-full  justify-between items-center h-20 ">
       <div className="left h-full min-w-32 w-max    flex justify-center items-center gap-2 p-1 ">
@@ -28,10 +29,17 @@ export default function TopMostInfoCard({ post }) {
       </div>
 
       <div className="right    gap-2  flex justify-evenly items-center">
-        <RiEdit2Fill
-          onClick={() => setIsEditing(true)}
-          className=" text-4xl text-white hover:bg-[#3d3c3c] p-1.25 rounded-full transition-colors "
-        />
+        {isEditing ? (
+          <LiaUndoAltSolid
+            className=" text-4xl text-white hover:bg-[#3d3c3c] p-1.25 rounded-full transition-colors font-extrabold "
+            onClick={() => setIsEditing(!isEditing)}
+          />
+        ) : (
+          <RiEdit2Fill
+            onClick={() => setIsEditing(!isEditing)}
+            className=" text-4xl text-white hover:bg-[#3d3c3c] p-1.25 rounded-full transition-colors "
+          />
+        )}
 
         <RxCross2
           onClick={() => {
