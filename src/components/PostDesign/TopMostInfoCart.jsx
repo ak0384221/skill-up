@@ -1,6 +1,9 @@
+import { useContext } from "react";
 import { RxCross2 } from "react-icons/rx";
+import { FetchingContext } from "../../Context/FetchingContext";
 
 export default function TopMostInfoCard({ post }) {
+  const { removePost } = useContext(FetchingContext);
   return (
     <div className="upper-Info-Card flex p-2  w-full  justify-between items-center h-20 ">
       <div className="left h-full min-w-32 w-max    flex justify-center items-center gap-2 p-1 ">
@@ -24,7 +27,12 @@ export default function TopMostInfoCard({ post }) {
       </div>
 
       <div className="right      flex justify-evenly items-center">
-        <RxCross2 className=" text-4xl text-white hover:bg-[#3d3c3c] p-1.25 rounded-full transition-colors " />
+        <RxCross2
+          onClick={() => {
+            removePost(post.id);
+          }}
+          className=" text-4xl text-white hover:bg-[#3d3c3c] p-1.25 rounded-full transition-colors "
+        />
       </div>
     </div>
   );
