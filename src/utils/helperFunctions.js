@@ -29,4 +29,16 @@ function logInFormHandler(evt, emailRef, passRef, logInAuth) {
   logInAuth(email, password);
 }
 
-export { signUpFormHandler, logInFormHandler };
+function uploadPostFormHandler(evt, titleRef, pictureUrlRef, uploadPost) {
+  evt.preventDefault();
+  const title = titleRef.current.value;
+  const pictureUrl = pictureUrlRef.current.value;
+
+  const postObj = {
+    username: "Ayaan Khan",
+    title: title,
+    pictureURL: pictureUrl,
+  };
+  uploadPost(postObj);
+}
+export { signUpFormHandler, logInFormHandler, uploadPostFormHandler };

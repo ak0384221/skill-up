@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import auth from "../firebase";
+import { auth } from "../firebase";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
@@ -24,7 +24,6 @@ export default function AuthContextProvider({ children }) {
         console.log(authorized);
         setAuthorized(true);
         setCurrentUser(user);
-        console.log(authorized);
         navigate("/posts");
       } else {
         setAuthorized(false);
@@ -42,7 +41,6 @@ export default function AuthContextProvider({ children }) {
     console.log(email, password);
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        console.log(userCredential);
         return userCredential;
       })
       .catch((err) => {
@@ -54,7 +52,6 @@ export default function AuthContextProvider({ children }) {
     console.log(username, email, password);
     return createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        console.log(userCredential);
         setCurrentUser();
 
         return userCredential;
@@ -70,7 +67,6 @@ export default function AuthContextProvider({ children }) {
     const provider = new GoogleAuthProvider();
     return signInWithPopup(auth, provider)
       .then((userCredential) => {
-        console.log(userCredential);
         return userCredential;
       })
       .catch((err) => {
