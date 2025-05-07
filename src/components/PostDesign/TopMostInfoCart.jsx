@@ -7,8 +7,8 @@ import { LiaUndoAltSolid } from "react-icons/lia";
 export default function TopMostInfoCard({ post, isEditing, setIsEditing }) {
   const { removePost } = useContext(FetchingContext);
   return (
-    <div className="upper-Info-Card flex p-2  w-full px-4  justify-between items-center h-max ">
-      <div className="left h-full  w-max    flex justify-center items-center gap-2 p-1 ">
+    <div className="upper-Info-Card flex   w-full   justify-between items-center max-h-max bg-transparent px-2  mt-4  h-[3.5rem]">
+      <div className="left h-full       flex justify-center items-center gap-2 p-1 ">
         <a
           className="hover:underline font-Inter text-3xl font-extrabold bg-gradient-to-r from-pink-500 via-red-500 to-yellow-400 bg-clip-text text-transparent"
           href=""
@@ -25,7 +25,7 @@ export default function TopMostInfoCard({ post, isEditing, setIsEditing }) {
         ) : (
           <RiEdit2Fill
             onClick={() => setIsEditing(!isEditing)}
-            className=" text-2xl text-white hover:cursor-pointer p-1.25 rounded-full transition-colors bg-gradient-to-r from-[#44c907]  to-[#153ec4]"
+            className=" text-4xl text-white hover:cursor-pointer p-1.25 rounded-full transition-colors bg-gradient-to-r from-[#44c907]  to-[#153ec4]"
           />
         )}
 

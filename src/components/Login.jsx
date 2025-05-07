@@ -12,10 +12,10 @@ export default function Login() {
   const emailRef = useRef();
   const passRef = useRef();
   return (
-    <div className=" flex items-center justify-center px-2 border-1 border-[#d4d4d4] my-7 rounded-sm w-4/5">
-      <div className="max-w-md w-full bg-white rounded-2xl shadow-lg px-6 py-8">
-        <h2 className="text-2xl font-bold text-center text-blue-500 mb-6">
-          Login to your account
+    <div className=" flex items-center justify-center  rounded-sm w-full h-[70vh] my-5 font-Inter">
+      <div className=" w-[90%] bg-white rounded-2xl  px-3  py-4 border-1 border-[#ce7ece] ">
+        <h2 className="text-3xl text-center bg-gradient-to-r from-purple-500 via-purple-500  to-pink-500 bg-clip-text text-transparent mb-6">
+          Log In
         </h2>
 
         <Form
@@ -24,12 +24,12 @@ export default function Login() {
           onSubmit={(evt) => {
             logInFormHandler(evt, emailRef, passRef, logInAuth);
           }}
-          className="space-y-5"
+          className="space-y-5  w-full mx-auto px-1 "
         >
           <div>
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-[#292929] mb-1"
+              className="block text-sm font-medium text-[#a71ec9] mb-1"
             >
               Email address
             </label>
@@ -38,13 +38,12 @@ export default function Login() {
               id="email"
               type="email"
               className="w-full px-4 py-2 border-1 border-[#c7c7c7] rounded-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="you@example.com"
             />
           </div>
           <div>
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-[#292929] mb-1"
+              className="block text-sm font-medium text-[#a71ec9] mb-1"
             >
               Password
             </label>
@@ -57,24 +56,24 @@ export default function Login() {
             />
           </div>
           <div className="flex items-center justify-between text-sm">
-            <label className="flex items-center text-[#424242]">
+            <label className="flex items-center text-[#a71ec9]">
               <input type="checkbox" className="Form-checkbox mr-2" />
               Remember me
             </label>
-            <a href="#" className="text-blue-500 hover:underline">
+            <a href="#" className="text-[#a71ec9] hover:underline">
               Forgot password?
             </a>
           </div>
-          <Button className={`w-full h-10`} variant="blue">
-            Click me
-          </Button>
+          <button className="w-full h-10 bg-gradient-to-r from-purple-500 to-pink-500  hover:from-purple-600 hover:to-pink-600   active:scale-97 transition text-white">
+            login
+          </button>
         </Form>
 
         <p className="mt-6 text-center text-sm text-[#303030]">
           Don’t have an account?
           <a
             href="/signup"
-            className="text-blue-500 hover:underline font-medium mx-2"
+            className="text-[#a71ec9] hover:underline font-bold mx-2"
           >
             Sign up
           </a>

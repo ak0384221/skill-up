@@ -10,42 +10,44 @@ export default function CreatePost() {
 
   return (
     <>
-      <div className="w-4/5 h-[90vh]  my-4">
-        <p className="text-4xl text-center my-5 text-white">Create a post </p>
+      <div className="w-full md:w-2/3 lg:w-2/5 my-4 font-Inter p-5">
+        <p className="text-4xl text-center my-5 bg-gradient-to-r from-purple-500 via-purple-500  to-pink-500 bg-clip-text text-transparent">
+          Create a post{" "}
+        </p>
         <Form
           action="#"
           method="post"
           onSubmit={(evt) => {
             uploadPostFormHandler(evt, titleRef, pictureUrlRef, uploadPost);
           }}
-          className=" p-8 w-5/6 mx-auto border-1 rounded-sm border-[#757373]"
+          className="w-full mx-auto  rounded-sm  p-2 "
         >
           <div className="mb-4">
-            <label className="block mb-1 text-gray-200 font-Inter font-light">
+            <label className="block mb-1  bg-gradient-to-r from-blue-700  to-purple-700 bg-clip-text text-transparent  font-[500] ">
               What's on your mind?
             </label>
             <textarea
               rows="6"
               ref={titleRef}
-              className="w-full p-2 border text-white font-Roboto font-normal border-gray-500 rounded resize-none placeholder:text-gray-300 placeholder:font-light placeholder:font-Inter placeholder:text-sm"
+              className="w-full p-2 border text-black font-normal border-[#cc93f3] rounded resize-none placeholder:text-[#838181] placeholder:font-light placeholder:font-Inter placeholder:text-sm focus:outline-blue-400"
               placeholder="Write something..."
             ></textarea>
           </div>
 
           <div className="mb-4">
-            <label className="block mb-1 text-gray-200 font-Inter font-light">
+            <label className="block mb-1 bg-gradient-to-r from-blue-700  to-purple-700 bg-clip-text text-transparent  font-[500] ">
               Picture url
             </label>
             <textarea
               rows="2"
               ref={pictureUrlRef}
-              className="w-full p-2 border text-white font-Roboto font-normal border-gray-500 rounded resize-none"
+              className="w-full p-2 border text-black font-normal border-[#cc93f3] rounded resize-none placeholder:text-[#838181] placeholder:font-light placeholder:font-Inter placeholder:text-sm focus:outline-blue-400"
             ></textarea>
           </div>
 
           <button
             type="submit"
-            className="bg-green-600 cursor-pointer text-white px-4 py-2 w-full rounded hover:bg-blue-700"
+            className=" cursor-pointer text-white px-4 py-2 w-full rounded bg-gradient-to-r from-purple-500 to-pink-500  hover:from-purple-600 hover:to-pink-600   active:scale-97 transition"
           >
             Submit
           </button>

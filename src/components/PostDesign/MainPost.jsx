@@ -24,12 +24,12 @@ export default function MainPost({ post, isEditing, setIsEditing }) {
 
   return (
     <>
-      <div className="post w-full h-max px-3 pb-3 text-gray-300 font-[400]">
+      <div className="post w-full  h-max   text-[#3b3b3b] font-[400]">
         {isEditing ? (
           <>
             <textarea
               rows="2"
-              className="w-full p-1 border"
+              className="w-full p-1 border-1 border-purple-400"
               placeholder="Write something..."
               value={editTitle}
               onChange={handleTitleChange}
@@ -43,7 +43,7 @@ export default function MainPost({ post, isEditing, setIsEditing }) {
           </>
         ) : (
           <>
-            <p className="px-3">
+            <p className=" h-max px-3  mb-2">
               {post.title === "" ? "No caption needed" : post.title}
             </p>
           </>

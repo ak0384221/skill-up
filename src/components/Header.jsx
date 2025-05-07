@@ -14,9 +14,12 @@ export default function Header() {
     <>
       <header className=" p-4  flex justify-between items-center font-Inter ">
         {/* Logo */}
-        <div className="text-3xl  font-Fugaz bg-gradient-to-r from-purple-500 via-purple-500  to-pink-500 bg-clip-text text-transparent">
+        <Link
+          to="/posts"
+          className="text-3xl  font-Fugaz bg-gradient-to-r from-purple-500 via-purple-500  to-pink-500 bg-clip-text text-transparent"
+        >
           Vibehive
-        </div>
+        </Link>
 
         {/* Navigation */}
 
@@ -67,7 +70,7 @@ export default function Header() {
         {/* Logout */}
         <div className=" cursor-pointer">
           <button
-            className="px-4 py-2 cursor-pointer text-white font-bold rounded-sm bg-gradient-to-r from-purple-500 to-pink-500  hover:from-purple-600 hover:to-pink-600   active:scale-97 transition"
+            className="px-3 py-2 text-sm cursor-pointer text-white font-bold rounded-sm bg-gradient-to-r from-purple-500 to-pink-500  hover:from-purple-600 hover:to-pink-600   active:scale-97 transition"
             onClick={logOutAuth}
           >
             Log out

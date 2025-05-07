@@ -1,17 +1,16 @@
 import { useState } from "react";
 import { FaHeart } from "react-icons/fa";
-import { FaShare } from "react-icons/fa6";
+import { CiShare2 } from "react-icons/ci";
+import { CiHeart } from "react-icons/ci";
 
 export default function BottomMostCard() {
   return (
-    <div className="lower pt-3   bg-[#242526] flex  justify-evenly items-center ">
-      <span className="w-1/3   flex justify-center items-center  ">
-        <FaHeart className=" w-1/2   text-3xl text-white hover:cursor-pointer p-1" />
-        <span className="text-white">10</span>
+    <div className="lower  h-[3.5rem]  p-2  flex justify-center items-center gap-3 w-4/5 mx-auto ">
+      <span className="flex justify-center items-center w-1/2 h-full gap-4 hover:bg-[#f1efef]  rounded-md transition-colors">
+        <CiHeart className=" text-3xl " />
       </span>
-      <span className="w-1/3   flex justify-center items-center  ">
-        <FaShare className=" w-1/2   text-3xl text-white hover:cursor-pointer p-1" />
-        <span className="text-white">1</span>
+      <span className="flex justify-center items-center w-1/2 h-full gap-4 hover:bg-[#f1efef] rounded-md transition-colors">
+        <CiShare2 className=" text-3xl" />
       </span>
     </div>
   );

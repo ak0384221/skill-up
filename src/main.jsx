@@ -21,6 +21,7 @@ const routes = createBrowserRouter([
       { path: "/normal", element: <Normal /> },
       { path: "/login", element: <Login /> },
       { path: "/signup", element: <SignUpForm /> },
+      { path: "/", element: <SignUpForm /> },
 
       {
         element: <ProtectedRoutes />,

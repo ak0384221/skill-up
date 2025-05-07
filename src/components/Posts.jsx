@@ -10,7 +10,7 @@ export default function Posts() {
   return (
     <>
       {postList.length !== 0 && (
-        <div className="postsList w-4/5 md:w-1/2  ">
+        <div className="postsList w-[90%] md:w-1/2   ">
           {postList.map((post) => {
             console.log(post);
             return <SinglePostCard key={post.id} post={post} />;
