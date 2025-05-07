@@ -39,7 +39,7 @@ export default function AuthContextProvider({ children }) {
   function logInAuth(email, password) {
     //then use the user
     console.log(email, password);
-    signInWithEmailAndPassword(auth, email, password)
+    return signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         return userCredential;
       })
@@ -52,8 +52,6 @@ export default function AuthContextProvider({ children }) {
     console.log(username, email, password);
     return createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        setCurrentUser();
-
         return userCredential;
       })
       .catch((error) => {

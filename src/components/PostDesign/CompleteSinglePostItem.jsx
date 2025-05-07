@@ -7,7 +7,7 @@ export default function SinglePostCard({ post }) {
   const [isEditing, setIsEditing] = useState(false);
 
   return (
-    <div className="post w-full min-h-[50vh]  mx-auto rounded-xl flex flex-col justify-between overflow-hidden  bg-[#242526] my-4 ">
+    <div className="post w-full min-h-[50vh] border py-4  mx-auto rounded-xl flex flex-col justify-between overflow-hidden  bg-[#242526] my-4 ">
       <TopMostInfoCard
         post={post}
         isEditing={isEditing}

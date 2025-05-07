@@ -4,6 +4,7 @@ import { postDataRef } from "../firebase";
 import { useState } from "react";
 import { AuthContext } from "./AuthContext";
 import { useNavigate } from "react-router-dom";
+
 export const FetchingContext = createContext([]);
 
 export default function FetchingContextProvider({ children }) {
@@ -26,7 +27,7 @@ export default function FetchingContextProvider({ children }) {
         const posts = snapshot.docs.map((doc) => {
           return { id: doc.id, ...doc.data() };
         });
-        console.log(posts);
+
         setPostList(posts);
 
         return posts;
@@ -77,22 +78,6 @@ export default function FetchingContextProvider({ children }) {
             pDoc.id === postId ? { ...pDoc, title: updatedData.title } : pDoc
           )
         );
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
-  function handleTitleChange(evt) {
-    setEditTitle(evt.target.value);
-  }
-
-  function handleSave() {
-    // Replace this with your actual Firestore update function
-    console.log("Saving updated title:", editTitle);
-    updatepost(post.id, { title: editTitle })
-      .then(() => {
-        setIsEditing(false);
       })
       .catch((err) => {
         console.log(err);

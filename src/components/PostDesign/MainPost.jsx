@@ -43,7 +43,9 @@ export default function MainPost({ post, isEditing, setIsEditing }) {
           </>
         ) : (
           <>
-            <p>{post.title}</p>
+            <p className="px-3">
+              {post.title === "" ? "No caption needed" : post.title}
+            </p>
           </>
         )}
       </div>

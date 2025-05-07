@@ -1,41 +1,77 @@
 import { useContext } from "react";
-import { FaHome, FaPen, FaVideo, FaImage, FaSignOutAlt } from "react-icons/fa";
+import { FaPen, FaVideo, FaImage, FaSignOutAlt } from "react-icons/fa";
+import { FaHeartCirclePlus } from "react-icons/fa6";
+import { SiMediamarkt } from "react-icons/si";
+import { NavLink } from "react-router-dom";
+
+import { SlFeed } from "react-icons/sl";
+
 import { Link } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
 export default function Header() {
   const { logOutAuth } = useContext(AuthContext);
   return (
     <>
-      <header className=" p-4  flex justify-between items-center">
+      <header className=" p-4  flex justify-between items-center font-Inter ">
         {/* Logo */}
-        <div className="text-white tracking-wider font-Roboto font-extrabold text-2xl">
-          Skill<span className="text-blue-500">Up</span>
+        <div className="text-3xl  font-Fugaz bg-gradient-to-r from-purple-500 via-purple-500  to-pink-500 bg-clip-text text-transparent">
+          Vibehive
         </div>
 
         {/* Navigation */}
+
         <nav className="flex space-x-6">
-          <Link to="/posts" className="text-white hover:text-blue-500">
-            <FaHome className="text-2xl" />
-            <span className="sr-only">Home</span>
-          </Link>
-          <Link to="/create-post" className="text-white hover:text-blue-500">
-            <FaPen className="text-2xl" />
-            <span className="sr-only">Create Post</span>
-          </Link>
-          <Link to="/reels" className="text-white hover:text-blue-500">
-            <FaVideo className="text-2xl" />
-            <span className="sr-only">Videos</span>
-          </Link>
-          <Link to="/images" className="text-white hover:text-blue-500">
-            <FaImage className="text-2xl" />
-            <span className="sr-only">Images</span>
-          </Link>
+          <NavLink
+            to="/posts"
+            title="feed"
+            className={({ isActive }) =>
+              `size-9 bg-gradient-to-r from-[#faa94d] to-[#ff0f06] flex justify-center items-center rounded-full p-1.25 ${
+                isActive
+                  ? "bg-gradient-to-r from-purple-500 to-pink-500  "
+                  : "bg-gradient-to-r from-[#faa94d] to-[#ff0f06] "
+              }`
+            }
+          >
+            <SlFeed className="size-7 p-1 text-white" />
+          </NavLink>
+
+          <NavLink
+            to="/create-post"
+            title="create post"
+            className={({ isActive }) =>
+              `size-9  flex justify-center items-center rounded-full ${
+                isActive
+                  ? "bg-gradient-to-r from-purple-500 to-pink-500    "
+                  : "bg-gradient-to-r from-[#faa94d] to-[#ff0f06]"
+              }`
+            }
+          >
+            <FaHeartCirclePlus className="size-7 p-1 text-white" />
+          </NavLink>
+
+          <NavLink
+            to="/reels"
+            title="reels"
+            className={({ isActive }) =>
+              `size-9 bg-gradient-to-r from-[#faa94d] to-[#ff0f06] flex justify-center items-center rounded-full ${
+                isActive
+                  ? "bg-gradient-to-r from-purple-500 to-pink-500    "
+                  : "bg-gradient-to-r from-[#faa94d] to-[#ff0f06]"
+              }`
+            }
+          >
+            <SiMediamarkt className="size-7 p-1 text-white" />
+          </NavLink>
         </nav>
 
         {/* Logout */}
-        <div className="text-white hover:text-blue-500 cursor-pointer">
-          <FaSignOutAlt onClick={logOutAuth} className="text-2xl" />
-          <span className="sr-only">Logout</span>
+        <div className=" cursor-pointer">
+          <button
+            className="px-4 py-2 cursor-pointer text-white font-bold rounded-sm bg-gradient-to-r from-purple-500 to-pink-500  hover:from-purple-600 hover:to-pink-600   active:scale-97 transition"
+            onClick={logOutAuth}
+          >
+            Log out
+          </button>
         </div>
       </header>
     </>
