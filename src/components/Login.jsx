@@ -6,9 +6,11 @@ import { Form } from "react-router-dom";
 import { useContext, useRef } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { logInFormHandler } from "../utils/helperFunctions";
+import Loader from "../shared/loader";
 
 export default function Login() {
-  const { logInAuth, logInWithGoogle } = useContext(AuthContext);
+  const { logInAuth, logInWithGoogle, AuthLoading, setAuthLoading } =
+    useContext(AuthContext);
   const emailRef = useRef();
   const passRef = useRef();
   return (
@@ -64,8 +66,8 @@ export default function Login() {
               Forgot password?
             </a>
           </div>
-          <button className="w-full h-10 bg-gradient-to-r from-purple-500 to-pink-500  hover:from-purple-600 hover:to-pink-600   active:scale-97 transition text-white">
-            login
+          <button className="w-full h-10 bg-gradient-to-r from-purple-500 to-pink-500  hover:from-purple-600 hover:to-pink-600   active:scale-97 transition  flex justify-center items-center text-white">
+            {AuthLoading ? <Loader /> : "Log in"}
           </button>
         </Form>
 
@@ -80,7 +82,10 @@ export default function Login() {
         </p>
         <div className=" flex  gap-2 justify-center my-2">
           <FcGoogle
-            onClick={logInWithGoogle}
+            onClick={() => {
+              setAuthLoading(true);
+              logInWithGoogle();
+            }}
             className="size-6 cursor-pointer hover:scale-115 transition-all "
           />
           <SiFacebook className="size-6 cursor-pointer hover:scale-115 transition-all " />

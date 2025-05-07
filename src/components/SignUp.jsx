@@ -4,8 +4,9 @@ import Button from "../shared/Button";
 import { signUpFormHandler } from "../utils/helperFunctions";
 import { useContext, useRef } from "react";
 import { AuthContext } from "../Context/AuthContext";
+import Loader from "../shared/loader";
 export default function SignUpForm() {
-  const { signUpAuth } = useContext(AuthContext);
+  const { signUpAuth, AuthLoading, setAuthLoading } = useContext(AuthContext);
   const emailRef = useRef();
   const userNameRef = useRef();
   const passRef = useRef();
@@ -16,7 +17,8 @@ export default function SignUpForm() {
       <Form
         method="post"
         action="#"
-        onSubmit={(evt) =>
+        onSubmit={(evt) => {
+          setAuthLoading(true);
           signUpFormHandler(
             evt,
             userNameRef,
@@ -24,8 +26,8 @@ export default function SignUpForm() {
             passRef,
             confirmPassRef,
             signUpAuth
-          )
-        }
+          );
+        }}
         className="bg-white  rounded-xl  w-full px-3 border-1 py-6 border-[#90a8f7] space-y-3"
       >
         <h2 className="text-3xl font-semibold text-center bg-gradient-to-r from-[#0729e9] via-[#a576e2]  to-[#d111d1] bg-clip-text text-transparent">
@@ -39,7 +41,7 @@ export default function SignUpForm() {
           <input
             type="text"
             ref={userNameRef}
-            className="border-1 border-[#c7c7c7] rounded-md px-2 py-2 focus:outline-none focus:ring-2  focus:ring-blue-400"
+            className="border-1 border-[#c7c7c7] rounded-md px-2 py-2 focus:outline-none focus:ring-2  focus:ring-blue-400 font-light font-Inter"
           />
         </div>
         <div>
@@ -53,7 +55,7 @@ export default function SignUpForm() {
             id="email"
             ref={emailRef}
             type="email"
-            className="w-full px-4 py-2 border-1 border-[#c7c7c7] rounded-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-4 py-2 border-1 border-[#c7c7c7] rounded-sm focus:outline-none focus:ring-2 focus:ring-blue-500 font-light font-Inter"
           />
         </div>
 
@@ -65,7 +67,7 @@ export default function SignUpForm() {
           <input
             ref={passRef}
             type="password"
-            className="border-1 border-[#c7c7c7] rounded-md px-2 py-2 focus:outline-none focus:ring-2  focus:ring-blue-400"
+            className="border-1 border-[#c7c7c7] rounded-md px-2 py-2 focus:outline-none focus:ring-2  focus:ring-blue-400 font-light font-Inter placeholder:font-bold"
             placeholder="••••••••"
           />
         </div>
@@ -77,15 +79,15 @@ export default function SignUpForm() {
           <input
             ref={confirmPassRef}
             type="password"
-            className="border-1 border-[#c7c7c7] rounded-md px-2 py-2 focus:outline-none focus:ring-2  focus:ring-blue-400"
+            className="border-1 border-[#c7c7c7] rounded-md px-2 py-2 focus:outline-none focus:ring-2  focus:ring-blue-400 font-light font-Inter placeholder:font-bold"
             placeholder="••••••••"
           />
         </div>
 
         <Button variant="blue" className="w-full h-10">
-          Sign Up
+          {AuthLoading ? <Loader /> : "Sign up"}
         </Button>
-        <p className="font-bold  text-sm text-center ">
+        <p className="font-bold  text-sm text-center text-[#2a48ac] ">
           Already have an account?{" "}
           <Link className="text-purple-600" to="/login">
             log in

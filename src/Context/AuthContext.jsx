@@ -14,7 +14,8 @@ import { useNavigate } from "react-router-dom";
 export const AuthContext = createContext([]);
 export default function AuthContextProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
-  const [authorized, setAuthorized] = useState(false);
+  const [authorized, setAuthorized] = useState(null);
+  const [AuthLoading, setAuthLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,6 +25,7 @@ export default function AuthContextProvider({ children }) {
         console.log(authorized);
         setAuthorized(true);
         setCurrentUser(user);
+        setAuthLoading(false);
         navigate("/posts");
       } else {
         setAuthorized(false);
@@ -84,7 +86,15 @@ export default function AuthContextProvider({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ authorized, logInWithGoogle, signUpAuth, logInAuth, logOutAuth }}
+      value={{
+        authorized,
+        logInWithGoogle,
+        signUpAuth,
+        logInAuth,
+        logOutAuth,
+        AuthLoading,
+        setAuthLoading,
+      }}
     >
       {children}
     </AuthContext.Provider>

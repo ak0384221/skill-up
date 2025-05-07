@@ -1,9 +1,11 @@
 import { createContext, useContext, useEffect } from "react";
 import { addDoc, deleteDoc, doc, getDocs, updateDoc } from "firebase/firestore";
-import { postDataRef } from "../firebase";
+import { postDataRef, db } from "../firebase";
 import { useState } from "react";
 import { AuthContext } from "./AuthContext";
 import { useNavigate } from "react-router-dom";
+
+import { collection, serverTimestamp } from "firebase/firestore";
 
 export const FetchingContext = createContext([]);
 
@@ -11,8 +13,9 @@ export default function FetchingContextProvider({ children }) {
   const [postList, setPostList] = useState([]);
   const { authorized } = useContext(AuthContext);
   const navigate = useNavigate();
+  //
 
-  //fetching posts from database
+  // fetching posts from database
   useEffect(() => {
     if (authorized) {
       getPost();
@@ -39,13 +42,18 @@ export default function FetchingContextProvider({ children }) {
 
   //addpost and combine prev posts
   function uploadPost(postObj) {
+    const postWithTimestamp = {
+      ...postObj,
+      createdAt: serverTimestamp(),
+    };
     return addDoc(postDataRef, postObj)
       .then((docRef) => {
         console.log("post uploaded");
-        const newPost = { id: docRef.id, ...postObj };
+        const newPost = { id: docRef.id, ...postObj, createdAt: new Date() };
         setPostList((prev) => {
           return [newPost, ...prev];
         });
+        console.log(newPost);
         navigate("/posts");
       })
       .catch((err) => {
