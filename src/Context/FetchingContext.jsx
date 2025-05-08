@@ -28,7 +28,7 @@ export default function FetchingContextProvider({ children }) {
     let unsubscribe = () => {};
     if (authorized) {
       const postsQuery = query(postDataRef, orderBy("createdAt", "desc"));
-      const unsubscribe = onSnapshot(postsQuery, (snapshot) => {
+      unsubscribe = onSnapshot(postsQuery, (snapshot) => {
         const postslist = snapshot.docs.map((document) => ({
           id: document.id,
           ...document.data(),
@@ -39,7 +39,7 @@ export default function FetchingContextProvider({ children }) {
     } else {
       console.log("Not authorized....");
     }
-    return () => unsubscribe;
+    return () => unsubscribe();
   }, [authorized]);
 
   //Listener Function for database-----OnSnapshot
