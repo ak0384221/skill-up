@@ -13,7 +13,7 @@ export default function SignUpForm() {
   const confirmPassRef = useRef();
 
   return (
-    <div className="h-[70vh] mt-10 mv-3 flex items-center justify-center bg-gray-100  w-[90%] ">
+    <div className="  flex items-center justify-center h-[80vh] rounded-sm w-full   font-Inter   ">
       <Form
         method="post"
         action="#"
@@ -28,7 +28,7 @@ export default function SignUpForm() {
             signUpAuth
           );
         }}
-        className="bg-white  rounded-xl  w-full px-3 border-1 py-6 border-[#90a8f7] space-y-3"
+        className="w-[95%] md:w-2/3 lg:w-3/5 xl:w-1/3 bg-white rounded-2xl  p-6 border-1 border-[#ce7ece]"
       >
         <h2 className="text-3xl font-semibold text-center bg-gradient-to-r from-[#0729e9] via-[#a576e2]  to-[#d111d1] bg-clip-text text-transparent">
           Create Account
@@ -84,10 +84,10 @@ export default function SignUpForm() {
           />
         </div>
 
-        <Button variant="blue" className="w-full h-10">
+        <Button variant="light" className="w-full h-10">
           {AuthLoading ? <Loader /> : "Sign up"}
         </Button>
-        <p className="font-bold  text-sm text-center text-[#2a48ac] ">
+        <p className="font-medium my-2 text-sm text-center text-[#2a48ac] ">
           Already have an account?{" "}
           <Link className="text-purple-600" to="/login">
             log in

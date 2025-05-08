@@ -3,8 +3,9 @@ import Button from "../shared/Button";
 import { FetchingContext } from "../Context/FetchingContext";
 import { Form } from "react-router-dom";
 import { uploadPostFormHandler } from "../utils/helperFunctions";
+import Loader from "../shared/loader";
 export default function CreatePost() {
-  const { uploadPost } = useContext(FetchingContext);
+  const { uploadPost, postLoading } = useContext(FetchingContext);
   const titleRef = useRef(null);
   const pictureUrlRef = useRef(null);
 
@@ -45,12 +46,7 @@ export default function CreatePost() {
             ></textarea>
           </div>
 
-          <button
-            type="submit"
-            className=" cursor-pointer text-white px-4 py-2 w-full rounded bg-gradient-to-r from-purple-500 to-pink-500  hover:from-purple-600 hover:to-pink-600   active:scale-97 transition"
-          >
-            Submit
-          </button>
+          <Button variant="light">{postLoading ? <Loader /> : "Upload"}</Button>
         </Form>
       </div>
     </>

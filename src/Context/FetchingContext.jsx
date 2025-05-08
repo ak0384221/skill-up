@@ -19,6 +19,7 @@ export const FetchingContext = createContext([]);
 export default function FetchingContextProvider({ children }) {
   //-------
   const [postList, setPostList] = useState([]);
+  const [postLoading, setPostLoading] = useState(false);
   const { authorized } = useContext(AuthContext);
   const navigate = useNavigate();
   //-------
@@ -46,6 +47,8 @@ export default function FetchingContextProvider({ children }) {
 
   //Functions of Uploading Post combined with prev posts
   function uploadPost(postObj) {
+    setPostLoading(true);
+
     const postWithTimestamp = {
       ...postObj,
       createdAt: serverTimestamp(),
@@ -55,10 +58,13 @@ export default function FetchingContextProvider({ children }) {
         console.log("post uploaded");
 
         console.log(postWithTimestamp);
+
+        setPostLoading(false);
         navigate("/posts");
       })
       .catch((err) => {
         console.log(err);
+        setPostLoading(false);
       });
   }
 
@@ -89,7 +95,7 @@ export default function FetchingContextProvider({ children }) {
 
   return (
     <FetchingContext.Provider
-      value={{ updatepost, uploadPost, removePost, postList }}
+      value={{ updatepost, postLoading, uploadPost, removePost, postList }}
     >
       {children}
     </FetchingContext.Provider>

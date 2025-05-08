@@ -40,6 +40,7 @@ export default function AuthContextProvider({ children }) {
 
   function logInAuth(email, password) {
     //then use the user
+    setAuthLoading(true);
     console.log(email, password);
     return signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
@@ -47,6 +48,7 @@ export default function AuthContextProvider({ children }) {
       })
       .catch((err) => {
         console.log(err);
+        setAuthLoading(false);
       });
   }
 
@@ -58,6 +60,7 @@ export default function AuthContextProvider({ children }) {
       })
       .catch((error) => {
         console.log(error);
+        setAuthLoading(false);
       });
     //create a User
   }
