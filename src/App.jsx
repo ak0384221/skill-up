@@ -7,8 +7,11 @@ function App() {
   return (
     <>
       <ParentContextProvider>
-        <Header />
-        <div className=" flex justify-center items-center  font-bold ">
+        <div className=" h-[12vh] border w-full fixed top-0 bg-white">
+          <Header />
+        </div>
+
+        <div className=" flex justify-center items-center   font-bold mt-18  ">
           <Outlet />
         </div>
         <Footer />

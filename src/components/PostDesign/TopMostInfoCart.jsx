@@ -19,13 +19,13 @@ export default function TopMostInfoCard({ post, isEditing, setIsEditing }) {
       <div className="right    gap-2  flex justify-evenly items-center">
         {isEditing ? (
           <LiaUndoAltSolid
-            className=" text-2xl  text-white  bg-gradient-to-r from-[#188cda]  to-[#21dfc5] hover:cursor-pointer p-1.25 rounded-full transition-colors font-extrabold "
+            className=" text-2xl hover:scale-105 transition-all  text-white  bg-gradient-to-r from-[#188cda]  to-[#21dfc5] hover:cursor-pointer p-1.25 rounded-full  font-extrabold "
             onClick={() => setIsEditing(!isEditing)}
           />
         ) : (
           <RiEdit2Fill
             onClick={() => setIsEditing(!isEditing)}
-            className=" text-4xl text-white hover:cursor-pointer p-1.25 rounded-full transition-colors bg-gradient-to-r from-[#44c907]  to-[#153ec4]"
+            className=" text-4xl text-white hover:cursor-pointer p-1.25 rounded-full hover:scale-105 transition-all bg-gradient-to-r from-[#44c907]  to-[#153ec4]"
           />
         )}
 
@@ -33,7 +33,7 @@ export default function TopMostInfoCard({ post, isEditing, setIsEditing }) {
           onClick={() => {
             removePost(post.id);
           }}
-          className=" text-2xl text-white  bg-gradient-to-r from-[#ec1010]  to-[#e01067b0] hover:cursor-pointer p-1.25 rounded-full transition-colors "
+          className=" text-2xl text-white  bg-gradient-to-r from-[#ec1010]  to-[#e01067b0] hover:cursor-pointer p-1.25 rounded-full hover:scale-105 transition-all"
         />
       </div>
     </div>

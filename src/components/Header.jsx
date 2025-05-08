@@ -12,7 +12,7 @@ export default function Header() {
   const { logOutAuth } = useContext(AuthContext);
   return (
     <>
-      <header className=" p-4  flex justify-between items-center font-Inter ">
+      <header className=" p-4  flex justify-between items-center font-Inter w-full   ">
         {/* Logo */}
         <Link
           to="/posts"
