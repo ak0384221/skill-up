@@ -4,10 +4,13 @@ import { FetchingContext } from "../Context/FetchingContext";
 import { Form } from "react-router-dom";
 import { uploadPostFormHandler } from "../utils/helperFunctions";
 import Loader from "../shared/loader";
+import { AuthContext } from "../Context/AuthContext";
 export default function CreatePost() {
   const { uploadPost, postLoading } = useContext(FetchingContext);
   const titleRef = useRef(null);
   const pictureUrlRef = useRef(null);
+  const { currentUser } = useContext(AuthContext);
+  const username = currentUser.displayName;
 
   return (
     <>
@@ -19,7 +22,13 @@ export default function CreatePost() {
           action="#"
           method="post"
           onSubmit={(evt) => {
-            uploadPostFormHandler(evt, titleRef, pictureUrlRef, uploadPost);
+            uploadPostFormHandler(
+              evt,
+              titleRef,
+              pictureUrlRef,
+              uploadPost,
+              username
+            );
           }}
           className="w-full mx-auto  rounded-sm  p-2 "
         >

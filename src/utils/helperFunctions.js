@@ -29,13 +29,19 @@ function logInFormHandler(evt, emailRef, passRef, logInAuth) {
   logInAuth(email, password);
 }
 
-function uploadPostFormHandler(evt, titleRef, pictureUrlRef, uploadPost) {
+function uploadPostFormHandler(
+  evt,
+  titleRef,
+  pictureUrlRef,
+  uploadPost,
+  username
+) {
   evt.preventDefault();
   const title = titleRef.current.value;
   const pictureUrl = pictureUrlRef.current.value;
 
   const postObj = {
-    username: "Ayaan Khan",
+    username: username,
     title: title,
     pictureURL: pictureUrl,
   };

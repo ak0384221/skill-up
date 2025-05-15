@@ -13,7 +13,7 @@ export default function SignUpForm() {
   const confirmPassRef = useRef();
 
   return (
-    <div className="  flex items-center justify-center h-[90vh] rounded-sm w-full      ">
+    <div className="  flex items-center justify-center h-[90vh] rounded-sm w-full text-black     ">
       <Form
         method="post"
         action="#"

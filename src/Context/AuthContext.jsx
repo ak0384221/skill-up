@@ -6,6 +6,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 
 import { GoogleAuthProvider } from "firebase/auth";
@@ -52,39 +53,40 @@ export default function AuthContextProvider({ children }) {
       });
   }
 
-  function signUpAuth(username, email, password) {
+  async function signUpAuth(username, email, password) {
     console.log(username, email, password);
-    return createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        return userCredential;
-      })
-      .catch((error) => {
-        console.log(error);
-        setAuthLoading(false);
-      });
-    //create a User
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      await updateProfile(userCredential.user, { displayName: username });
+      console.log("signed in succesfully", userCredential.user);
+    } catch (err) {
+      console.log(err);
+      setAuthLoading(false);
+    }
   }
 
-  function logInWithGoogle() {
+  async function logInWithGoogle() {
     //login with google
     const provider = new GoogleAuthProvider();
-    return signInWithPopup(auth, provider)
-      .then((userCredential) => {
-        return userCredential;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    try {
+      const userCredential = await signInWithPopup(auth, provider);
+    } catch (err) {
+      console.log(err);
+    }
+    return;
   }
 
-  function logOutAuth() {
-    return signOut(auth)
-      .then(() => {
-        console.log("logging out... ");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  async function logOutAuth() {
+    try {
+      await signOut(auth);
+      console.log("logging out");
+    } catch (err) {
+      console.log(err, "error while logging out,,,");
+    }
   }
 
   return (
