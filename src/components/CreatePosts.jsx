@@ -11,8 +11,8 @@ export default function CreatePost() {
 
   return (
     <>
-      <div className="w-full md:w-2/3 lg:w-2/5 my-4 font-Inter p-5">
-        <p className="text-4xl text-center my-5 bg-gradient-to-r from-purple-500 via-purple-500  to-pink-500 bg-clip-text text-transparent">
+      <div className="w-full md:w-2/3 lg:w-2/5 my-4  p-5">
+        <p className="text-4xl text-center my-5 bg-gradient-to-r from-purple-500 via-purple-500  to-pink-500 bg-clip-text text-transparent font-bold">
           Create a post{" "}
         </p>
         <Form
@@ -24,25 +24,25 @@ export default function CreatePost() {
           className="w-full mx-auto  rounded-sm  p-2 "
         >
           <div className="mb-4">
-            <label className="block mb-1  bg-gradient-to-r from-blue-700  to-purple-700 bg-clip-text text-transparent  font-[500] ">
+            <label className="block mb-1  bg-gradient-to-r from-blue-700  to-purple-700 bg-clip-text text-transparent   ">
               What's on your mind?
             </label>
             <textarea
               rows="6"
               ref={titleRef}
-              className="w-full p-2 border text-black font-normal border-[#cc93f3] rounded resize-none placeholder:text-[#838181] placeholder:font-light placeholder:font-Inter placeholder:text-sm focus:outline-blue-400"
+              className="w-full p-2 border text-black font-normal border-[#cc93f3] rounded resize-none placeholder:text-[#838181] placeholder:font-light placeholder: placeholder:text-sm focus:outline-blue-400"
               placeholder="Write something..."
             ></textarea>
           </div>
 
           <div className="mb-4">
-            <label className="block mb-1 bg-gradient-to-r from-blue-700  to-purple-700 bg-clip-text text-transparent  font-[500] ">
+            <label className="block mb-1 bg-gradient-to-r from-blue-700  to-purple-700 bg-clip-text text-transparent   ">
               Picture url
             </label>
             <textarea
               rows="2"
               ref={pictureUrlRef}
-              className="w-full p-2 border text-black font-normal border-[#cc93f3] rounded resize-none placeholder:text-[#838181] placeholder:font-light placeholder:font-Inter placeholder:text-sm focus:outline-blue-400"
+              className="w-full p-2 border text-black font-normal border-[#cc93f3] rounded resize-none placeholder:text-[#838181] placeholder:font-light placeholder: placeholder:text-sm focus:outline-blue-400"
             ></textarea>
           </div>
 

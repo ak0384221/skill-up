@@ -10,7 +10,7 @@ export default function TopMostInfoCard({ post, isEditing, setIsEditing }) {
     <div className="upper-Info-Card flex   w-full   justify-between items-center max-h-max bg-transparent px-2  mt-4  h-[3.5rem]">
       <div className="left h-full       flex justify-center items-center gap-2 p-1 ">
         <a
-          className="hover:underline font-Inter text-2xl font-extrabold bg-gradient-to-r from-pink-500 via-red-500 to-yellow-400 bg-clip-text text-transparent"
+          className="hover:underline font-Inter  text-2xl font-extrabold bg-gradient-to-r from-pink-600 via-red-500 to-yellow-400 bg-clip-text text-transparent"
           href=""
         >
           {post.username}

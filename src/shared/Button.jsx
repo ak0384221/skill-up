@@ -25,7 +25,7 @@ export default function Button({
     <button
       type="submit"
       {...(onClick && { onClick })}
-      className={`cursor-pointer rounded-sm ${getBtnColor()}  text-white font-[500] active:scale-99 transition-all font-Inter tracking-wide text-sm hover:opacity-90   ${className}`}
+      className={`cursor-pointer rounded-sm ${getBtnColor()}  text-white font-[500] active:scale-99 transition-all  tracking-wide text-sm hover:opacity-90   ${className}`}
     >
       {children}
     </button>

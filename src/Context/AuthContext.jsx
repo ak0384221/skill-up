@@ -97,6 +97,7 @@ export default function AuthContextProvider({ children }) {
         logOutAuth,
         AuthLoading,
         setAuthLoading,
+        currentUser,
       }}
     >
       {children}

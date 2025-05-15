@@ -1,19 +1,17 @@
 import { useContext } from "react";
-import { FaPen, FaVideo, FaImage, FaSignOutAlt } from "react-icons/fa";
 import { FaHeartCirclePlus } from "react-icons/fa6";
-import { SiMediamarkt } from "react-icons/si";
-import { Form, NavLink } from "react-router-dom";
-
+import { IoSettings } from "react-icons/io5";
+import { HiLogout } from "react-icons/hi";
+import { FaUser } from "react-icons/fa";
+import { NavLink } from "react-router-dom";
 import { SlFeed } from "react-icons/sl";
-
 import { Link } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
-import Button from "../shared/Button";
 export default function Header() {
   const { logOutAuth, authorized } = useContext(AuthContext);
   return (
     <>
-      <header className=" p-4  flex justify-between items-center font-Inter w-full bg-white   ">
+      <header className=" p-4  flex justify-between items-center  w-full backdrop-blur-lg  ">
         {/* Logo */}
         <Link
           to="/posts"
@@ -25,7 +23,7 @@ export default function Header() {
         {/* Navigation */}
 
         {authorized && (
-          <nav className="flex space-x-4">
+          <nav className="flex space-x-2">
             <NavLink
               to="/posts"
               title="feed"
@@ -55,8 +53,8 @@ export default function Header() {
             </NavLink>
 
             <NavLink
-              to="/reels"
-              title="reels"
+              to="/user"
+              title="user profile"
               className={({ isActive }) =>
                 `size-9 bg-gradient-to-r from-[#faa94d] to-[#ff0f06] flex justify-center items-center rounded-full ${
                   isActive
@@ -65,18 +63,28 @@ export default function Header() {
                 }`
               }
             >
-              <SiMediamarkt className="size-7 p-1 text-white" />
+              <FaUser className="size-7 p-1 text-white" />
+            </NavLink>
+            <NavLink
+              to="/settings"
+              title="settings"
+              className={({ isActive }) =>
+                `size-9 bg-gradient-to-r from-[#faa94d] to-[#ff0f06] flex justify-center items-center rounded-full ${
+                  isActive
+                    ? "bg-gradient-to-r from-purple-500 to-pink-500    "
+                    : "bg-gradient-to-r from-[#faa94d] to-[#ff0f06]"
+                }`
+              }
+            >
+              <IoSettings className="size-7 p-1 text-white" />
             </NavLink>
             <div className=" cursor-pointer ">
-              {/* <Form
-                className="border"
-                method="get"
-                action="#"
-                onSubmit={logOutAuth}
-              > */}
-              <Button onClick={logOutAuth} variant="light">
-                Log out
-              </Button>
+              <HiLogout
+                title="Log out"
+                className="size-9 text-white  flex justify-center items-center rounded-sm bg-gradient-to-r from-[#f3cb5e] to-[#f04a4a]"
+                onClick={logOutAuth}
+              />
+
               {/* </Form> */}
             </div>
           </nav>

@@ -27,7 +27,7 @@ export default function FetchingContextProvider({ children }) {
   const [hasMore, setHasMore] = useState(true);
   const { authorized } = useContext(AuthContext);
   const navigate = useNavigate();
-  const POSTS_LIMIT = 3;
+  const POSTS_LIMIT = 10;
   //-------
 
   //Fetching posts initiallt from fireStore
@@ -45,7 +45,6 @@ export default function FetchingContextProvider({ children }) {
           id: document.id,
           ...document.data(),
         }));
-        console.log("snapshpt working..");
         setPostList(postslist);
         setLastDoc(lastVisible);
         setHasMore(snapshot.docs.length === POSTS_LIMIT);

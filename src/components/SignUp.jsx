@@ -13,7 +13,7 @@ export default function SignUpForm() {
   const confirmPassRef = useRef();
 
   return (
-    <div className="  flex items-center justify-center h-[80vh] rounded-sm w-full   font-Inter   ">
+    <div className="  flex items-center justify-center h-[90vh] rounded-sm w-full      ">
       <Form
         method="post"
         action="#"
@@ -41,7 +41,7 @@ export default function SignUpForm() {
           <input
             type="text"
             ref={userNameRef}
-            className="border-1 border-[#c7c7c7] rounded-md px-2 py-2 focus:outline-none focus:ring-2  focus:ring-blue-400 font-light font-Inter"
+            className="border-1 border-[#c7c7c7] rounded-md px-2 py-2 focus:outline-none focus:ring-2  focus:ring-blue-400 font-light "
           />
         </div>
         <div>
@@ -55,7 +55,7 @@ export default function SignUpForm() {
             id="email"
             ref={emailRef}
             type="email"
-            className="w-full px-4 py-2 border-1 border-[#c7c7c7] rounded-sm focus:outline-none focus:ring-2 focus:ring-blue-500 font-light font-Inter"
+            className="w-full px-4 py-2 border-1 border-[#c7c7c7] rounded-sm focus:outline-none focus:ring-2 focus:ring-blue-500 font-light "
           />
         </div>
 
@@ -67,7 +67,7 @@ export default function SignUpForm() {
           <input
             ref={passRef}
             type="password"
-            className="border-1 border-[#c7c7c7] rounded-md px-2 py-2 focus:outline-none focus:ring-2  focus:ring-blue-400 font-light font-Inter placeholder:font-bold"
+            className="border-1 border-[#c7c7c7] rounded-md px-2 py-2 focus:outline-none focus:ring-2  focus:ring-blue-400 font-light  placeholder:font-bold"
             placeholder="••••••••"
           />
         </div>
@@ -79,7 +79,7 @@ export default function SignUpForm() {
           <input
             ref={confirmPassRef}
             type="password"
-            className="border-1 border-[#c7c7c7] rounded-md px-2 py-2 focus:outline-none focus:ring-2  focus:ring-blue-400 font-light font-Inter placeholder:font-bold"
+            className="border-1 border-[#c7c7c7] rounded-md px-2 py-2 focus:outline-none focus:ring-2  focus:ring-blue-400 font-light  placeholder:font-bold"
             placeholder="••••••••"
           />
         </div>

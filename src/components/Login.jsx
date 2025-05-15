@@ -14,7 +14,7 @@ export default function Login() {
   const emailRef = useRef();
   const passRef = useRef();
   return (
-    <div className=" flex items-center justify-center h-[80vh] rounded-sm w-full   font-Inter">
+    <div className=" flex items-center justify-center h-[90vh] rounded-sm w-full   ">
       <div className=" w-[95%] md:w-2/3 lg:w-3/5 xl:w-1/3 bg-white rounded-2xl  px-3  py-4 border-1 border-[#ce7ece] ">
         <h2 className="text-3xl text-center bg-gradient-to-r from-purple-500 via-purple-500  to-pink-500 bg-clip-text text-transparent mb-6">
           Log In

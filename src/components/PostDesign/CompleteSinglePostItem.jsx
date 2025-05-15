@@ -1,13 +1,21 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import BottomMostCard from "./BottomMostCard";
 import MainPost from "./MainPost";
 import TopMostInfoCard from "./TopMostInfoCart";
+import { SettingContext } from "../../Context/SettingContext";
 
 export default function SinglePostCard({ post }) {
   const [isEditing, setIsEditing] = useState(false);
+  const { theme } = useContext(SettingContext);
 
   return (
-    <div className="post w-full min-h-[50vh] border-1 border-[#d8d8d8]  mx-auto rounded-3xl flex flex-col justify-between overflow-hidden   mb-[5vh] mt-[5vh] ">
+    <div
+      className={`post w-full min-h-[50vh] border-1  ${
+        (theme == "Dark" && "border-[#3a3939]") ||
+        (theme == "Light" && "border-[#a19f9f]") ||
+        (theme === "System" && "dark:border-[#2c2c2c]")
+      }   mx-auto rounded-3xl flex flex-col justify-between overflow-hidden   mb-[5vh] mt-[5vh] `}
+    >
       <TopMostInfoCard
         post={post}
         isEditing={isEditing}

@@ -24,7 +24,7 @@ export default function MainPost({ post, isEditing, setIsEditing }) {
 
   return (
     <>
-      <div className="post w-full  h-max   text-[#3b3b3b] font-[400]">
+      <div className="post w-full  h-max  ">
         {isEditing ? (
           <>
             <textarea
@@ -50,11 +50,12 @@ export default function MainPost({ post, isEditing, setIsEditing }) {
         )}
       </div>
 
-      <div className="pic w-full min-h-max h-[80vh] max-h-screen">
+      <div className="pic w-full min-h-max h-[80vh] max-h-[40vh]">
         <img
           className="w-full h-full object-cover"
           src={`${post.pictureURL}`}
-          alt=""
+          loading="lazy"
+          alt={`${post.title}`}
         />
       </div>
     </>

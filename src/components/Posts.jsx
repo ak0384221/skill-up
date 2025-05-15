@@ -4,6 +4,8 @@ import { AuthContext } from "../Context/AuthContext";
 import { FetchingContext } from "../Context/FetchingContext";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Loader from "../shared/loader";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 export default function Posts() {
   const { authorized } = useContext(AuthContext);
@@ -17,7 +19,7 @@ export default function Posts() {
           next={fetchMorePosts}
           hasMore={hasMore}
           loader={
-            <div className="h-16 w-full bg-blue-500 p-1">
+            <div className="h-16 w-full  bg-blue-500 ">
               <Loader />
             </div>
           }
@@ -27,6 +29,12 @@ export default function Posts() {
             </p>
           }
         >
+          {postList.length === 0 && (
+            <div className="">
+              <Skeleton count={2} height="60vh" />
+            </div>
+          )}
+
           {postList.map((post) => {
             return <SinglePostCard key={post.id} post={post} />;
           })}
