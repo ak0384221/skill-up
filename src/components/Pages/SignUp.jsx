@@ -1,10 +1,11 @@
-import { Form, Link } from "react-router-dom";
-import Button from "../shared/Button";
-
-import { signUpFormHandler } from "../utils/helperFunctions";
 import { useContext, useRef } from "react";
-import { AuthContext } from "../Context/AuthContext";
+import { Form, Link } from "react-router-dom";
+//built-in
+import Button from "../shared/Button";
+import { signUpFormHandler } from "../../utils/helperFunctions";
+import { AuthContext } from "../../Context/AuthContext";
 import Loader from "../shared/loader";
+//local
 export default function SignUpForm() {
   const { signUpAuth, AuthLoading, setAuthLoading } = useContext(AuthContext);
   const emailRef = useRef();
@@ -13,7 +14,7 @@ export default function SignUpForm() {
   const confirmPassRef = useRef();
 
   return (
-    <div className="  flex items-center justify-center h-[90vh] rounded-sm w-full text-black     ">
+    <div className="  flex items-start justify-center min-h-screen rounded-sm w-full text-black     ">
       <Form
         method="post"
         action="#"
@@ -28,7 +29,7 @@ export default function SignUpForm() {
             signUpAuth
           );
         }}
-        className="w-[95%] md:w-2/3 lg:w-3/5 xl:w-1/3 bg-white rounded-2xl  p-6 border-1 border-[#ce7ece]"
+        className="w-[90%] md:w-2/3 lg:w-3/5 xl:w-1/3 bg-white rounded-lg mt-[10vh] p-6 border-1 border-[#ce7ece]"
       >
         <h2 className="text-3xl font-semibold text-center bg-gradient-to-r from-[#0729e9] via-[#a576e2]  to-[#d111d1] bg-clip-text text-transparent">
           Create Account
@@ -84,7 +85,7 @@ export default function SignUpForm() {
           />
         </div>
 
-        <Button variant="light" className="w-full h-10">
+        <Button variant="light" className="w-full h-10 mt-3">
           {AuthLoading ? <Loader /> : "Sign up"}
         </Button>
         <p className="font-medium my-2 text-sm text-center text-[#2a48ac] ">

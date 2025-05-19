@@ -1,22 +1,23 @@
-import Button from "../shared/Button";
 import { FcGoogle } from "react-icons/fc";
 import { SiFacebook } from "react-icons/si";
 import { AiFillGithub } from "react-icons/ai";
 import { Form, Link } from "react-router-dom";
 import { useContext, useRef } from "react";
-import { AuthContext } from "../Context/AuthContext";
-import { logInFormHandler } from "../utils/helperFunctions";
+//built-in
+import { AuthContext } from "../../Context/AuthContext";
+import Button from "../shared/Button";
+import { logInFormHandler } from "../../utils/helperFunctions";
 import Loader from "../shared/loader";
-
+//local
 export default function Login() {
-  const { logInAuth, logInWithGoogle, AuthLoading, setAuthLoading } =
+  const { authError, logInAuth, logInWithGoogle, AuthLoading, setAuthLoading } =
     useContext(AuthContext);
   const emailRef = useRef();
   const passRef = useRef();
   return (
-    <div className="text-black flex items-center justify-center h-[90vh] rounded-sm w-full   ">
-      <div className=" w-[95%] md:w-2/3 lg:w-3/5 xl:w-1/3 bg-white rounded-2xl  px-3  py-4 border-1 border-[#ce7ece] ">
-        <h2 className="text-3xl font-bold text-center bg-gradient-to-r from-purple-500 via-purple-500  to-pink-500 bg-clip-text text-transparent mb-6">
+    <div className="text-black flex items-start justify-center min-h-screen rounded-sm w-full   ">
+      <div className=" w-[90%] mt-[10vh] md:w-2/3 lg:w-3/5 xl:w-1/3 bg-white rounded-2xl  px-3  py-4 border-1 border-[#ce7ece] ">
+        <h2 className="text-3xl pt-4 font-bold text-center bg-gradient-to-r from-purple-500 via-purple-500  to-pink-500 bg-clip-text text-transparent mb-6">
           Log In
         </h2>
 
@@ -26,7 +27,7 @@ export default function Login() {
           onSubmit={(evt) => {
             logInFormHandler(evt, emailRef, passRef, logInAuth);
           }}
-          className="space-y-5  w-full mx-auto px-1 "
+          className="space-y-5  w-full mx-auto px-1  "
         >
           <div>
             <label
@@ -57,6 +58,11 @@ export default function Login() {
               placeholder="••••••••"
             />
           </div>
+          {authError && (
+            <div className="w-full border min-h-10 h-max border-red-300 font-bold text-red-500 text-sm px-2 py-1 rounded-sm">
+              {authError.message}
+            </div>
+          )}
           <div className="flex items-center justify-between text-sm">
             <label className="flex items-center text-[#a71ec9]">
               <input type="checkbox" className="Form-checkbox mr-2" />

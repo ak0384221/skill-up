@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { auth } from "../firebase";
+import { auth } from "../Config/firebase";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
@@ -17,6 +17,8 @@ export default function AuthContextProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [authorized, setAuthorized] = useState(null);
   const [AuthLoading, setAuthLoading] = useState(false);
+  const [authError, setAuthError] = useState(null);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,10 +29,13 @@ export default function AuthContextProvider({ children }) {
         setAuthorized(true);
         setCurrentUser(user);
         setAuthLoading(false);
+        setAuthError(null);
+
         navigate("/posts");
       } else {
         setAuthorized(false);
         setCurrentUser(false);
+        setAuthLoading(false);
       }
     });
     return () => {
@@ -50,6 +55,7 @@ export default function AuthContextProvider({ children }) {
       .catch((err) => {
         console.log(err);
         setAuthLoading(false);
+        setAuthError(err);
       });
   }
 
@@ -66,6 +72,7 @@ export default function AuthContextProvider({ children }) {
     } catch (err) {
       console.log(err);
       setAuthLoading(false);
+      setAuthError(err);
     }
   }
 
@@ -76,6 +83,8 @@ export default function AuthContextProvider({ children }) {
       const userCredential = await signInWithPopup(auth, provider);
     } catch (err) {
       console.log(err);
+      setAuthLoading(false);
+      setAuthError(err);
     }
     return;
   }
@@ -100,6 +109,7 @@ export default function AuthContextProvider({ children }) {
         AuthLoading,
         setAuthLoading,
         currentUser,
+        authError,
       }}
     >
       {children}

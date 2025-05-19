@@ -1,22 +1,27 @@
-import { useContext } from "react";
+import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { useContext, useState } from "react";
+//built-in
+import { AuthContext } from "../../Context/AuthContext";
+import LogoutModal from "../Modal/logOUtModal";
+//local
 import { FaHeartCirclePlus } from "react-icons/fa6";
 import { IoSettings } from "react-icons/io5";
 import { HiLogout } from "react-icons/hi";
 import { FaUser } from "react-icons/fa";
-import { NavLink } from "react-router-dom";
 import { SlFeed } from "react-icons/sl";
-import { Link } from "react-router-dom";
-import { AuthContext } from "../Context/AuthContext";
+//external
 export default function Header() {
   const { logOutAuth, authorized } = useContext(AuthContext);
+  const [showModal, setShowModal] = useState(false);
+  const handleLogout = () => {
+    logOutAuth(); // or your logout logic
+  };
   return (
     <>
       <header className=" p-4  flex justify-between items-center  w-full backdrop-blur-lg  ">
         {/* Logo */}
-        <Link
-          to="/posts"
-          className="text-3xl  font-Fugaz bg-gradient-to-r from-purple-500 via-purple-500  to-pink-500 bg-clip-text text-transparent"
-        >
+        <Link to="/posts" className="text-3xl  font-Fugaz text-gradient-purple">
           Vibehive
         </Link>
 
@@ -80,17 +85,20 @@ export default function Header() {
             </NavLink>
             <div className=" cursor-pointer ">
               <HiLogout
+                onClick={() => {
+                  setShowModal(true);
+                }}
                 title="Log out"
                 className="size-9 text-white  flex justify-center items-center rounded-sm bg-gradient-to-r from-[#f3cb5e] to-[#f04a4a]"
-                onClick={logOutAuth}
               />
-
-              {/* </Form> */}
+              <LogoutModal
+                isOpen={showModal}
+                onClose={() => setShowModal(false)}
+                onConfirm={handleLogout}
+              />
             </div>
           </nav>
         )}
-
-        {/* Logout */}
       </header>
     </>
   );

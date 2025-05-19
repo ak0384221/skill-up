@@ -1,9 +1,8 @@
 import { Navigate, Outlet } from "react-router-dom";
-import NotLoggedIn from "../Errors/NotLoggedIn";
+import NotLoggedIn from "../components/Errors/NotLoggedIn";
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
-import Loader from "../shared/loader";
-
+import Loader from "../components/shared/loader";
 export default function ProtectedRoutes() {
   const { authorized } = useContext(AuthContext);
 

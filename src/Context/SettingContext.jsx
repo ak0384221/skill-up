@@ -1,7 +1,7 @@
 import { createContext, useState } from "react";
 export const SettingContext = createContext();
 export default function SettingContextProvider({ children }) {
-  const [theme, setTheme] = useState("System");
+  const [theme, setTheme] = useState("light");
   const [font, setFont] = useState("Inter");
   const [lang, setLang] = useState("Eng");
   const [fontWeight, setFontWeight] = useState("normal");

@@ -1,14 +1,17 @@
 import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../Context/AuthContext";
+//built-in
 import { onSnapshot, query } from "firebase/firestore";
-import { postDataRef } from "../firebase";
 import { where, orderBy } from "firebase/firestore";
-import SinglePostCard from "./PostDesign/CompleteSinglePostItem";
+//external
+import { AuthContext } from "../../Context/AuthContext";
+import { postDataRef } from "../../Config/firebase";
+import SinglePostCard from "../PostDesign/CompleteSinglePostItem";
+//local
 export default function UserProfile() {
   const { currentUser } = useContext(AuthContext);
   const [myData, setMyData] = useState([]);
 
-  console.log(currentUser);
+  console.log(currentUser.photoURL);
 
   useEffect(() => {
     const q = query(
@@ -29,9 +32,12 @@ export default function UserProfile() {
   return (
     <>
       <div className="lg:w-[40vw]  min-h-screen w-full  rounded-sm    gap-4 ">
-        <div className="profile bg-[#f2fdff] p-3">
-          <div className="w-1/3  mx-auto h-[25vh] flex justify-center items-center">
-            <img className="h-35 w-35 border  rounded-full object-cover " />
+        <div className="profile p-3">
+          <div className="w-1/3  mx-auto h-[25vh] flex justify-center items-cente">
+            <img
+              src={currentUser.photoURL}
+              className="w-32 h-32 p-1.25  bg-[linear-gradient(to_right,_#feda75,_#fa7e1e,_#d62976,_#962fbf,_#4f5bd5)] object-cover rounded-full "
+            />
           </div>
           <div className="w-full  my-4 space-y-2 p-2 ">
             <h2 className="font-Inter  text-3xl font-extrabold bg-gradient-to-r from-pink-600 via-red-500 to-yellow-400 bg-clip-text text-transparent  border-black w-max ">
@@ -47,7 +53,7 @@ export default function UserProfile() {
             </p>
           </div>
         </div>
-        <h1 className="text-4xl  font-Fugaz bg-gradient-to-r from-purple-500 via-purple-500  to-pink-500 bg-clip-text text-transparent  w-max border  mx-auto my-[5vh]">
+        <h1 className="text-4xl  font-Fugaz text-gradient-purple w-max border  mx-auto my-[5vh]">
           Your Posts
         </h1>
         {myData.map((post) => {

@@ -1,25 +1,28 @@
-import { useContext } from "react";
-import SinglePostCard from "./PostDesign/CompleteSinglePostItem";
-import { AuthContext } from "../Context/AuthContext";
-import { FetchingContext } from "../Context/FetchingContext";
-import InfiniteScroll from "react-infinite-scroll-component";
-import Loader from "../shared/loader";
 import Skeleton from "react-loading-skeleton";
+import InfiniteScroll from "react-infinite-scroll-component";
+//external
+import { useContext } from "react";
+import SinglePostCard from "../PostDesign/CompleteSinglePostItem";
+import { AuthContext } from "../../Context/AuthContext";
+import { FetchingContext } from "../../Context/FetchingContext";
+import Loader from "../shared/loader";
 import "react-loading-skeleton/dist/skeleton.css";
+//local
 
 export default function Posts() {
   const { authorized } = useContext(AuthContext);
-  const { postList, fetchMorePosts, hasMore } = useContext(FetchingContext);
+  const { postLists, fetchMorePosts, hasMore } = useContext(FetchingContext);
   console.log(authorized);
+  console.log(postLists);
   return (
     <>
       <div className="postsList w-full md:w-1/2   ">
         <InfiniteScroll
-          dataLength={postList.length} //This is important field to render the next data
+          dataLength={postLists.length} //This is important field to render the next data
           next={fetchMorePosts}
           hasMore={hasMore}
           loader={
-            <div className="h-16 w-full  bg-blue-500 ">
+            <div className="h-screen w-full bg-transparent p-2  ">
               <Loader />
             </div>
           }
@@ -29,13 +32,13 @@ export default function Posts() {
             </p>
           }
         >
-          {postList.length === 0 && (
+          {postLists.length === 0 && (
             <div className="">
               <Skeleton count={2} height="60vh" />
             </div>
           )}
 
-          {postList.map((post) => {
+          {postLists.map((post) => {
             return <SinglePostCard key={post.id} post={post} />;
           })}
         </InfiniteScroll>

@@ -1,5 +1,5 @@
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Header from "./components/shared/Header";
+import Footer from "./components/shared/Footer";
 import { Outlet } from "react-router-dom";
 import { useContext } from "react";
 import { SettingContext } from "./Context/SettingContext";
@@ -14,10 +14,10 @@ function App() {
       </div>
 
       <div
-        className={`font-${font} font-${fontWeight} p-2  flex justify-center items-center w-full mx-auto  font-bold  pt-18 ${
-          (theme == "Dark" && "bg-black text-white") ||
-          (theme === "Light" && "bg-white text-black") ||
-          (theme === "System" && "dark:bg-black text-white")
+        className={`font-${font} font-${fontWeight}   min-h-screen flex justify-center items-start w-full mx-auto  font-bold  pt-18 ${
+          (theme == "Dark" && "bg-[#181717] text-white") ||
+          (theme === "Light" && "bg-[#eef7fd] text-black") ||
+          (theme === "System" && "dark:bg-[#181717] text-white")
         }`}
       >
         <Outlet />

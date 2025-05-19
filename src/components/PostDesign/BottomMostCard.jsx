@@ -1,7 +1,9 @@
+import { SettingContext } from "../../Context/SettingContext";
+//local
 import { useContext } from "react";
 import { CiShare2 } from "react-icons/ci";
 import { CiHeart } from "react-icons/ci";
-import { SettingContext } from "../../Context/SettingContext";
+//external
 
 export default function BottomMostCard() {
   const { theme } = useContext(SettingContext);

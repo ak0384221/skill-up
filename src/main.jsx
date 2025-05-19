@@ -1,20 +1,20 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import App from "./App.jsx";
 import ParentContextProvider from "./Context/ParentContext.jsx";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Posts from "./components/Posts.jsx";
-import Images from "./components/Images.jsx";
-import CreatePost from "./components/CreatePosts.jsx";
-import Reels from "./components/Reels.jsx";
-import Login from "./components/Login.jsx";
+import Posts from "./components/Pages/Posts.jsx";
+import CreatePost from "./components/Pages/CreatePosts.jsx";
+import Login from "./components/Pages/Login.jsx";
 import Normal from "./components/Normal.jsx";
 import ProtectedRoutes from "./routes/ProtectedRoutes.jsx";
-import NotLoggedIn from "./Errors/NotLoggedIn.jsx";
-import SignUpForm from "./components/SignUp.jsx";
-import UserProfile from "./components/Userprofile.jsx";
-import Settings from "./components/Settings.jsx";
+import NotLoggedIn from "./components/Errors/NotLoggedIn.jsx";
+import SignUpForm from "./components/Pages/SignUp.jsx";
+import UserProfile from "./components/Pages/Userprofile.jsx";
+import Settings from "./components/Pages/Settings.jsx";
+import LogoutModal from "./components/Modal/logOUtModal.jsx";
+import EditFields from "./components/editFields.jsx";
 
 const routes = createBrowserRouter([
   {
@@ -34,10 +34,10 @@ const routes = createBrowserRouter([
         element: <ProtectedRoutes />,
         children: [
           { path: "/posts", element: <Posts /> },
-          { path: "/images", element: <Images /> },
           { path: "/create-post", element: <CreatePost /> },
           { path: "/user", element: <UserProfile /> },
           { path: "/settings", element: <Settings /> },
+          { path: "/editFields", element: <EditFields /> },
         ],
       },
     ],
