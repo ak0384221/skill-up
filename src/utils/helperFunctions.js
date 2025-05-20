@@ -64,12 +64,14 @@ async function uploadPostFormHandler(
       return; // Stop if upload fails
     }
   } else {
-    const postObj = {
-      username: username,
-      title: title,
-      pictureURL: pictureUrl,
-    };
-    uploadPost(postObj);
+    if (title || pictureUrl) {
+      const postObj = {
+        username: username,
+        title: title,
+        pictureURL: pictureUrl,
+      };
+      uploadPost(postObj);
+    }
   }
 }
 

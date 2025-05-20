@@ -1,22 +1,33 @@
+import { useContext, useEffect, useState } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import NotLoggedIn from "../components/Errors/NotLoggedIn";
-import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import Loader from "../components/shared/loader";
-export default function ProtectedRoutes() {
-  const { authorized } = useContext(AuthContext);
+import PageLoader from "../components/shared/pageLoader";
 
-  if (authorized === null) {
+export default function ProtectedRoutes() {
+  const { currentUser } = useContext(AuthContext);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timeout); // Cleanup
+  }, []);
+
+  if (loading) {
     return (
-      <div className="w-[20vw] h-[20vh] p-4 my-[20vh] mx-auto">
-        <Loader />
+      <div className="size-[10rem] mx-auto mt-[15vh] flex justify-center items-center  rounded-full p-1">
+        <PageLoader />
       </div>
     );
   }
 
-  if (authorized === true) {
+  if (currentUser) {
     return <Outlet />;
+  } else {
+    return <NotLoggedIn />;
   }
-
-  return <NotLoggedIn />;
 }

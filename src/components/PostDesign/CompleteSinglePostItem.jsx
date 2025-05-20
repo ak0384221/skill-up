@@ -12,10 +12,10 @@ export default function SinglePostCard({ post }) {
   return (
     <div
       className={`post w-full min-h-[50vh] border-1  ${
-        (theme == "Dark" && "border-[#3a3939]") ||
-        (theme == "Light" && "border-[#6f757c]") ||
+        (theme == "Dark" && "border-[#7a7575]") ||
+        (theme == "Light" && "border-[#979691]") ||
         (theme === "System" && "dark:border-[#2c2c2c]")
-      }   mx-auto rounded-3xl flex flex-col justify-between overflow-hidden   mb-[5vh] mt-[5vh] `}
+      } mx-auto rounded-3xl flex flex-col justify-between overflow-hidden   mb-[5vh] mt-[5vh] `}
     >
       <TopMostInfoCard
         post={post}

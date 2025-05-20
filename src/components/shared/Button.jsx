@@ -14,7 +14,7 @@ export default function Button({
     const { postLoading } = useContext(FetchingContext);
     switch (variant) {
       case "light":
-        return "px-3 w-full h-10 bg-gradient-to-r from-purple-500 to-pink-500  hover:from-purple-600 hover:to-pink-600   active:scale-97 transition  flex justify-center items-center text-white";
+        return "px-3  w-full h-10 bg-gradient-to-r from-purple-500 to-pink-500  hover:from-purple-600 hover:to-pink-600   active:scale-97 transition  flex justify-center items-center text-white";
 
       case "createPost":
         return "cursor-pointer text-white px-4 py-2 w-full rounded bg-gradient-to-r from-purple-500 to-pink-500  hover:from-purple-600 hover:to-pink-600   active:scale-97 transition";

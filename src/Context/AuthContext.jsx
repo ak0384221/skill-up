@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useReducer, useState } from "react";
 import { auth } from "../Config/firebase";
 import {
   createUserWithEmailAndPassword,
@@ -8,34 +8,26 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
-
 import { GoogleAuthProvider } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { authContent, authReducerMethod } from "../Reducers/AuthReducer";
 
 export const AuthContext = createContext([]);
 export default function AuthContextProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState(null);
-  const [authorized, setAuthorized] = useState(null);
-  const [AuthLoading, setAuthLoading] = useState(false);
-  const [authError, setAuthError] = useState(null);
-
+  const [authInitialValue, dispatchAuthMethod] = useReducer(
+    authReducerMethod,
+    authContent
+  );
+  const { currentUser, authLoading, authError } = authInitialValue;
   const navigate = useNavigate();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         console.log(user);
-        console.log(authorized);
-        setAuthorized(true);
-        setCurrentUser(user);
-        setAuthLoading(false);
-        setAuthError(null);
-
-        navigate("/posts");
+        dispatchAuthMethod({ type: "LOG_IN", payload: { user: user } });
       } else {
-        setAuthorized(false);
-        setCurrentUser(false);
-        setAuthLoading(false);
+        dispatchAuthMethod({ type: "NOT_AUTHED", payload: { user: user } });
       }
     });
     return () => {
@@ -44,23 +36,22 @@ export default function AuthContextProvider({ children }) {
     };
   }, []);
 
-  function logInAuth(email, password) {
+  async function logInAuth(email, password) {
     //then use the user
-    setAuthLoading(true);
-    console.log(email, password);
-    return signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        return userCredential;
-      })
-      .catch((err) => {
-        console.log(err);
-        setAuthLoading(false);
-        setAuthError(err);
-      });
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      navigate("/posts");
+    } catch (err) {
+      console.log(err);
+      passErrorDispatch(err);
+    }
   }
 
   async function signUpAuth(username, email, password) {
-    console.log(username, email, password);
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -71,8 +62,7 @@ export default function AuthContextProvider({ children }) {
       console.log("signed in succesfully", userCredential.user);
     } catch (err) {
       console.log(err);
-      setAuthLoading(false);
-      setAuthError(err);
+      passErrorDispatch(err);
     }
   }
 
@@ -81,10 +71,10 @@ export default function AuthContextProvider({ children }) {
     const provider = new GoogleAuthProvider();
     try {
       const userCredential = await signInWithPopup(auth, provider);
+      navigate("/posts");
     } catch (err) {
       console.log(err);
-      setAuthLoading(false);
-      setAuthError(err);
+      passErrorDispatch(err);
     }
     return;
   }
@@ -98,17 +88,35 @@ export default function AuthContextProvider({ children }) {
     }
   }
 
+  function passLoadingDispatch(loading) {
+    const newLoadingState = {
+      type: "SET_LOADING",
+      payload: {
+        loadingState: loading,
+      },
+    };
+    dispatchAuthMethod(newLoadingState);
+  }
+  function passErrorDispatch(err) {
+    const newErr = {
+      type: "SET_ERROR",
+      payload: {
+        errorState: err,
+      },
+    };
+    dispatchAuthMethod(newErr);
+  }
+
   return (
     <AuthContext.Provider
       value={{
-        authorized,
         logInWithGoogle,
         signUpAuth,
         logInAuth,
         logOutAuth,
-        AuthLoading,
-        setAuthLoading,
         currentUser,
+        authLoading,
+        passLoadingDispatch,
         authError,
       }}
     >

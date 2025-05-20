@@ -3,11 +3,11 @@ import { AuthContext } from "../../Context/AuthContext";
 import { SettingContext } from "../../Context/SettingContext";
 
 export default function Footer() {
-  const { authorized } = useContext(AuthContext);
+  const { currentUser } = useContext(AuthContext);
   const { theme } = useContext(SettingContext);
   return (
     <>
-      {authorized && (
+      {currentUser && (
         <footer
           className={`${
             (theme == "Dark" && "bg-[#181717] ") ||

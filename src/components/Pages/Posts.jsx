@@ -3,17 +3,15 @@ import InfiniteScroll from "react-infinite-scroll-component";
 //external
 import { useContext } from "react";
 import SinglePostCard from "../PostDesign/CompleteSinglePostItem";
-import { AuthContext } from "../../Context/AuthContext";
 import { FetchingContext } from "../../Context/FetchingContext";
 import Loader from "../shared/loader";
 import "react-loading-skeleton/dist/skeleton.css";
+import PostSkeleton from "../PostSkeleton/postSkeleton";
 //local
 
 export default function Posts() {
-  const { authorized } = useContext(AuthContext);
   const { postLists, fetchMorePosts, hasMore } = useContext(FetchingContext);
-  console.log(authorized);
-  console.log(postLists);
+
   return (
     <>
       <div className="postsList w-full md:w-1/2   ">
@@ -34,7 +32,7 @@ export default function Posts() {
         >
           {postLists.length === 0 && (
             <div className="">
-              <Skeleton count={2} height="60vh" />
+              <PostSkeleton />
             </div>
           )}
 

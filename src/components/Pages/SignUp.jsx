@@ -7,7 +7,8 @@ import { AuthContext } from "../../Context/AuthContext";
 import Loader from "../shared/loader";
 //local
 export default function SignUpForm() {
-  const { signUpAuth, AuthLoading, setAuthLoading } = useContext(AuthContext);
+  const { signUpAuth, authLoading, passLoadingDispatch, authError } =
+    useContext(AuthContext);
   const emailRef = useRef();
   const userNameRef = useRef();
   const passRef = useRef();
@@ -19,7 +20,7 @@ export default function SignUpForm() {
         method="post"
         action="#"
         onSubmit={(evt) => {
-          setAuthLoading(true);
+          passLoadingDispatch(true);
           signUpFormHandler(
             evt,
             userNameRef,
@@ -84,9 +85,14 @@ export default function SignUpForm() {
             placeholder="••••••••"
           />
         </div>
+        {authError && (
+          <div className="w-full mt-3 border min-h-10 h-max border-red-300 font-bold text-red-500 text-sm px-2 py-1 rounded-sm">
+            {authError.message}
+          </div>
+        )}
 
         <Button variant="light" className="w-full h-10 mt-3">
-          {AuthLoading ? <Loader /> : "Sign up"}
+          {authLoading ? <Loader /> : "Sign up"}
         </Button>
         <p className="font-medium my-2 text-sm text-center text-[#2a48ac] ">
           Already have an account?{" "}

@@ -12,7 +12,7 @@ import { FaUser } from "react-icons/fa";
 import { SlFeed } from "react-icons/sl";
 //external
 export default function Header() {
-  const { logOutAuth, authorized } = useContext(AuthContext);
+  const { logOutAuth, currentUser } = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
   const handleLogout = () => {
     logOutAuth(); // or your logout logic
@@ -27,7 +27,7 @@ export default function Header() {
 
         {/* Navigation */}
 
-        {authorized && (
+        {currentUser && (
           <nav className="flex space-x-2">
             <NavLink
               to="/posts"

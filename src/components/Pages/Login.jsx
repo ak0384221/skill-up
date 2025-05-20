@@ -10,8 +10,13 @@ import { logInFormHandler } from "../../utils/helperFunctions";
 import Loader from "../shared/loader";
 //local
 export default function Login() {
-  const { authError, logInAuth, logInWithGoogle, AuthLoading, setAuthLoading } =
-    useContext(AuthContext);
+  const {
+    authError,
+    logInAuth,
+    passLoadingDispatch,
+    logInWithGoogle,
+    authLoading,
+  } = useContext(AuthContext);
   const emailRef = useRef();
   const passRef = useRef();
   return (
@@ -25,6 +30,8 @@ export default function Login() {
           method="post"
           action="#"
           onSubmit={(evt) => {
+            passLoadingDispatch(true);
+            console.log(authLoading);
             logInFormHandler(evt, emailRef, passRef, logInAuth);
           }}
           className="space-y-5  w-full mx-auto px-1  "
@@ -72,7 +79,7 @@ export default function Login() {
               Forgot password?
             </a>
           </div>
-          <Button variant="light">{AuthLoading ? <Loader /> : "Log in"}</Button>
+          <Button variant="light">{authLoading ? <Loader /> : "Log in"}</Button>
         </Form>
 
         <p className="mt-6 text-center text-sm text-[#303030]">
@@ -87,7 +94,7 @@ export default function Login() {
         <div className=" flex  gap-2 justify-center my-2">
           <FcGoogle
             onClick={() => {
-              setAuthLoading(true);
+              passLoadingDispatch(true);
               logInWithGoogle();
             }}
             className="size-6 cursor-pointer hover:scale-115 transition-all "

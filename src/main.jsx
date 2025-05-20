@@ -15,6 +15,7 @@ import UserProfile from "./components/Pages/Userprofile.jsx";
 import Settings from "./components/Pages/Settings.jsx";
 import LogoutModal from "./components/Modal/logOUtModal.jsx";
 import EditFields from "./components/editFields.jsx";
+import PostSkeleton from "./components/PostSkeleton/postSkeleton.jsx";
 
 const routes = createBrowserRouter([
   {
@@ -38,6 +39,7 @@ const routes = createBrowserRouter([
           { path: "/user", element: <UserProfile /> },
           { path: "/settings", element: <Settings /> },
           { path: "/editFields", element: <EditFields /> },
+          { path: "/test", element: <PostSkeleton /> },
         ],
       },
     ],

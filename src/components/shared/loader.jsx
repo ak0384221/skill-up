@@ -1,4 +1,9 @@
+import { useContext } from "react";
+import { SettingContext } from "../../Context/SettingContext";
+
 export default function Loader() {
+  const { theme } = useContext(SettingContext);
+
   return (
     <>
       <svg
@@ -8,7 +13,7 @@ export default function Loader() {
       >
         <path
           fill="none"
-          stroke="#FFFFFF"
+          stroke="white"
           strokeWidth="15"
           strokeLinecap="round"
           strokeDasharray="300 385"

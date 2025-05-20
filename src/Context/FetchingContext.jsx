@@ -33,15 +33,16 @@ export default function FetchingContextProvider({ children }) {
   );
   const { postLists, crudError } = postContents;
   let { hasMore, lastDoc } = postContents;
-  const { authorized } = useContext(AuthContext);
+  const { currentUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const POSTS_LIMIT = 10;
   //-------
 
   //Fetching posts initially from fireStore
   useEffect(() => {
+    console.log(currentUser);
     let unsubscribe = () => {};
-    if (authorized) {
+    if (currentUser) {
       const postsQuery = query(
         postDataRef,
         orderBy("createdAt", "desc"),
@@ -63,7 +64,7 @@ export default function FetchingContextProvider({ children }) {
       console.log("Not authorized....");
     }
     return () => unsubscribe();
-  }, [authorized]);
+  }, [currentUser]);
 
   //Functions of Uploading Post combined with prev posts
   async function uploadPost(postObj) {

@@ -6,7 +6,6 @@ import { SettingContext } from "./Context/SettingContext";
 
 function App() {
   const { theme, font, fontWeight } = useContext(SettingContext);
-  console.log(theme);
   return (
     <>
       <div className=" h-[10vh]  w-full fixed top-0  bg-transparent">
