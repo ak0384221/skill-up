@@ -31,7 +31,6 @@ export default function Login() {
           action="#"
           onSubmit={(evt) => {
             passLoadingDispatch(true);
-            console.log(authLoading);
             logInFormHandler(evt, emailRef, passRef, logInAuth);
           }}
           className="space-y-5  w-full mx-auto px-1  "

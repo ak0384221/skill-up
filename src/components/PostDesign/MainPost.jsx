@@ -14,7 +14,6 @@ export default function MainPost({ post, isEditing, setIsEditing }) {
 
   function handleSave() {
     // Replace this with your actual Firestore update function
-    console.log("Saving updated title:", editTitle);
     updatepost(post.id, { title: editTitle })
       .then(() => {
         setIsEditing(false);
@@ -31,7 +30,7 @@ export default function MainPost({ post, isEditing, setIsEditing }) {
           <>
             <textarea
               rows="2"
-              className="mx-3 w-[95%]  p-1 border-1 border-gray-500 rounded-md"
+              className="mx-3 w-[95%]   p-1 border-1 border-gray-500 rounded-md"
               placeholder="Write something..."
               value={editTitle}
               onChange={handleTitleChange}
@@ -46,7 +45,7 @@ export default function MainPost({ post, isEditing, setIsEditing }) {
         ) : (
           <>
             <p className=" h-max px-3 text-[16px]  mb-2">
-              {post.title === "" ? "No caption needed" : post.title}
+              {post.title && post.title}
             </p>
           </>
         )}

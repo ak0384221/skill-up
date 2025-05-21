@@ -12,6 +12,7 @@ import { AuthContext } from "../../Context/AuthContext";
 export default function CreatePost() {
   const { uploadPost, postLoading, crudError } = useContext(FetchingContext);
   const titleRef = useRef(null);
+
   const pictureUrlRef = useRef(null);
   const { currentUser } = useContext(AuthContext);
   const username = currentUser.displayName;
@@ -33,7 +34,8 @@ export default function CreatePost() {
               pictureUrlRef,
               uploadPost,
               username,
-              files
+              files,
+              currentUser.uid
             );
           }}
           className="w-full mx-auto  rounded-sm  p-2 "
@@ -76,8 +78,6 @@ export default function CreatePost() {
                 onChange={(e) => {
                   e.preventDefault();
                   setFiles(e.target.files[0]);
-                  console.log(files);
-                  console.log(e.target.files[0]);
                 }}
                 id="fileInput"
                 type="file"

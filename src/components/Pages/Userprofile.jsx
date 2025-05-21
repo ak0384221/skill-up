@@ -4,31 +4,14 @@ import { onSnapshot, query } from "firebase/firestore";
 import { where, orderBy } from "firebase/firestore";
 //external
 import { AuthContext } from "../../Context/AuthContext";
-import { postDataRef } from "../../Config/firebase";
 import SinglePostCard from "../PostDesign/CompleteSinglePostItem";
+import useUserProfile from "../../hooks/useUserProfile";
 //local
 export default function UserProfile() {
   const { currentUser } = useContext(AuthContext);
-  const [myData, setMyData] = useState([]);
 
-  console.log(currentUser.photoURL);
+  const { user, userPosts } = useUserProfile(currentUser.uid);
 
-  useEffect(() => {
-    const q = query(
-      postDataRef,
-      where("username", "==", currentUser.displayName),
-      orderBy("createdAt", "desc")
-    );
-
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      const posts = snapshot.docs.map((doc) => {
-        return { id: doc.id, ...doc.data() };
-      });
-      console.log(posts);
-      setMyData(posts);
-    });
-    return () => unsubscribe();
-  }, []);
   return (
     <>
       <div className="lg:w-[40vw]  min-h-screen w-full  rounded-sm    gap-4 ">
@@ -56,8 +39,8 @@ export default function UserProfile() {
         <h1 className="text-4xl  font-Fugaz text-gradient-purple w-max border  mx-auto my-[5vh]">
           Your Posts
         </h1>
-        {myData.map((post) => {
-          return <SinglePostCard post={post} />;
+        {userPosts.map((post) => {
+          return <SinglePostCard post={post} key={post.id} />;
         })}
       </div>{" "}
     </>

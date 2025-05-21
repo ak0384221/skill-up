@@ -1,5 +1,5 @@
 import { createContext, useEffect, useReducer, useState } from "react";
-import { auth } from "../Config/firebase";
+import { auth, userDataRef } from "../Config/firebase";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
@@ -8,6 +8,7 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
+import { doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { GoogleAuthProvider } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { authContent, authReducerMethod } from "../Reducers/AuthReducer";
@@ -24,7 +25,6 @@ export default function AuthContextProvider({ children }) {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log(user);
         dispatchAuthMethod({ type: "LOG_IN", payload: { user: user } });
       } else {
         dispatchAuthMethod({ type: "NOT_AUTHED", payload: { user: user } });
@@ -44,13 +44,12 @@ export default function AuthContextProvider({ children }) {
         email,
         password
       );
-      navigate("/posts");
+      navigate("/");
     } catch (err) {
       console.log(err);
       passErrorDispatch(err);
     }
   }
-
   async function signUpAuth(username, email, password) {
     try {
       const userCredential = await createUserWithEmailAndPassword(
@@ -58,10 +57,23 @@ export default function AuthContextProvider({ children }) {
         email,
         password
       );
+
+      // Update Firebase Auth profile displayName
       await updateProfile(userCredential.user, { displayName: username });
-      console.log("signed in succesfully", userCredential.user);
+
+      // Get doc ref (no await here)
+      const userDocRef = doc(userDataRef, userCredential.user.uid);
+
+      // Set user data in Firestore
+      await setDoc(userDocRef, {
+        email: userCredential.user.email,
+        username: username,
+        joinedOn: serverTimestamp(),
+      });
+
+      navigate("/");
     } catch (err) {
-      console.log(err);
+      console.error("Signup error:", err);
       passErrorDispatch(err);
     }
   }
@@ -71,7 +83,18 @@ export default function AuthContextProvider({ children }) {
     const provider = new GoogleAuthProvider();
     try {
       const userCredential = await signInWithPopup(auth, provider);
-      navigate("/posts");
+      const userDocRef = doc(userDataRef, userCredential.user.uid);
+
+      // Set user data in Firestore
+      await setDoc(userDocRef, {
+        email: userCredential.user.email,
+        username: userCredential.user.displayName,
+        joinedOn: serverTimestamp(),
+      });
+
+      console.log("Signed up successfully:", userCredential.user);
+
+      navigate("/");
     } catch (err) {
       console.log(err);
       passErrorDispatch(err);

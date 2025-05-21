@@ -32,7 +32,7 @@ export default function FetchingContextProvider({ children }) {
     postsInitialState
   );
   const { postLists, crudError } = postContents;
-  let { hasMore, lastDoc } = postContents;
+  let { hasMore, lastDoc, postLoading } = postContents;
   const { currentUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const POSTS_LIMIT = 10;
@@ -86,7 +86,7 @@ export default function FetchingContextProvider({ children }) {
         type: "SET_LOADING",
         payload: { postLoading: false },
       });
-      navigate("/posts");
+      navigate("/");
       dispatchPostsContent({
         type: "SET_CRUD_ERROR",
         payload: {
@@ -168,46 +168,7 @@ export default function FetchingContextProvider({ children }) {
       });
     }
   }
-  //function of getting more posts
-  async function fetchMorePosts() {
-    if (lastDoc) {
-      const nextQuery = query(
-        postDataRef,
-        orderBy("createdAt", "desc"),
-        startAfter(lastDoc),
-        limit(POSTS_LIMIT)
-      );
-      const snapshot = await getDocs(nextQuery);
-      if (snapshot.empty) {
-        dispatchPostsContent({
-          type: "SET_HAS_MORE",
-          payload: { hasMore: false },
-        });
-        return;
-      }
-      const newPosts = snapshot.docs.map((doc) => {
-        return {
-          id: doc.id,
-          ...doc.data(),
-        };
-      });
-      lastDoc = snapshot.docs[snapshot.docs.length - 1];
-      const hasMore = newPosts.length == POSTS_LIMIT;
-      addMorePostsToState(newPosts, lastDoc, hasMore);
-    }
-  }
-  //dispatch functions for adding more posts
-  function addMorePostsToState(newPosts, lastDoc, hasMore) {
-    const combinedPosts = {
-      type: "FETCH_MORE_ITEM",
-      payload: {
-        newPosts,
-        lastDoc,
-        hasMore,
-      },
-    };
-    dispatchPostsContent(combinedPosts);
-  }
+
   //dispatch functions for initial posts
 
   function addInitialPosts(postLists, lastDoc, hasMore) {
@@ -229,9 +190,13 @@ export default function FetchingContextProvider({ children }) {
         uploadPost,
         removePost,
         postLists,
-        fetchMorePosts,
         hasMore,
         crudError,
+        postLoading,
+        lastDoc,
+        POSTS_LIMIT,
+        postDataRef,
+        dispatchPostsContent,
       }}
     >
       {children}

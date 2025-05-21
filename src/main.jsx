@@ -16,6 +16,7 @@ import Settings from "./components/Pages/Settings.jsx";
 import LogoutModal from "./components/Modal/logOUtModal.jsx";
 import EditFields from "./components/editFields.jsx";
 import PostSkeleton from "./components/PostSkeleton/postSkeleton.jsx";
+import User from "./components/Pages/user.jsx";
 
 const routes = createBrowserRouter([
   {
@@ -29,17 +30,17 @@ const routes = createBrowserRouter([
       { path: "/normal", element: <Normal /> },
       { path: "/login", element: <Login /> },
       { path: "/signup", element: <SignUpForm /> },
-      { path: "/", element: <SignUpForm /> },
 
       {
         element: <ProtectedRoutes />,
         children: [
-          { path: "/posts", element: <Posts /> },
+          { path: "/", element: <Posts /> },
           { path: "/create-post", element: <CreatePost /> },
           { path: "/user", element: <UserProfile /> },
           { path: "/settings", element: <Settings /> },
           { path: "/editFields", element: <EditFields /> },
           { path: "/test", element: <PostSkeleton /> },
+          { path: "/vibehives/user/:id", element: <User /> },
         ],
       },
     ],

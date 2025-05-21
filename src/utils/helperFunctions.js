@@ -37,7 +37,8 @@ async function uploadPostFormHandler(
   pictureUrlRef,
   uploadPost,
   username,
-  files
+  files,
+  uid
 ) {
   evt.preventDefault();
 
@@ -54,6 +55,7 @@ async function uploadPostFormHandler(
         username: username,
         title: title,
         pictureURL: pictureUrl,
+        uid: uid,
       };
       uploadPost(postObj);
 
@@ -69,6 +71,7 @@ async function uploadPostFormHandler(
         username: username,
         title: title,
         pictureURL: pictureUrl,
+        uid: uid,
       };
       uploadPost(postObj);
     }

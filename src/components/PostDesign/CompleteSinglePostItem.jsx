@@ -11,10 +11,10 @@ export default function SinglePostCard({ post }) {
 
   return (
     <div
-      className={`post w-full min-h-[50vh] border-1  ${
-        (theme == "Dark" && "border-[#7a7575]") ||
-        (theme == "Light" && "border-[#979691]") ||
-        (theme === "System" && "dark:border-[#2c2c2c]")
+      className={`post w-full min-h-[50vh]  ${
+        (theme === "Dark" && "bg-[#212222]") ||
+        (theme === "Light" && "bg-[#d3f5f0ce]") ||
+        (theme === "System" && "dark:bg-[#212222]")
       } mx-auto rounded-3xl flex flex-col justify-between overflow-hidden   mb-[5vh] mt-[5vh] `}
     >
       <TopMostInfoCard

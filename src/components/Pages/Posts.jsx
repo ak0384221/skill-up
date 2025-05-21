@@ -1,6 +1,7 @@
 import Skeleton from "react-loading-skeleton";
 import InfiniteScroll from "react-infinite-scroll-component";
 //external
+import usePaginatedPosts from "../../hooks/usePaginatedPosts";
 import { useContext } from "react";
 import SinglePostCard from "../PostDesign/CompleteSinglePostItem";
 import { FetchingContext } from "../../Context/FetchingContext";
@@ -10,7 +11,20 @@ import PostSkeleton from "../PostSkeleton/postSkeleton";
 //local
 
 export default function Posts() {
-  const { postLists, fetchMorePosts, hasMore } = useContext(FetchingContext);
+  const {
+    postLists,
+    hasMore,
+    lastDoc,
+    POSTS_LIMIT,
+    postDataRef,
+    dispatchPostsContent,
+  } = useContext(FetchingContext);
+  const { fetchMorePosts } = usePaginatedPosts({
+    lastDoc,
+    POSTS_LIMIT,
+    postDataRef,
+    dispatchPostsContent,
+  });
 
   return (
     <>

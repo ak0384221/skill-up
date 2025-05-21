@@ -21,7 +21,7 @@ export default function Header() {
     <>
       <header className=" p-4  flex justify-between items-center  w-full backdrop-blur-lg  ">
         {/* Logo */}
-        <Link to="/posts" className="text-3xl  font-Fugaz text-gradient-purple">
+        <Link to="/" className="text-3xl  font-Fugaz text-gradient-purple">
           Vibehive
         </Link>
 
@@ -30,7 +30,7 @@ export default function Header() {
         {currentUser && (
           <nav className="flex space-x-2">
             <NavLink
-              to="/posts"
+              to="/"
               title="feed"
               className={({ isActive }) =>
                 `size-9 bg-gradient-to-r from-[#faa94d] to-[#ff0f06] flex justify-center items-center rounded-full p-1.25 ${

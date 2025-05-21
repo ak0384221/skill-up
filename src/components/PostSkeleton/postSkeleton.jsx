@@ -1,5 +1,4 @@
 export default function PostSkeleton() {
-  console.log("skeleton is rendering");
   return (
     <div className="w-full h-[90vh] rounded-2xl mt-10 overflow-hidden animate-pulse ">
       {/* Top Section */}

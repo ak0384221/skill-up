@@ -13,7 +13,6 @@ export default function Settings() {
     fontWeight,
     setFontWeight,
   } = useContext(SettingContext);
-  console.log(theme, font, lang);
   return (
     <>
       <div className=" w-full md:w-3/4 lg:w-1/2 ">
