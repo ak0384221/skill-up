@@ -2,6 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playwrite+US+Modern:wght@100..400&display=swap");
 
 @import "tailwindcss";
 
@@ -10,7 +11,9 @@
   --font-Roboto: "Roboto", sans-serif;
   --font-Bebas: "Bebas Neue", sans-serif;
   --font-Fugaz: "Fugaz One", sans-serif;
+  --font-playwright: "Playwrite US Modern", "cursive";
 }
+
 @layer utilities {
   .text-gradient-purple {
     @apply bg-gradient-to-r from-purple-500 via-purple-500 to-pink-500 bg-clip-text text-transparent;

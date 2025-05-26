@@ -5,10 +5,10 @@ import SettingContextProvider from "./SettingContext";
 
 export default function ParentContextProvider({ children }) {
   return (
-    <AuthContextProvider>
-      <SettingContextProvider>
+    <SettingContextProvider>
+      <AuthContextProvider>
         <FetchingContextProvider>{children}</FetchingContextProvider>
-      </SettingContextProvider>
-    </AuthContextProvider>
+      </AuthContextProvider>
+    </SettingContextProvider>
   );
 }

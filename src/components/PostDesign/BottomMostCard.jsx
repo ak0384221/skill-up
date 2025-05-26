@@ -12,7 +12,7 @@ export default function BottomMostCard() {
       <span
         className={`cursor-pointer flex justify-center items-center w-1/2 h-full   rounded-md transition-colors ${
           (theme == "Dark" && "hover:bg-[#0a0a0a]") ||
-          (theme == "Light" && "hover:bg-[#e7e7e7]") ||
+          (theme == "Light" && "hover:bg-[#d8d6d6]") ||
           (theme == "System" && "dark:hover:bg-[#0a0a0a]")
         }`}
       >
@@ -21,7 +21,7 @@ export default function BottomMostCard() {
       <span
         className={` cursor-pointer flex justify-center items-center w-1/2 h-full   rounded-md transition-colors ${
           (theme == "Dark" && "hover:bg-[#0a0a0a]") ||
-          (theme == "Light" && "hover:bg-[#e7e7e7]") ||
+          (theme == "Light" && "hover:bg-[#d8d6d6]") ||
           (theme == "System" && "dark:hover:bg-[#0a0a0a]")
         }`}
       >

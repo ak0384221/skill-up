@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { RiUploadCloud2Fill } from "react-icons/ri";
 import { Form } from "react-router-dom";
 //built-in
@@ -17,6 +17,23 @@ export default function CreatePost() {
   const { currentUser } = useContext(AuthContext);
   const username = currentUser.displayName;
   const [files, setFiles] = useState(null);
+  const [preview, setPreview] = useState(null);
+
+  function handleOnchangePicture(evt) {
+    setFiles(evt.target.files[0]);
+    const file = evt.target.files[0];
+    if (!file) return;
+    const objUrl = URL.createObjectURL(file);
+    setPreview(objUrl);
+  }
+
+  useEffect(() => {
+    return () => {
+      if (preview) {
+        URL.revokeObjectURL(preview);
+      }
+    };
+  }, [preview]);
 
   return (
     <>
@@ -75,15 +92,21 @@ export default function CreatePost() {
               <br />
               <input
                 className=" w-full  p-1 px-3 text-pink-500 text-sm "
-                onChange={(e) => {
-                  e.preventDefault();
-                  setFiles(e.target.files[0]);
-                }}
+                onChange={handleOnchangePicture}
                 id="fileInput"
                 type="file"
                 accept="image/*"
               />
             </center>
+            {preview && (
+              <div className="picyPreview h-auto min-h-[30vh] my-5 border">
+                <img
+                  src={preview}
+                  alt=""
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            )}
           </div>
 
           <Button variant="light">{postLoading ? <Loader /> : "Post"}</Button>

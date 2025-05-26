@@ -25,7 +25,7 @@ export default function MainPost({ post, isEditing, setIsEditing }) {
 
   return (
     <>
-      <div className="post w-full  h-max  ">
+      <div className="post w-full  h-max  pt-2 ">
         {isEditing ? (
           <>
             <textarea

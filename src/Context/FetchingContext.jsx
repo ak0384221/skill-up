@@ -3,12 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { useReducer } from "react";
 //built-in
 import { AuthContext } from "./AuthContext";
-import { postDataRef } from "../Config/firebase";
+import { postDataRef, userDataRef } from "../Config/firebase";
 import {
   addDoc,
   deleteDoc,
   doc,
   getDocs,
+  getDoc,
   updateDoc,
   serverTimestamp,
   query,
@@ -17,12 +18,15 @@ import {
   where,
   limit,
   startAfter,
+  Timestamp,
 } from "firebase/firestore";
 import { supabase } from "../Config/supabase";
 import {
   postsInitialState,
   postsContentReducerMethod,
 } from "../Reducers/PostCRUD";
+
+import { uploadFilesViaSupabase } from "../utils/helperFunctions";
 //important import statement------
 
 export const FetchingContext = createContext([]);
@@ -183,6 +187,48 @@ export default function FetchingContextProvider({ children }) {
     dispatchPostsContent(initialItems);
   }
 
+  //   import { doc, updateDoc, getDoc } from "firebase/firestore";
+  // import { db } from "./firebase"; // adjust the path to your firestore config
+
+  async function updateUserImageArray(uid, file, type) {
+    // type = "profilePics" or "coverPics"
+    try {
+      // 1. Upload to Supabase and get public URL
+      const pictureUrl = await uploadFilesViaSupabase(file);
+      if (!pictureUrl) throw new Error("Failed to get image URL");
+
+      // 2. Create new image object
+      const newImageObj = {
+        pictureUrl: pictureUrl.url,
+        uploadedAt: Timestamp.now(),
+      };
+
+      // 3. Reference Firestore user document
+      const userDatas = doc(userDataRef, uid); // ✅ FIXED: create doc ref from uid
+      const userSnap = await getDoc(userDatas);
+
+      if (!userSnap.exists()) {
+        throw new Error("User not found");
+      }
+
+      const existingData = userSnap.data();
+      const existingArray = existingData[type] || [];
+
+      // 4. Append new image object
+      const updatedArray = [...existingArray, newImageObj];
+
+      // 5. Update Firestore
+      await updateDoc(userDatas, {
+        [type]: updatedArray,
+      });
+
+      return { success: true, updatedArray };
+    } catch (err) {
+      console.error("Error updating Firestore:", err.message);
+      return { success: false, error: err.message };
+    }
+  }
+
   return (
     <FetchingContext.Provider
       value={{
@@ -196,6 +242,7 @@ export default function FetchingContextProvider({ children }) {
         lastDoc,
         POSTS_LIMIT,
         postDataRef,
+        updateUserImageArray,
         dispatchPostsContent,
       }}
     >

@@ -58,7 +58,7 @@ export default function Header() {
             </NavLink>
 
             <NavLink
-              to="/user"
+              to={`/vibehives/user/${currentUser.uid}`}
               title="user profile"
               className={({ isActive }) =>
                 `size-9 bg-gradient-to-r from-[#faa94d] to-[#ff0f06] flex justify-center items-center rounded-full ${

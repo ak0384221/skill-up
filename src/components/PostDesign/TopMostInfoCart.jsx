@@ -3,6 +3,8 @@ import { useContext } from "react";
 import { FetchingContext } from "../../Context/FetchingContext";
 import { AuthContext } from "../../Context/AuthContext";
 //local
+import { CiTimer } from "react-icons/ci";
+
 import { RxCross2 } from "react-icons/rx";
 import { RiEdit2Fill } from "react-icons/ri";
 import { LiaUndoAltSolid } from "react-icons/lia";
@@ -16,20 +18,25 @@ export default function TopMostInfoCard({ post, isEditing, setIsEditing }) {
   dayjs.extend(relativeTime);
 
   // Example usage:
-  const timeAgo = dayjs(post.createdAt.toDate()).fromNow();
+  const timeAgo = post?.createdAt?.toDate
+    ? dayjs(post.createdAt.toDate()).fromNow()
+    : "some time ago";
 
   return (
-    <div className="upper-Info-Card flex   w-full   justify-between items-center max-h-max bg-transparent px-2  mt-4  h-[3.5rem]">
+    <div className="upper-Info-Card flex   w-full   justify-between items-center max-h-max bg-transparent px-2  mt-4  h-max ">
       <div className="left h-full  p-1 ">
-        <Link
-          className="hover:underline font-Inter  text-2xl font-extrabold text-gradient-sunset"
-          to={`/vibehives/user/${post.uid}`}
-        >
-          {post.username}
-        </Link>
-        <p className="text-[12px] text-[#5e5c5c] font-Fugaz font-extralight">
-          {timeAgo}
-        </p>
+        <div className="">
+          <Link
+            className="hover:underline font-Inter  text-2xl font-extrabold text-gradient-sunset"
+            to={`/vibehives/user/${post.uid}`}
+          >
+            {post.username}
+          </Link>
+
+          <span className="text-[10px]  font-playwright mx-2">
+            {timeAgo} <CiTimer className="inline-block text-[14px]" />
+          </span>
+        </div>
       </div>
 
       <div className="right    gap-2  flex justify-evenly items-center">
@@ -45,13 +52,14 @@ export default function TopMostInfoCard({ post, isEditing, setIsEditing }) {
               className=" text-4xl text-white hover:cursor-pointer p-1.25 rounded-full hover:scale-105 transition-all bg-gradient-to-r from-[#44c907]  to-[#153ec4]"
             />
           ))}
-
-        <RxCross2
-          onClick={() => {
-            removePost(post.id, post.pictureURL);
-          }}
-          className=" text-2xl text-white  bg-gradient-to-r from-[#ec1010]  to-[#e01067b0] hover:cursor-pointer p-1.25 rounded-full hover:scale-105 transition-all"
-        />
+        {currentUser.uid === post.uid && (
+          <RxCross2
+            onClick={() => {
+              removePost(post.id, post.pictureURL);
+            }}
+            className=" text-2xl text-white  bg-gradient-to-r from-[#ec1010]  to-[#e01067b0] hover:cursor-pointer p-1.25 rounded-full hover:scale-105 transition-all"
+          />
+        )}
       </div>
     </div>
   );

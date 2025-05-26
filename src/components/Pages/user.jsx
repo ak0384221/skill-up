@@ -2,49 +2,183 @@ import { useParams } from "react-router-dom";
 import PageLoader from "../shared/pageLoader";
 import { VscEdit } from "react-icons/vsc";
 import ProfileInfo from "../profileInfo";
+import { RiUploadCloud2Fill } from "react-icons/ri";
+import { FaUpload } from "react-icons/fa6";
+import { FaCheckCircle } from "react-icons/fa";
+import { IoCloseCircle } from "react-icons/io5";
+
 import SinglePostCard from "../PostDesign/CompleteSinglePostItem";
 import useUserProfile from "../../hooks/useUserProfile";
+import ShowProfileInfo from "../Micro/showProfileInfo";
+import { GrUploadOption } from "react-icons/gr";
+import { useContext, useEffect } from "react";
+
+import { useState } from "react";
+import { FetchingContext } from "../../Context/FetchingContext";
+import { AuthContext } from "../../Context/AuthContext";
 
 export default function User() {
+  const { updateUserImageArray } = useContext(FetchingContext);
+  const { currentUser } = useContext(AuthContext);
+
   const { id } = useParams();
   const { user, userPosts } = useUserProfile(id);
+  const [files, setFiles] = useState(null);
+  const [cover, setCover] = useState(null);
+  const [coverPreview, setCoverPreview] = useState(null);
+  const [preview, setPreview] = useState(null);
+  console.log(user?.profilePic?.[user.profilePic.length - 1]?.pictureUrl);
+
+  function handleOnchangeImg(evt) {
+    evt.preventDefault();
+    setFiles(evt.target.files[0]);
+    const file = evt.target.files[0];
+    if (!file) return;
+
+    const objUrl = URL.createObjectURL(file);
+    setPreview(objUrl);
+  }
+  function handleOnchangeImgCover(evt) {
+    evt.preventDefault();
+    setCover(evt.target.files[0]);
+    const file = evt.target.files[0];
+    if (!file) return;
+
+    const objUrl = URL.createObjectURL(file);
+    setCoverPreview(objUrl);
+  }
+
+  useEffect(() => {
+    return () => {
+      if (preview) {
+        URL.revokeObjectURL(preview);
+      }
+      if (cover) {
+        URL.revokeObjectURL(cover);
+      }
+    };
+  }, [preview]);
 
   return (
-    <div className="w-full min-h-screen h-max">
+    <div className="w-full">
       {user ? (
-        <div className="w-full ">
-          <div className="cover dp w-full md:w-4/5 lg:w-3/5 h-[40vh] md:h-[40vh] lg:h-[50vh] border mx-auto relative">
+        <div className="w-full  ">
+          <div className="cover dp w-full md:w-2/3 lg:1/2  h-[40vh] md:h-[40vh] lg:h-[50vh]  mx-auto relative">
             <img
-              className="w-full h-full object-cover"
-              src="https://plus.unsplash.com/premium_photo-1685736630644-488e8146a3dc?q=80&w=876&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              className={`h-full w-full object-cover  ${
+                cover && "border-4 border-purple-400"
+              } `}
+              src={
+                coverPreview ||
+                user?.coverPic?.[user.coverPic.length - 1]?.pictureUrl ||
+                "https://t3.ftcdn.net/jpg/04/42/47/52/360_F_442475292_5ouemiiJiArGyNKSWgUpkRR8lmep6jgM.jpg"
+              }
               alt=""
             />
+            {currentUser.uid === id && (
+              <div className="addCover  ">
+                <div className="add absolute bottom-2 right-2   flex  items-center  space-x-2 bg-white">
+                  {cover ? (
+                    <>
+                      <IoCloseCircle
+                        onClick={() => {
+                          setCover(null);
+                          setCoverPreview(null);
+                          console.log("cliced cancel");
+                        }}
+                        className="text-3xl text-red-600 cursor-pointer"
+                      />
 
-            <div className="size-40 absolute -bottom-10 left-1/2 transform -translate-x-1/2">
+                      <FaCheckCircle
+                        className="text-blue-500 text-2xl cursor-pointer"
+                        onClick={async (e) => {
+                          await updateUserImageArray(id, cover, "coverPic");
+                          setCover(null);
+                        }}
+                      />
+                    </>
+                  ) : (
+                    <label
+                      htmlFor="coverInput"
+                      className="cursor-pointer inline-block"
+                    >
+                      <FaUpload className="text-2xl  text-blue-500 cursor-pointer" />
+                    </label>
+                  )}
+
+                  <input
+                    className=" w-full  p-1 px-3 text-pink-500 text-sm hidden"
+                    id="coverInput"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleOnchangeImgCover}
+                  />
+                </div>
+              </div>
+            )}
+            <div className="  profile pic size-40 absolute -bottom-10 left-1/2 transform -translate-x-1/2">
               <img
-                src="https://images.unsplash.com/photo-1743071441939-9ec2b3352b54?q=80&w=389&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                className="h-full w-full object-cover rounded-full"
+                src={
+                  preview ||
+                  user?.profilePic?.[user.profilePic.length - 1]?.pictureUrl ||
+                  "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                }
+                className={`h-full w-full object-cover rounded-full ${
+                  files && "border-4 border-purple-400"
+                } `}
               />
+              {currentUser.uid === id && (
+                <div className="add absolute bottom-0 right-0 rounded-full  flex justify-center items-center  space-x-2">
+                  {files ? (
+                    <>
+                      <IoCloseCircle
+                        onClick={() => {
+                          setFiles(null);
+                          setPreview(null);
+                        }}
+                        className="text-3xl text-red-600 cursor-pointer"
+                      />
+
+                      <FaCheckCircle
+                        className="text-blue-500 text-2xl cursor-pointer"
+                        onClick={async (e) => {
+                          await updateUserImageArray(id, files, "profilePic");
+                          setFiles(null);
+                        }}
+                      />
+                    </>
+                  ) : (
+                    <label
+                      htmlFor="fileInput"
+                      className="cursor-pointer inline-block"
+                    >
+                      <FaUpload className="text-2xl  text-blue-500 cursor-pointer" />
+                    </label>
+                  )}
+
+                  <input
+                    className=" w-full  p-1 px-3 text-pink-500 text-sm hidden"
+                    id="fileInput"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleOnchangeImg}
+                  />
+                </div>
+              )}
             </div>
           </div>
 
           <h2 className="font-Inter  text-4xl font-extrabold bg-gradient-to-r from-pink-600 via-red-500 to-yellow-400 bg-clip-text text-transparent  border-black w-max  p-2 mt-10 mx-auto ">
-            {user.username}
+            {user && user.username}
           </h2>
-          <div className="w-3/5 mx-auto">
-            <p className="mx-auto  text-center ">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Possimus, impedit Lorem ipsum dolor sit amet consectetur,
-              adipisicing elit. Incidunt, illo?
-            </p>
-            <VscEdit className="float-end border text-[2.25rem] p-2 rounded-full   bg-blue-500 text-white " />
-          </div>
 
-          <div className="left w-4/5  mx-auto my-[10vh] ">
-            <ProfileInfo />
-          </div>
+          {user && (
+            <p className="mx-auto  text-center w-full md:w-1/2 ">{user.bio}</p>
+          )}
+          <ShowProfileInfo user={user} id={id} />
+
           {
-            <div className="w-2/5 mx-auto   ">
+            <div className="w-full mx-auto  md:w-1/2 ">
               {userPosts.map((post) => {
                 return <SinglePostCard post={post} key={post.id} />;
               })}

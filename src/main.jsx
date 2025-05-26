@@ -11,12 +11,12 @@ import Normal from "./components/Normal.jsx";
 import ProtectedRoutes from "./routes/ProtectedRoutes.jsx";
 import NotLoggedIn from "./components/Errors/NotLoggedIn.jsx";
 import SignUpForm from "./components/Pages/SignUp.jsx";
-import UserProfile from "./components/Pages/Userprofile.jsx";
 import Settings from "./components/Pages/Settings.jsx";
 import LogoutModal from "./components/Modal/logOUtModal.jsx";
 import EditFields from "./components/editFields.jsx";
 import PostSkeleton from "./components/PostSkeleton/postSkeleton.jsx";
 import User from "./components/Pages/user.jsx";
+import UpdateProfileForm from "./components/Pages/UpdateProfileForm.jsx";
 
 const routes = createBrowserRouter([
   {
@@ -36,11 +36,11 @@ const routes = createBrowserRouter([
         children: [
           { path: "/", element: <Posts /> },
           { path: "/create-post", element: <CreatePost /> },
-          { path: "/user", element: <UserProfile /> },
           { path: "/settings", element: <Settings /> },
           { path: "/editFields", element: <EditFields /> },
           { path: "/test", element: <PostSkeleton /> },
           { path: "/vibehives/user/:id", element: <User /> },
+          { path: "/updateProfile", element: <UpdateProfileForm /> },
         ],
       },
     ],

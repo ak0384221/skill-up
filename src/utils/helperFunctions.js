@@ -1,4 +1,9 @@
 import { supabase } from "../Config/supabase";
+import { auth } from "../Config/firebase";
+import { doc, updateDoc } from "firebase/firestore";
+import { userDataRef } from "../Config/firebase"; // your Firestore collection reference
+
+// src/utils/updateProfileInDb.js
 
 function signUpFormHandler(
   evt,
@@ -100,5 +105,37 @@ async function uploadFilesViaSupabase(files) {
     return { error: err };
   }
 }
+async function updateProfileInDb(uid, updatedFields) {
+  try {
+    const userDocRef = doc(userDataRef, uid);
+    await updateDoc(userDocRef, updatedFields);
+    console.log("User profile updated in Firestore.");
+  } catch (err) {
+    console.error("Failed to update profile:", err.message);
+    throw err;
+  }
+}
+async function handleUpdateProfile(
+  evt,
+  profileData, // object with nickName, location, etc.
+  navigate
+) {
+  evt.preventDefault();
 
-export { signUpFormHandler, logInFormHandler, uploadPostFormHandler };
+  try {
+    const uid = auth.currentUser.uid;
+    await updateProfileInDb(uid, profileData);
+    navigate("/");
+  } catch (error) {
+    console.error("Error updating Firestore:", error.message);
+  }
+}
+
+export {
+  signUpFormHandler,
+  logInFormHandler,
+  uploadPostFormHandler,
+  handleUpdateProfile,
+  uploadFilesViaSupabase,
+  updateProfileInDb,
+};

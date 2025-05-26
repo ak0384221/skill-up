@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useReducer, useState } from "react";
 export const SettingContext = createContext();
 export default function SettingContextProvider({ children }) {
   const [theme, setTheme] = useState("light");

@@ -1,4 +1,10 @@
-import { createContext, useEffect, useReducer, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+  useState,
+} from "react";
 import { auth, userDataRef } from "../Config/firebase";
 import {
   createUserWithEmailAndPassword,
@@ -12,6 +18,7 @@ import { doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { GoogleAuthProvider } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { authContent, authReducerMethod } from "../Reducers/AuthReducer";
+import { SettingContext } from "./SettingContext";
 
 export const AuthContext = createContext([]);
 export default function AuthContextProvider({ children }) {
@@ -20,6 +27,8 @@ export default function AuthContextProvider({ children }) {
     authContent
   );
   const { currentUser, authLoading, authError } = authInitialValue;
+  const { dispatchNewprofile } = useContext(SettingContext);
+  console.log(dispatchNewprofile);
   const navigate = useNavigate();
 
   useEffect(() => {

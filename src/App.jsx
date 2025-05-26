@@ -16,7 +16,7 @@ function App() {
       <div
         className={`font-${font} font-${fontWeight}   min-h-screen flex justify-center items-start w-full mx-auto  font-bold  pt-18 ${
           (theme == "Dark" && "bg-[#181717] text-white") ||
-          (theme == "Light" && "bg-[#eef7fd]   text-black") ||
+          (theme == "Light" && "bg-[#ffffff]   text-black") ||
           (theme == "System" && "dark:bg-[#181717] text-white")
         }`}
       >
