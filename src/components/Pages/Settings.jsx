@@ -16,13 +16,13 @@ export default function Settings() {
   return (
     <>
       <div className=" w-full md:w-3/4 lg:w-1/2 ">
-        <div className="logo text-center text-4xl mt-5  font-Fugaz text-gradient-purple w-max mx-auto">
+        <div className="logo text-center text-4xl mt-5  font-Rochester text-gradient-purple w-max mx-auto">
           Settings
         </div>
 
-        <ul className="w-full px-3 mx-auto my-6 space-y-2 h-[70vh]">
+        <ul className="w-full px-3 mx-auto my-6 space-y-2 h-[70vh] ">
           <li className=" w-full py-4 px-4 rounded-sm">
-            <span className="left">Themes</span>
+            <span className="left font-playwright">Themes</span>
             <span className="float-right">
               {" "}
               <select
@@ -37,7 +37,7 @@ export default function Settings() {
             </span>
           </li>
           <li className=" w-full py-4 px-4 rounded-sm">
-            <span className="left">Font</span>
+            <span className="left font-playwright">Font</span>
             <span className="float-right">
               {" "}
               <select
@@ -56,7 +56,7 @@ export default function Settings() {
           </li>
 
           <li className=" w-full py-4 px-4 rounded-sm ">
-            <span className="left">Font Weight</span>
+            <span className="left font-playwright">Font Weight</span>
             <span className="float-right">
               <select
                 value={fontWeight}

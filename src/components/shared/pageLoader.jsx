@@ -1,7 +1,9 @@
+import Loader from "./loader";
+
 export default function PageLoader() {
   return (
     <>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+      {/* <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
         <path
           fill="#D357FF"
           stroke="#D357FF"
@@ -20,7 +22,12 @@ export default function PageLoader() {
             repeatCount="indefinite"
           ></animateTransform>
         </path>
-      </svg>
+      </svg> */}
+      <div className="fixed inset-0 z-50 flex items-center justify-center ">
+        <h1 className="text-6xl md:text-8xl font-Inter font-extrabold  text-gradient-purple animate-pulse">
+          Vibehives.
+        </h1>
+      </div>
     </>
   );
 }

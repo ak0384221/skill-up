@@ -11,15 +11,18 @@ export default function ShowProfileInfo({ user, id }) {
       <ul className="space-y-3">
         <li className="flex items-center gap-2">
           <span className="  w-max">
-            Also known as <b className="capitalize">{user && user.nickName}</b>{" "}
+            Also known as{" "}
+            <b className="capitalize font-bold font-kings text-gradient-purple text-4xl mx-1">
+              {user && user.nickName}
+            </b>{" "}
           </span>
         </li>
 
         <li className="flex items-center gap-2">
           <FaBriefcase className="text-blue-500 text-lg" />
           <span>
-            <span className="font-bold">Works at</span>{" "}
-            <span className=" px-2 py-0.5 rounded">
+            <span className="">Works at</span>{" "}
+            <span className=" px-2 py-0.5 rounded font-playwright capitalize font-bold">
               {user?.worksAt || "empty"}
             </span>
           </span>
@@ -27,8 +30,8 @@ export default function ShowProfileInfo({ user, id }) {
         <li className="flex items-center gap-2">
           <FaHome className="text-blue-500 text-lg" />
           <span>
-            <span className="font-bold">Lives in</span>{" "}
-            <span className=" px-2 py-0.5 rounded">
+            <span className="">Lives in</span>{" "}
+            <span className=" px-2 py-0.5 rounded font-playwright capitalize font-bold">
               {user?.location || "empty"}
             </span>
           </span>
@@ -36,8 +39,8 @@ export default function ShowProfileInfo({ user, id }) {
         <li className="flex items-center gap-2">
           <FaSchool className="text-blue-500 text-lg" />
           <span>
-            <span className="font-bold">Went to</span>{" "}
-            <span className=" px-2 py-0.5 rounded">
+            <span className="">Went to</span>{" "}
+            <span className=" px-2 py-0.5 rounded font-playwright capitalize font-bold">
               {user?.wentTo || "empty"}
             </span>
           </span>
@@ -47,7 +50,7 @@ export default function ShowProfileInfo({ user, id }) {
       {currentUser?.uid === id && (
         <Link
           to="/updateProfile"
-          className="inline-block mt-4 border px-4 py-1 bg-blue-600 rounded text-white hover:bg-blue-500 transition-colors"
+          className="inline-block mt-4 text-gradient-purple font-Rochester font-semibold text-3xl   "
         >
           Update your Profile
         </Link>

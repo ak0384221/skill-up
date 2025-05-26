@@ -21,7 +21,7 @@ export default function Header() {
     <>
       <header className=" p-4  flex justify-between items-center  w-full backdrop-blur-lg  ">
         {/* Logo */}
-        <Link to="/" className="text-3xl  font-Fugaz text-gradient-purple">
+        <Link to="/" className="text-4xl f  font-cookie text-gradient-purple">
           Vibehive
         </Link>
 

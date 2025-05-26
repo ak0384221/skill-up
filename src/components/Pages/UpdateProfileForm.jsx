@@ -39,70 +39,78 @@ export default function UpdateProfileForm() {
   return (
     <Form
       onSubmit={handleSubmit}
-      className="border-1 border-[#adadad] w-ful md:w-1/2 mx-auto p-6 rounded-2xl space-y-4"
+      className=" w-ful md:w-1/2 mx-auto p-6 rounded-2xl space-y-4"
     >
-      <h2 className="text-3xl text-center text-gradient-purple w-max mx-auto font-extrabold">
+      <h2 className="text-5xl text-center font-cookie text-gradient-purple w-max mx-auto ">
         Update Profile
       </h2>
 
       <div className="flex flex-col">
-        <label className="font-medium mb-1">Nick Name</label>
+        <label className=" text-gradient-purple font-medium mb-1 ">
+          Nick Name
+        </label>
         <input
           value={nickName}
           onChange={(e) => setNickName(e.target.value)}
           type="text"
           placeholder="Enter your nick name"
-          className="border-1 border-[#adadad] rounded-lg p-2 focus:outline-0"
+          className="border-1 border-[#b39ee5] rounded-sm p-2 focus:outline-0"
         />
       </div>
 
       <div className="flex flex-col">
-        <label className="font-medium mb-1">Works At</label>
+        <label className=" text-gradient-purple font-medium mb-1">
+          Works At
+        </label>
         <input
           value={worksAt}
           onChange={(e) => setWorksAt(e.target.value)}
           type="text"
           placeholder="e.g., Facebook"
-          className="border-1 border-[#adadad] rounded-lg p-2 focus:outline-0"
+          className="border-1  border-[#b39ee5] rounded-sm p-2 focus:outline-0"
         />
       </div>
 
       <div className="flex flex-col">
-        <label className="font-medium mb-1">Lives In</label>
+        <label className=" text-gradient-purple font-medium mb-1">
+          Lives In
+        </label>
         <input
           value={location}
           onChange={(e) => setLocation(e.target.value)}
           type="text"
           placeholder="e.g., Uttara, Dhaka"
-          className="border-1 border-[#adadad] rounded-lg p-2 focus:outline-0"
+          className="border-1 border-[#b39ee5] rounded-sm p-2 focus:outline-0"
         />
       </div>
 
       <div className="flex flex-col">
-        <label className="font-medium mb-1">Went To</label>
+        <label className=" text-gradient-purple font-medium mb-1">
+          Went To
+        </label>
         <input
           value={wentTo}
           onChange={(e) => setWentTo(e.target.value)}
           type="text"
           placeholder="e.g., Uttara High School"
-          className="border-1 border-[#adadad] rounded-lg p-2 focus:outline-0"
+          className="border-1 border-[#b39ee5] rounded-sm p-2 focus:outline-0"
         />
       </div>
 
       <div className="flex flex-col">
-        <label className="font-medium mb-1">Bio</label>
+        <label className=" text-gradient-purple font-medium mb-1">Bio</label>
         <input
           value={bio}
           onChange={(e) => setBio(e.target.value)}
           type="text"
           placeholder="Enter your bio"
-          className="border-1 border-[#adadad] rounded-lg p-2 focus:outline-0"
+          className="border-1 border-[#b39ee5] rounded-sm p-2 focus:outline-0"
         />
       </div>
 
       <Button
         variant="light"
-        className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
+        className="w-full bg-blue-600 text-white py-2 rounded-sm hover:bg-blue-700 transition font-cookie text-lg"
       >
         Save Changes
       </Button>

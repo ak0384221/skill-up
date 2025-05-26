@@ -77,7 +77,7 @@ export default function User() {
             />
             {currentUser.uid === id && (
               <div className="addCover  ">
-                <div className="add absolute bottom-2 right-2   flex  items-center  space-x-2 bg-white">
+                <div className="add absolute bottom-2 right-2   flex  items-center cursor-pointer opacity-50 transition-opacity  p-1.5 hover:opacity-100 bg-white border-blue-500 rounded-full">
                   {cover ? (
                     <>
                       <IoCloseCircle
@@ -102,7 +102,7 @@ export default function User() {
                       htmlFor="coverInput"
                       className="cursor-pointer inline-block"
                     >
-                      <FaUpload className="text-2xl  text-blue-500 cursor-pointer" />
+                      <FaUpload className="text-2xl  text-blue-600 cursor-pointer" />
                     </label>
                   )}
 
@@ -128,7 +128,7 @@ export default function User() {
                 } `}
               />
               {currentUser.uid === id && (
-                <div className="add absolute bottom-0 right-0 rounded-full  flex justify-center items-center  space-x-2">
+                <div className="add absolute bottom-0 right-0 rounded-full  flex justify-center items-center opacity-50 transition-opacity  p-1.5 hover:opacity-100 bg-white">
                   {files ? (
                     <>
                       <IoCloseCircle
@@ -173,7 +173,9 @@ export default function User() {
           </h2>
 
           {user && (
-            <p className="mx-auto  text-center w-full md:w-1/2 ">{user.bio}</p>
+            <p className="mx-auto text-lg font-playwright text-center w-full md:w-1/2 ">
+              {user.bio}
+            </p>
           )}
           <ShowProfileInfo user={user} id={id} />
 

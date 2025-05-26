@@ -38,7 +38,7 @@ export default function CreatePost() {
   return (
     <>
       <div className="w-full md:w-2/3 lg:w-2/5 my-4  p-5">
-        <p className="text-4xl text-center my-5 text-gradient-purple font-bold w-max mx-auto">
+        <p className="text-5xl text-center my-5 text-gradient-purple w-max mx-auto font-cookie">
           Create a post
         </p>
         <Form
@@ -91,7 +91,7 @@ export default function CreatePost() {
               </label>
               <br />
               <input
-                className=" w-full  p-1 px-3 text-pink-500 text-sm "
+                className=" w-full font-cookie text-2xl  p-1 px-3 text-pink-500  "
                 onChange={handleOnchangePicture}
                 id="fileInput"
                 type="file"
@@ -109,7 +109,9 @@ export default function CreatePost() {
             )}
           </div>
 
-          <Button variant="light">{postLoading ? <Loader /> : "Post"}</Button>
+          <Button className="font-Rochester text-lg" variant="light">
+            {postLoading ? <Loader /> : "Upload"}
+          </Button>
           {crudError && (
             <div className="w-full h-10 border border-red-300 my-2 font-bold text-red-500">
               {crudError}

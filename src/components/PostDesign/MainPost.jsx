@@ -44,7 +44,7 @@ export default function MainPost({ post, isEditing, setIsEditing }) {
           </>
         ) : (
           <>
-            <p className=" h-max px-3 text-[16px]  mb-2">
+            <p className=" h-max px-3 text-[16px]   mb-2">
               {post.title && post.title}
             </p>
           </>
