@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { FaBriefcase, FaHome, FaSchool } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
+import { FaAngleDoubleRight } from "react-icons/fa";
 
 export default function ShowProfileInfo({ user, id }) {
   const { currentUser } = useContext(AuthContext);
@@ -9,15 +10,6 @@ export default function ShowProfileInfo({ user, id }) {
   return (
     <div className="w-full px-5 md:w-1/2 mx-auto space-y-4 my-[5vh]">
       <ul className="space-y-3">
-        <li className="flex items-center gap-2">
-          <span className="  w-max">
-            Also known as{" "}
-            <b className="capitalize font-bold font-kings text-gradient-purple text-4xl mx-1">
-              {user && user.nickName}
-            </b>{" "}
-          </span>
-        </li>
-
         <li className="flex items-center gap-2">
           <FaBriefcase className="text-blue-500 text-lg" />
           <span>
@@ -50,9 +42,10 @@ export default function ShowProfileInfo({ user, id }) {
       {currentUser?.uid === id && (
         <Link
           to="/updateProfile"
-          className="inline-block mt-4 text-gradient-purple font-Rochester font-semibold text-3xl   "
+          className=" mt-4 mx-auto w-max text-gradient-purple font-Rochester font-semibold text-3xl border  flex justify-center items-center py-2 gap-4 hover:gap-16 transition-all "
         >
-          Update your Profile
+          Update your Profile{" "}
+          <FaAngleDoubleRight className="text-pink-500 text-2xl" />
         </Link>
       )}
     </div>

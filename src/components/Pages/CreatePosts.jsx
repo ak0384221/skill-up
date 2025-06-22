@@ -99,11 +99,11 @@ export default function CreatePost() {
               />
             </center>
             {preview && (
-              <div className="picyPreview h-auto min-h-[30vh] my-5 border">
+              <div className="picyPreview    h-auto min-h-[30vh] my-5 ">
                 <img
                   src={preview}
                   alt=""
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover rounded-md"
                 />
               </div>
             )}

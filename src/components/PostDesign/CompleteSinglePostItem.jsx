@@ -23,7 +23,7 @@ export default function SinglePostCard({ post }) {
         setIsEditing={setIsEditing}
       />
       <MainPost post={post} isEditing={isEditing} setIsEditing={setIsEditing} />
-      <BottomMostCard />
+      <BottomMostCard post={post} />
     </div>
   );
 }

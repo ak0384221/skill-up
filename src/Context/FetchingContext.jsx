@@ -39,7 +39,7 @@ export default function FetchingContextProvider({ children }) {
   let { hasMore, lastDoc, postLoading } = postContents;
   const { currentUser } = useContext(AuthContext);
   const navigate = useNavigate();
-  const POSTS_LIMIT = 10;
+  const POSTS_LIMIT = 6;
   //-------
 
   //Fetching posts initially from fireStore
@@ -111,7 +111,6 @@ export default function FetchingContextProvider({ children }) {
       });
     }
   }
-
   //Functions of Removing post
   async function removePost(postId, picUrl) {
     let picPath;
@@ -151,7 +150,6 @@ export default function FetchingContextProvider({ children }) {
       });
     }
   }
-
   //Functions of Updating post
   async function updatepost(postId, updatedData) {
     const singlePostRef = doc(postDataRef, postId);
@@ -172,7 +170,6 @@ export default function FetchingContextProvider({ children }) {
       });
     }
   }
-
   //dispatch functions for initial posts
 
   function addInitialPosts(postLists, lastDoc, hasMore) {
@@ -186,10 +183,8 @@ export default function FetchingContextProvider({ children }) {
     };
     dispatchPostsContent(initialItems);
   }
-
   //   import { doc, updateDoc, getDoc } from "firebase/firestore";
   // import { db } from "./firebase"; // adjust the path to your firestore config
-
   async function updateUserImageArray(uid, file, type) {
     // type = "profilePics" or "coverPics"
     try {
@@ -229,6 +224,43 @@ export default function FetchingContextProvider({ children }) {
     }
   }
 
+  async function updateLike(post) {
+    const postRef = doc(postDataRef, post.id);
+    const postSnap = await getDoc(postRef);
+    if (!postSnap.exists()) return;
+
+    const postData = postSnap.data();
+    const reactions = postData.reactions || [];
+
+    const alreadyLikedIndex = reactions.findIndex(
+      (reaction) => reaction.uid === currentUser.uid
+    );
+
+    if (alreadyLikedIndex > -1) {
+      // Remove like
+      const updatedReactions = [...reactions];
+      updatedReactions.splice(alreadyLikedIndex, 1);
+
+      await updateDoc(postRef, {
+        reactions: updatedReactions,
+      });
+    } else {
+      // Add like
+      const newReaction = {
+        uid: currentUser.uid,
+        time: Timestamp.now(),
+      };
+
+      await updateDoc(postRef, {
+        reactions: [...reactions, newReaction],
+      });
+    }
+  }
+
+  async function addComment(comment) {
+    console.log(comment);
+  }
+
   return (
     <FetchingContext.Provider
       value={{
@@ -244,6 +276,8 @@ export default function FetchingContextProvider({ children }) {
         postDataRef,
         updateUserImageArray,
         dispatchPostsContent,
+        updateLike,
+        addComment,
       }}
     >
       {children}
