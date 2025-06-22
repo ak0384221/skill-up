@@ -27,7 +27,6 @@ export default function User() {
   const [cover, setCover] = useState(null);
   const [coverPreview, setCoverPreview] = useState(null);
   const [preview, setPreview] = useState(null);
-  console.log(user?.profilePic?.[user.profilePic.length - 1]?.pictureUrl);
 
   function handleOnchangeImg(evt) {
     evt.preventDefault();
@@ -168,7 +167,7 @@ export default function User() {
             </div>
           </div>
 
-          <h2 className="font-Inter  text-4xl font-extrabold bg-gradient-to-r from-pink-600 via-red-500 to-yellow-400 bg-clip-text text-transparent  border-black w-max  p-2 mt-10 mx-auto ">
+          <div className="font-Inter  text-4xl font-extrabold bg-gradient-to-r from-pink-600 via-red-500 to-yellow-400 bg-clip-text text-transparent  border-black w-max  p-2 mt-10 mx-auto ">
             <h2 className="font-Inter  text-4xl font-extrabold bg-gradient-to-r from-pink-600 via-red-500 to-yellow-400 bg-clip-text text-transparent  border-black w-max inline-block ">
               {" "}
               {user && user.username}{" "}
@@ -176,7 +175,7 @@ export default function User() {
             <b className="capitalize font-bold font-Rochester text-gradient-purple text-2xl mx-1">
               ( {user && user.nickName})
             </b>{" "}
-          </h2>
+          </div>
 
           {user && (
             <p className="mx-auto text-lg font-playwright text-center w-full md:w-1/2 ">

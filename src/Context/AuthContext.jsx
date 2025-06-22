@@ -27,8 +27,7 @@ export default function AuthContextProvider({ children }) {
     authContent
   );
   const { currentUser, authLoading, authError } = authInitialValue;
-  const { dispatchNewprofile } = useContext(SettingContext);
-  console.log(dispatchNewprofile);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -40,7 +39,6 @@ export default function AuthContextProvider({ children }) {
       }
     });
     return () => {
-      console.log("auth is quitting subscription");
       unsubscribe();
     };
   }, []);

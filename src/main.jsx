@@ -1,22 +1,23 @@
-import { StrictMode } from "react";
+import { lazy, Suspense, StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import App from "./App.jsx";
-import ParentContextProvider from "./Context/ParentContext.jsx";
-import Posts from "./components/Pages/Posts.jsx";
-import CreatePost from "./components/Pages/CreatePosts.jsx";
-import Login from "./components/Pages/Login.jsx";
-import Normal from "./components/Normal.jsx";
 import ProtectedRoutes from "./routes/ProtectedRoutes.jsx";
-import NotLoggedIn from "./components/Errors/NotLoggedIn.jsx";
-import SignUpForm from "./components/Pages/SignUp.jsx";
-import Settings from "./components/Pages/Settings.jsx";
-import LogoutModal from "./components/Modal/logOUtModal.jsx";
-import EditFields from "./components/editFields.jsx";
-import PostSkeleton from "./components/PostSkeleton/postSkeleton.jsx";
-import User from "./components/Pages/user.jsx";
-import UpdateProfileForm from "./components/Pages/UpdateProfileForm.jsx";
+import ParentContextProvider from "./Context/ParentContext.jsx";
+const Posts = lazy(() => import("./components/Pages/Posts.jsx"));
+const CreatePost = lazy(() => import("./components/Pages/CreatePosts.jsx"));
+const Login = lazy(() => import("./components/Pages/Login.jsx"));
+const SignUpForm = lazy(() => import("./components/Pages/SignUp.jsx"));
+const Settings = lazy(() => import("./components/Pages/Settings.jsx"));
+const EditFields = lazy(() => import("./components/editFields.jsx"));
+const PostSkeleton = lazy(() =>
+  import("./components/PostSkeleton/postSkeleton.jsx")
+);
+const User = lazy(() => import("./components/Pages/user.jsx"));
+const UpdateProfileForm = lazy(() =>
+  import("./components/Pages/UpdateProfileForm.jsx")
+);
 
 const routes = createBrowserRouter([
   {
@@ -27,7 +28,6 @@ const routes = createBrowserRouter([
       </ParentContextProvider>
     ),
     children: [
-      { path: "/normal", element: <Normal /> },
       { path: "/login", element: <Login /> },
       { path: "/signup", element: <SignUpForm /> },
 
@@ -49,6 +49,8 @@ const routes = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={routes} />
+    <Suspense fallback={<div>Loading...</div>}>
+      <RouterProvider router={routes} />
+    </Suspense>
   </StrictMode>
 );

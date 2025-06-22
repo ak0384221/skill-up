@@ -1,6 +1,13 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { useNavigate } from "react-router-dom";
 import { useReducer } from "react";
+
 //built-in
 import { AuthContext } from "./AuthContext";
 import { postDataRef, userDataRef } from "../Config/firebase";
@@ -19,6 +26,7 @@ import {
   limit,
   startAfter,
   Timestamp,
+  arrayUnion,
 } from "firebase/firestore";
 import { supabase } from "../Config/supabase";
 import {
@@ -44,7 +52,6 @@ export default function FetchingContextProvider({ children }) {
 
   //Fetching posts initially from fireStore
   useEffect(() => {
-    console.log(currentUser);
     let unsubscribe = () => {};
     if (currentUser) {
       const postsQuery = query(
@@ -257,8 +264,27 @@ export default function FetchingContextProvider({ children }) {
     }
   }
 
-  async function addComment(comment) {
+  async function addComment(comment, post) {
+    console.log(post);
     console.log(comment);
+    console.log(currentUser);
+
+    const commentObj = {
+      uid: currentUser.uid,
+      comment: comment.trim(),
+      timestamp: Date.now(), // or new Date()
+    };
+
+    const postRef = doc(postDataRef, post.id); // assumes posts is your collection
+
+    try {
+      await updateDoc(postRef, {
+        comments: arrayUnion(commentObj), // Firestore will create "comments" if it doesn't exist
+      });
+      console.log("Comment added");
+    } catch (error) {
+      console.error("Error adding comment:", error);
+    }
   }
 
   return (

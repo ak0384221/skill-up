@@ -10,7 +10,6 @@ function postsContentReducerMethod(currValue, action) {
   let newValue = currValue;
 
   if (action.type === "ADD_INITIAL_POSTS") {
-    console.log(action);
     newValue = {
       ...currValue,
       postLists: action.payload.postLists,
