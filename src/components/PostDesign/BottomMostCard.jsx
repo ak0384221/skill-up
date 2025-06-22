@@ -16,15 +16,17 @@ import Button from "../shared/Button";
 export default function BottomMostCard({ post }) {
   const { updateLike, addComment } = useContext(FetchingContext);
   const { theme } = useContext(SettingContext);
-  const [clicked, setClicked] = useState(false);
+  const [clickedLove, setClickedLove] = useState(false);
+  const [clickedComment, setClickedComment] = useState(false);
+
   const commentsRef = useRef();
 
   return (
     <div className="">
-      <div className="lower  h-[3.5rem]  p-2  flex justify-center items-center  w-4/5 mx-auto ">
+      <div className="lower  h-[3.5rem]  p-2  flex justify-between items-center  w-full mx-auto gap-3">
         <span
           onClick={() => {
-            setClicked(!clicked);
+            setClickedLove(!clickedLove);
             updateLike(post);
           }}
           className={` flex justify-center items-center w-1/3  cursor-pointer h-full   rounded-md transition-colors ${
@@ -42,7 +44,7 @@ export default function BottomMostCard({ post }) {
         </span>
         <span
           onClick={() => {
-            setClicked(!clicked);
+            setClickedComment(!clickedComment);
           }}
           className={` flex justify-center items-center w-1/3  cursor-pointer h-full   rounded-md transition-colors text-2xl ${
             (theme == "Dark" && "hover:bg-[#0a0a0a]") ||
@@ -69,7 +71,7 @@ export default function BottomMostCard({ post }) {
       </div>
       <div
         className={`${
-          clicked ? " min-h-[5rem] h-max " : "h-0"
+          clickedComment ? " min-h-[5rem] h-max " : "h-0"
         } overflow-hidden`}
       >
         <div className="send comment px-5">
@@ -84,7 +86,7 @@ export default function BottomMostCard({ post }) {
             className="my-2"
             onClick={() => {
               addComment(commentsRef.current.value, post);
-              setClicked(false);
+              setClickedComment(false);
             }}
           >
             Send
