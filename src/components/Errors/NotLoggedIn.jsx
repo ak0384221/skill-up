@@ -19,7 +19,7 @@ export default function NotLoggedIn() {
             <Button className="mb-1.5" variant="light">
               Demo login
             </Button>
-          </Link>{" "}
+          </Link>
         </div>
       </div>
     </div>

@@ -4,6 +4,7 @@ import NotLoggedIn from "../components/Errors/NotLoggedIn";
 import { AuthContext } from "../Context/AuthContext";
 import Loader from "../components/shared/loader";
 import PageLoader from "../components/shared/pageLoader";
+import Login from "../components/Pages/Login";
 
 export default function ProtectedRoutes() {
   const { currentUser } = useContext(AuthContext);
@@ -28,6 +29,6 @@ export default function ProtectedRoutes() {
   if (currentUser) {
     return <Outlet />;
   } else {
-    return <NotLoggedIn />;
+    return <Login />;
   }
 }

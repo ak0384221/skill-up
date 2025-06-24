@@ -20,11 +20,9 @@ export default function Login() {
   const emailRef = useRef();
   const passRef = useRef();
   return (
-    <div className="text-black flex items-start justify-center min-h-screen rounded-sm w-full   ">
-      <div className=" w-[90%] mt-[10vh] md:w-2/3 lg:w-3/5 xl:w-1/3 bg-white rounded-2xl  px-3  py-4 border-1 border-[#ce7ece] ">
-        <h2 className="text-3xl pt-4 font-bold text-center bg-gradient-to-r from-purple-500 via-purple-500  to-pink-500 bg-clip-text text-transparent mb-6">
-          Log In
-        </h2>
+    <div className="text-white mt-[10vh] flex items-start justify-center min-h-screen rounded-sm w-full   ">
+      <div className=" w-[90%] mt-[10vh] md:w-2/3 lg:w-3/5 xl:w-1/3 rounded-2xl  px-3  py-4 border-1 border-[#ce7ece57] ">
+        <h2 className="text-3xl pt-4 font-bold text-center mb-6 ">Log In</h2>
 
         <Form
           method="post"
@@ -36,23 +34,20 @@ export default function Login() {
           className="space-y-5  w-full mx-auto px-1  "
         >
           <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-[#a71ec9] mb-1"
-            >
+            <label htmlFor="email" className="block text-sm font-medium  mb-1">
               Email address
             </label>
             <input
               ref={emailRef}
               id="email"
               type="email"
-              className="w-full px-4 py-2 border-1 border-[#c7c7c7] rounded-sm focus:outline-none focus:ring-2 focus:ring-blue-500 font-light"
+              className="w-full px-4 py-2 border-1 border-[#c7c7c7] rounded-sm focus:outline-none focus:outline-0 font-light"
             />
           </div>
           <div>
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-[#a71ec9] mb-1"
+              className="block text-sm font-medium  mb-1"
             >
               Password
             </label>
@@ -60,7 +55,7 @@ export default function Login() {
               ref={passRef}
               id="password"
               type="password"
-              className="w-full px-4 py-2 border-1  border-[#c7c7c7] rounded-sm font-light focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border-1  border-[#c7c7c7] rounded-sm font-light focus:outline-none focus:outline-0"
               placeholder="••••••••"
             />
           </div>
@@ -70,23 +65,20 @@ export default function Login() {
             </div>
           )}
           <div className="flex items-center justify-between text-sm">
-            <label className="flex items-center text-[#a71ec9]">
+            <label className="flex items-center ">
               <input type="checkbox" className="Form-checkbox mr-2" />
               Remember me
             </label>
-            <a href="#" className="text-[#a71ec9] hover:underline">
+            <a href="#" className=" hover:underline">
               Forgot password?
             </a>
           </div>
           <Button variant="light">{authLoading ? <Loader /> : "Log in"}</Button>
         </Form>
 
-        <p className="mt-6 text-center text-sm text-[#303030]">
+        <p className="mt-6 text-center text-sm text-[#c0bfbf]">
           Don’t have an account?
-          <Link
-            to="/signup"
-            className="text-[#a71ec9] hover:underline font-bold mx-2"
-          >
+          <Link to="/signup" className=" hover:underline font-bold mx-2">
             Sign up
           </Link>
         </p>

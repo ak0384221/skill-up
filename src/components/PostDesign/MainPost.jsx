@@ -2,12 +2,16 @@ import { useContext, useState } from "react";
 //built in
 import { FetchingContext } from "../../Context/FetchingContext";
 //local
+import { RxCross2 } from "react-icons/rx";
+
 import { IoCloudDoneSharp } from "react-icons/io5";
+import { AuthContext } from "../../Context/AuthContext";
 //external
 export default function MainPost({ post, isEditing, setIsEditing }) {
   const { updatepost } = useContext(FetchingContext);
   const [editTitle, setEditTitle] = useState(post.title);
-
+  const { removePost } = useContext(FetchingContext);
+  const { currentUser } = useContext(AuthContext);
   function handleTitleChange(evt) {
     setEditTitle(evt.target.value);
   }
@@ -35,16 +39,20 @@ export default function MainPost({ post, isEditing, setIsEditing }) {
               value={editTitle}
               onChange={handleTitleChange}
             ></textarea>
-            <div className="w-full  flex justify-end items-center ">
+            <div className="w-full  flex justify-end items-center gap-3 px-5  ">
               <IoCloudDoneSharp
                 className=" text-4xl cursor-pointer rounded-full hover:bg-white transition-colors  p-1 text-blue-500"
                 onClick={handleSave}
+              />
+              <RxCross2
+                onClick={() => setIsEditing(false)}
+                className=" text-2xl text-white  bg-gradient-to-r from-[#ec1010]  to-[#e01067b0] hover:cursor-pointer p-1.25 rounded-full hover:scale-105 transition-all"
               />
             </div>
           </>
         ) : (
           <>
-            <p className=" h-max px-3 text-[16px]   mb-2">
+            <p className=" h-max px-3 text-[16px] text-[#f0f0f0]  mb-3">
               {post.title && post.title}
             </p>
           </>

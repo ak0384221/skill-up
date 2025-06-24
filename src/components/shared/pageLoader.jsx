@@ -23,7 +23,7 @@ export default function PageLoader() {
           ></animateTransform>
         </path>
       </svg> */}
-      <div className="fixed inset-0 z-50 flex items-center justify-center ">
+      <div className="fixed inset-0 z-1000 flex items-center justify-center ">
         <h1 className="text-6xl md:text-8xl font-Inter font-extrabold  text-gradient-purple animate-pulse">
           Vibehives.
         </h1>

@@ -18,7 +18,6 @@ import { doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { GoogleAuthProvider } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { authContent, authReducerMethod } from "../Reducers/AuthReducer";
-import { SettingContext } from "./SettingContext";
 
 export const AuthContext = createContext([]);
 export default function AuthContextProvider({ children }) {

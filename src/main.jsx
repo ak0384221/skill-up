@@ -5,11 +5,12 @@ import "./index.css";
 import App from "./App.jsx";
 import ProtectedRoutes from "./routes/ProtectedRoutes.jsx";
 import ParentContextProvider from "./Context/ParentContext.jsx";
+import Messenger from "./components/Pages/Messenger.jsx";
+import Chats from "./components/Micro/Chats.jsx";
 const Posts = lazy(() => import("./components/Pages/Posts.jsx"));
 const CreatePost = lazy(() => import("./components/Pages/CreatePosts.jsx"));
 const Login = lazy(() => import("./components/Pages/Login.jsx"));
 const SignUpForm = lazy(() => import("./components/Pages/SignUp.jsx"));
-const Settings = lazy(() => import("./components/Pages/Settings.jsx"));
 const EditFields = lazy(() => import("./components/editFields.jsx"));
 const PostSkeleton = lazy(() =>
   import("./components/PostSkeleton/postSkeleton.jsx")
@@ -36,11 +37,12 @@ const routes = createBrowserRouter([
         children: [
           { path: "/", element: <Posts /> },
           { path: "/create-post", element: <CreatePost /> },
-          { path: "/settings", element: <Settings /> },
           { path: "/editFields", element: <EditFields /> },
           { path: "/test", element: <PostSkeleton /> },
           { path: "/vibehives/user/:id", element: <User /> },
           { path: "/updateProfile", element: <UpdateProfileForm /> },
+          { path: "/messenger", element: <Messenger /> },
+          { path: "/messenger/:receiverId", element: <Chats /> },
         ],
       },
     ],

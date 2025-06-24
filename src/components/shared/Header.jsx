@@ -6,10 +6,12 @@ import { AuthContext } from "../../Context/AuthContext";
 import LogoutModal from "../Modal/logOUtModal";
 //local
 import { FaHeartCirclePlus } from "react-icons/fa6";
-import { IoSettings } from "react-icons/io5";
+
 import { HiLogout } from "react-icons/hi";
 import { FaUser } from "react-icons/fa";
 import { SlFeed } from "react-icons/sl";
+import { FaFacebookMessenger } from "react-icons/fa6";
+
 //external
 export default function Header() {
   const { logOutAuth, currentUser } = useContext(AuthContext);
@@ -19,7 +21,7 @@ export default function Header() {
   };
   return (
     <>
-      <header className=" p-4  flex justify-between items-center  w-full backdrop-blur-lg  ">
+      <header className="p-4 mb-[10vh] flex justify-between items-center overflow-hidden w-full bg-[#2a2c2a]">
         {/* Logo */}
         <Link to="/" className="text-4xl f  font-cookie text-gradient-purple">
           Vibehive
@@ -70,9 +72,10 @@ export default function Header() {
             >
               <FaUser className="size-7 p-1 text-white" />
             </NavLink>
+
             <NavLink
-              to="/settings"
-              title="settings"
+              to="/messenger"
+              title="messenger"
               className={({ isActive }) =>
                 `size-9 bg-gradient-to-r from-[#faa94d] to-[#ff0f06] flex justify-center items-center rounded-full ${
                   isActive
@@ -81,9 +84,10 @@ export default function Header() {
                 }`
               }
             >
-              <IoSettings className="size-7 p-1 text-white" />
+              <FaFacebookMessenger className="size-7 p-1 text-white" />
             </NavLink>
-            <div className=" cursor-pointer ">
+
+            <div className="cursor-pointer ">
               <HiLogout
                 onClick={() => {
                   setShowModal(true);

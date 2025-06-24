@@ -1,9 +1,4 @@
-import { useContext } from "react";
-import { SettingContext } from "../../Context/SettingContext";
-
 export default function Loader() {
-  const { theme } = useContext(SettingContext);
-
   return (
     <>
       <svg

@@ -1,8 +1,6 @@
 import { useParams } from "react-router-dom";
 import PageLoader from "../shared/pageLoader";
-import { VscEdit } from "react-icons/vsc";
-import ProfileInfo from "../profileInfo";
-import { RiUploadCloud2Fill } from "react-icons/ri";
+
 import { FaUpload } from "react-icons/fa6";
 import { FaCheckCircle } from "react-icons/fa";
 import { IoCloseCircle } from "react-icons/io5";
@@ -59,10 +57,10 @@ export default function User() {
   }, [preview]);
 
   return (
-    <div className="w-full">
+    <div className="w-full min-h-screen mt-[12vh]">
       {user ? (
         <div className="w-full  ">
-          <div className="cover dp w-full md:w-2/3 lg:1/2  h-[40vh] md:h-[40vh] lg:h-[50vh]  mx-auto relative">
+          <div className="cover bg-[#000000] dp w-full md:w-2/3 lg:1/2  h-[40vh] md:h-[40vh] lg:h-[50vh]  mx-auto relative">
             <img
               className={`h-full w-full object-cover  ${
                 cover && "border-4 border-purple-400"
@@ -173,12 +171,12 @@ export default function User() {
               {user && user.username}{" "}
             </h2>
             <b className="capitalize font-bold font-Rochester text-gradient-purple text-2xl mx-1">
-              ( {user && user.nickName})
+              {user && user.nickName}
             </b>{" "}
           </div>
 
           {user && (
-            <p className="mx-auto text-lg font-playwright text-center w-full md:w-1/2 ">
+            <p className="mx-auto text-lg font-playwright text-center w-full md:w-1/2 text-white">
               {user.bio}
             </p>
           )}
