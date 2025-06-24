@@ -44,9 +44,9 @@ export default function Chats() {
     <>
       <>
         {/* Chat Area */}
-        <main className="flex flex-col min-h-screen w-full boverflow-hidden  ">
+        <main className="flex flex-col justify-between min-h-screen w-full boverflow-hidden  ">
           {/* Header */}
-          <header className="  bg-[#2A2C2A]  w-full flex  gap-2 h-[10vh] backdrop-blur-2xl text-white font-bold items-center px-5 ">
+          <header className="  bg-[#2A2C2A]  w-full flex  gap-2 h-max py-3 backdrop-blur-2xl text-white font-bold items-center px-5 ">
             <img
               src={user?.profilePic?.[user.profilePic.length - 1]?.pictureUrl}
               alt="Chat User"
@@ -77,11 +77,144 @@ export default function Chats() {
                   </div>
                 </div>
               ))}
+              {Messages?.map((msg) => (
+                <div
+                  className={`flex ${
+                    msg?.senderId === currentUser?.uid
+                      ? "justify-end "
+                      : "justify-start"
+                  }   `}
+                >
+                  <div
+                    className={` ${
+                      msg?.senderId === currentUser?.uid
+                        ? "bg-[#263d86] text-white "
+                        : "bg-[#383838] text-white"
+                    } p-3 rounded-xl max-w-xs  text-gray-800`}
+                  >
+                    {msg.textMsg}
+                  </div>
+                </div>
+              ))}
+              {Messages?.map((msg) => (
+                <div
+                  className={`flex ${
+                    msg?.senderId === currentUser?.uid
+                      ? "justify-end "
+                      : "justify-start"
+                  }   `}
+                >
+                  <div
+                    className={` ${
+                      msg?.senderId === currentUser?.uid
+                        ? "bg-[#263d86] text-white "
+                        : "bg-[#383838] text-white"
+                    } p-3 rounded-xl max-w-xs  text-gray-800`}
+                  >
+                    {msg.textMsg}
+                  </div>
+                </div>
+              ))}
+              {Messages?.map((msg) => (
+                <div
+                  className={`flex ${
+                    msg?.senderId === currentUser?.uid
+                      ? "justify-end "
+                      : "justify-start"
+                  }   `}
+                >
+                  <div
+                    className={` ${
+                      msg?.senderId === currentUser?.uid
+                        ? "bg-[#263d86] text-white "
+                        : "bg-[#383838] text-white"
+                    } p-3 rounded-xl max-w-xs  text-gray-800`}
+                  >
+                    {msg.textMsg}
+                  </div>
+                </div>
+              ))}
+              {Messages?.map((msg) => (
+                <div
+                  className={`flex ${
+                    msg?.senderId === currentUser?.uid
+                      ? "justify-end "
+                      : "justify-start"
+                  }   `}
+                >
+                  <div
+                    className={` ${
+                      msg?.senderId === currentUser?.uid
+                        ? "bg-[#263d86] text-white "
+                        : "bg-[#383838] text-white"
+                    } p-3 rounded-xl max-w-xs  text-gray-800`}
+                  >
+                    {msg.textMsg}
+                  </div>
+                </div>
+              ))}
+              {Messages?.map((msg) => (
+                <div
+                  className={`flex ${
+                    msg?.senderId === currentUser?.uid
+                      ? "justify-end "
+                      : "justify-start"
+                  }   `}
+                >
+                  <div
+                    className={` ${
+                      msg?.senderId === currentUser?.uid
+                        ? "bg-[#263d86] text-white "
+                        : "bg-[#383838] text-white"
+                    } p-3 rounded-xl max-w-xs  text-gray-800`}
+                  >
+                    {msg.textMsg}
+                  </div>
+                </div>
+              ))}
+              {Messages?.map((msg) => (
+                <div
+                  className={`flex ${
+                    msg?.senderId === currentUser?.uid
+                      ? "justify-end "
+                      : "justify-start"
+                  }   `}
+                >
+                  <div
+                    className={` ${
+                      msg?.senderId === currentUser?.uid
+                        ? "bg-[#263d86] text-white "
+                        : "bg-[#383838] text-white"
+                    } p-3 rounded-xl max-w-xs  text-gray-800`}
+                  >
+                    {msg.textMsg}
+                  </div>
+                </div>
+              ))}
+              {Messages?.map((msg) => (
+                <div
+                  className={`flex ${
+                    msg?.senderId === currentUser?.uid
+                      ? "justify-end "
+                      : "justify-start"
+                  }   `}
+                >
+                  <div
+                    className={` ${
+                      msg?.senderId === currentUser?.uid
+                        ? "bg-[#263d86] text-white "
+                        : "bg-[#383838] text-white"
+                    } p-3 rounded-xl max-w-xs  text-gray-800`}
+                  >
+                    {msg.textMsg}
+                  </div>
+                </div>
+              ))}
             </div>
           </section>
 
           {/* Input area */}
-          <footer className="h-[15vh]  bg-[#2A2C2A] p-4 w-full   flex items-center justify-center  gap-4 ">
+          <footer className="h-max py-4  bg-[#2A2C2A] px-4 w-full   flex items-center justify-center  gap-4 ">
             <IoArrowBack
               onClick={() => navigate(-1)}
               className="   text-2xl text-white bg-black rounded-full size-8 p-1 hover:bg-white hover:text-black  active:scale-105 transition-all"
