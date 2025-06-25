@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import { AuthContext } from "../../Context/AuthContext";
-import Loader from "./loader";
 import { FetchingContext } from "../../Context/FetchingContext";
 export default function Button({
   children,

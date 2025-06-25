@@ -170,7 +170,7 @@ export default function User() {
               {" "}
               {user && user.username}{" "}
             </h2>
-            <b className="capitalize font-bold font-Rochester text-gradient-purple text-2xl mx-1">
+            <b className="capitalize  font-Rochester tracking-wider  text-white text-[16px] mx-2">
               {user && user.nickName}
             </b>{" "}
           </div>

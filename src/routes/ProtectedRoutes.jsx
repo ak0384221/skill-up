@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import NotLoggedIn from "../components/Errors/NotLoggedIn";
 import { AuthContext } from "../Context/AuthContext";
 import Loader from "../components/shared/loader";
 import PageLoader from "../components/shared/pageLoader";

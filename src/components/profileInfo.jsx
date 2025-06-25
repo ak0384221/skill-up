@@ -1,11 +1,4 @@
-import {
-  FaGraduationCap,
-  FaBriefcase,
-  FaMapMarkerAlt,
-  FaHeart,
-  FaGlobe,
-  FaInfoCircle,
-} from "react-icons/fa";
+import { FaGraduationCap, FaBriefcase, FaMapMarkerAlt } from "react-icons/fa";
 export default function ProfileInfo() {
   return (
     <>

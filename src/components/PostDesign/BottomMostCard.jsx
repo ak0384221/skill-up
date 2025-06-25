@@ -13,23 +13,30 @@ import Button from "../shared/Button";
 //external
 
 export default function BottomMostCard({ post }) {
+  const { currentUser } = useContext(AuthContext);
   const { updateLike, addComment } = useContext(FetchingContext);
-  const [clickedLove, setClickedLove] = useState(false);
   const [clickedComment, setClickedComment] = useState(false);
   const commentsRef = useRef();
+  console.log(post);
+  const hasReacted = post?.reactions?.some(
+    (reaction) => reaction?.uid === currentUser.uid
+  );
 
   return (
     <div className="">
       <div className="lower  h-[3.5rem]  p-2 text-white flex justify-evenly items-center  w-full mx-auto ">
         <span
           onClick={() => {
-            setClickedLove(!clickedLove);
             updateLike(post);
           }}
           className={` flex justify-center hover:bg-[#282b28] rounded-md items-center w-1/5   cursor-pointer h-full    transition-colors 
             `}
         >
-          <CiHeart className="text-3xl" />
+          {hasReacted ? (
+            <IoMdHeart className="text-3xl" />
+          ) : (
+            <CiHeart className="text-3xl" />
+          )}
 
           <span className="mx-3 text-lg">{post.reactions?.length}</span>
         </span>

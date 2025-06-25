@@ -76,7 +76,7 @@ export default function Login() {
           <Button variant="light">{authLoading ? <Loader /> : "Log in"}</Button>
         </Form>
 
-        <p className="mt-6 text-center text-sm text-[#c0bfbf]">
+        <p className="mt-6 text-center text-sm text-[#ffffff]">
           Don’t have an account?
           <Link to="/signup" className=" hover:underline font-bold mx-2">
             Sign up

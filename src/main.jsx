@@ -51,7 +51,11 @@ const routes = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense
+      fallback={
+        <div className="text-white text-xl font-cookie p-5">loading...</div>
+      }
+    >
       <RouterProvider router={routes} />
     </Suspense>
   </StrictMode>

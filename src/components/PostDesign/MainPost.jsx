@@ -5,13 +5,11 @@ import { FetchingContext } from "../../Context/FetchingContext";
 import { RxCross2 } from "react-icons/rx";
 
 import { IoCloudDoneSharp } from "react-icons/io5";
-import { AuthContext } from "../../Context/AuthContext";
 //external
 export default function MainPost({ post, isEditing, setIsEditing }) {
   const { updatepost } = useContext(FetchingContext);
   const [editTitle, setEditTitle] = useState(post.title);
-  const { removePost } = useContext(FetchingContext);
-  const { currentUser } = useContext(AuthContext);
+
   function handleTitleChange(evt) {
     setEditTitle(evt.target.value);
   }
@@ -34,12 +32,12 @@ export default function MainPost({ post, isEditing, setIsEditing }) {
           <>
             <textarea
               rows="2"
-              className="mx-3 w-[95%]   p-1 border-1 border-gray-500 rounded-md"
+              className="mx-3 w-[95%]   p-1 border-1 text-white border-gray-500 rounded-md"
               placeholder="Write something..."
               value={editTitle}
               onChange={handleTitleChange}
             ></textarea>
-            <div className="w-full  flex justify-end items-center gap-3 px-5  ">
+            <div className="w-full  flex justify-between items-center gap-3 px-5  ">
               <IoCloudDoneSharp
                 className=" text-4xl cursor-pointer rounded-full hover:bg-white transition-colors  p-1 text-blue-500"
                 onClick={handleSave}
@@ -60,7 +58,7 @@ export default function MainPost({ post, isEditing, setIsEditing }) {
       </div>
 
       {post.pictureURL && (
-        <div className="pic w-full min-h-max h-[80vh] max-h-[40vh]">
+        <div className="pic  w-full min-h-max h-[80vh] max-h-[40vh]">
           <img
             className="w-full h-full object-cover"
             src={`${post.pictureURL}`}
