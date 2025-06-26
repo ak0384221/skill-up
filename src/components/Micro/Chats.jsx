@@ -36,7 +36,6 @@ export default function Chats() {
   useEffect(() => {
     const unsubscribe = listenMessagesRealtime(convId, (msgs) => {
       setMessages(msgs);
-      console.log(msgs);
     });
 
     return () => unsubscribe(); // cleanup on unmount

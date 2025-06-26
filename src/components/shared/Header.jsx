@@ -35,7 +35,7 @@ export default function Header() {
               to="/"
               title="feed"
               className={({ isActive }) =>
-                `size-9 bg-gradient-to-r from-[#faa94d] to-[#ff0f06] flex justify-center items-center rounded-full p-1.25 ${
+                `size-9 bg-gradient-to-r from-[#faa94d] to-[#ff0f06] flex justify-center items-center rounded-full active:scale-115 transition-all p-1.25 ${
                   isActive
                     ? "bg-gradient-to-r from-purple-500 to-pink-500  "
                     : "bg-gradient-to-r from-[#faa94d] to-[#ff0f06] "
@@ -49,9 +49,9 @@ export default function Header() {
               to="/create-post"
               title="create post"
               className={({ isActive }) =>
-                `size-9  flex justify-center items-center rounded-full ${
+                `size-9  flex justify-center items-center rounded-full active:scale-115 transition-all  ${
                   isActive
-                    ? "bg-gradient-to-r from-purple-500 to-pink-500    "
+                    ? "bg-gradient-to-r from-purple-500 to-pink-500   "
                     : "bg-gradient-to-r from-[#faa94d] to-[#ff0f06]"
                 }`
               }
@@ -63,7 +63,7 @@ export default function Header() {
               to={`/vibehives/user/${currentUser.uid}`}
               title="user profile"
               className={({ isActive }) =>
-                `size-9 bg-gradient-to-r from-[#faa94d] to-[#ff0f06] flex justify-center items-center rounded-full ${
+                `size-9 bg-gradient-to-r from-[#faa94d] to-[#ff0f06] flex justify-center items-center rounded-full active:scale-115 transition-all ${
                   isActive
                     ? "bg-gradient-to-r from-purple-500 to-pink-500    "
                     : "bg-gradient-to-r from-[#faa94d] to-[#ff0f06]"
@@ -77,7 +77,7 @@ export default function Header() {
               to="/messenger"
               title="messenger"
               className={({ isActive }) =>
-                `size-9 bg-gradient-to-r from-[#faa94d] to-[#ff0f06] flex justify-center items-center rounded-full ${
+                `size-9 bg-gradient-to-r from-[#faa94d] to-[#ff0f06] flex justify-center items-center rounded-full active:scale-115 transition-all ${
                   isActive
                     ? "bg-gradient-to-r from-purple-500 to-pink-500    "
                     : "bg-gradient-to-r from-[#faa94d] to-[#ff0f06]"

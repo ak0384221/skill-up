@@ -17,7 +17,6 @@ export default function BottomMostCard({ post }) {
   const { updateLike, addComment } = useContext(FetchingContext);
   const [clickedComment, setClickedComment] = useState(false);
   const commentsRef = useRef();
-  console.log(post);
   const hasReacted = post?.reactions?.some(
     (reaction) => reaction?.uid === currentUser.uid
   );
@@ -33,9 +32,9 @@ export default function BottomMostCard({ post }) {
             `}
         >
           {hasReacted ? (
-            <IoMdHeart className="text-3xl" />
+            <IoMdHeart className="text-3xl " />
           ) : (
-            <CiHeart className="text-3xl" />
+            <CiHeart className="text-3xl  " />
           )}
 
           <span className="mx-3 text-lg">{post.reactions?.length}</span>

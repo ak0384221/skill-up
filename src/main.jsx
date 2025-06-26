@@ -11,10 +11,7 @@ const Posts = lazy(() => import("./components/Pages/Posts.jsx"));
 const CreatePost = lazy(() => import("./components/Pages/CreatePosts.jsx"));
 const Login = lazy(() => import("./components/Pages/Login.jsx"));
 const SignUpForm = lazy(() => import("./components/Pages/SignUp.jsx"));
-const EditFields = lazy(() => import("./components/editFields.jsx"));
-const PostSkeleton = lazy(() =>
-  import("./components/PostSkeleton/postSkeleton.jsx")
-);
+
 const User = lazy(() => import("./components/Pages/user.jsx"));
 const UpdateProfileForm = lazy(() =>
   import("./components/Pages/UpdateProfileForm.jsx")
@@ -37,8 +34,6 @@ const routes = createBrowserRouter([
         children: [
           { path: "/", element: <Posts /> },
           { path: "/create-post", element: <CreatePost /> },
-          { path: "/editFields", element: <EditFields /> },
-          { path: "/test", element: <PostSkeleton /> },
           { path: "/vibehives/user/:id", element: <User /> },
           { path: "/updateProfile", element: <UpdateProfileForm /> },
           { path: "/messenger", element: <Messenger /> },

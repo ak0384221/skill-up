@@ -47,7 +47,7 @@ export default function FetchingContextProvider({ children }) {
   let { hasMore, lastDoc, postLoading } = postContents;
   const { currentUser } = useContext(AuthContext);
   const navigate = useNavigate();
-  const POSTS_LIMIT = 6;
+  const POSTS_LIMIT = 10;
   //-------
 
   //Fetching posts initially from fireStore
@@ -124,7 +124,6 @@ export default function FetchingContextProvider({ children }) {
     if (picUrl) {
       picPath = picUrl.split("/vibehive/")[1];
     }
-    console.log(postId);
     const postDocRef = doc(postDataRef, postId);
     try {
       await deleteDoc(postDocRef);

@@ -42,31 +42,11 @@ export default function TopMostInfoCard({ post, isEditing, setIsEditing }) {
       </div>
 
       <div className="right   gap-2  relative   ">
-        {/* {currentUser.uid === post.uid &&
-          (isEditing ? (
-            <LiaUndoAltSolid
-              className=" text-2xl hover:scale-105 transition-all  text-white  bg-gradient-to-r from-[#188cda]  to-[#21dfc5] hover:cursor-pointer p-1.25 rounded-full  font-extrabold "
-              onClick={() => setIsEditing(!isEditing)}
-            />
-          ) : (
-            <RiEdit2Fill
-              onClick={() => setIsEditing(!isEditing)}
-              className=" text-4xl text-white hover:cursor-pointer p-1.25 rounded-full hover:scale-105 transition-all bg-gradient-to-r from-[#44c907]  to-[#153ec4]"
-            />
-          ))}
-        {currentUser.uid === post.uid && (
-          <RxCross2
-            onClick={() => {
-              removePost(post.id, post.pictureURL);
-            }}
-            className=" text-2xl text-white  bg-gradient-to-r from-[#ec1010]  to-[#e01067b0] hover:cursor-pointer p-1.25 rounded-full hover:scale-105 transition-all"
-          />
-        )} */}
         <BsThreeDots
           onClick={() => {
             setOpenOptions(!openOptions);
           }}
-          className="text-3xl mx-4  text-white"
+          className="text-3xl mx-4  text-white active:text-2xl transition-all"
         />
         {openOptions ? (
           <div className="box  rounded-md absolute  top-[5vh] min-w-max w-[55vw] md:w-[30vw] lg:w-[20vw] right-0  bg-[#1b1b1b] text-white border border-[#7a7979]">

@@ -15,7 +15,7 @@ export default function SignUpForm() {
   const confirmPassRef = useRef();
 
   return (
-    <div className=" mt-[10vh] flex items-start justify-center min-h-screen rounded-sm w-full text-white     ">
+    <div className=" mt-[15vh] flex items-start justify-center  rounded-sm w-full text-white     ">
       <Form
         method="post"
         action="#"
@@ -30,7 +30,7 @@ export default function SignUpForm() {
             signUpAuth
           );
         }}
-        className="w-[90%] md:w-2/3 lg:w-3/5 xl:w-1/3  rounded-lg mt-[10vh] p-6 border-1 border-[#ce7ece73]"
+        className="w-[90%] md:w-2/3 lg:w-3/5 xl:w-1/3  rounded-lg  p-6 border-1 border-[#ce7ece73]"
       >
         <h2 className="text-3xl font-semibold text-center mb-5 ">
           Create Account

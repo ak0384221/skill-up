@@ -20,8 +20,8 @@ export default function Login() {
   const emailRef = useRef();
   const passRef = useRef();
   return (
-    <div className="text-white mt-[10vh] flex items-start justify-center min-h-screen rounded-sm w-full   ">
-      <div className=" w-[90%] mt-[10vh] md:w-2/3 lg:w-3/5 xl:w-1/3 rounded-2xl  px-3  py-4 border-1 border-[#ce7ece57] ">
+    <div className="mt-[15vh] text-white  flex items-start justify-center  rounded-sm w-full   ">
+      <div className=" w-[90%]  md:w-2/3 lg:w-3/5 xl:w-1/3 rounded-2xl  px-3  py-4 border-1 border-[#ce7ece57] ">
         <h2 className="text-3xl pt-4 font-bold text-center mb-6 ">Log In</h2>
 
         <Form

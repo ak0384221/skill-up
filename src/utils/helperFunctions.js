@@ -25,8 +25,6 @@ function signUpFormHandler(
     console.log(false);
     alert("pass didnt match");
   }
-
-  console.log({ email, userName, password, confirmPassword });
 }
 
 function logInFormHandler(evt, emailRef, passRef, logInAuth) {

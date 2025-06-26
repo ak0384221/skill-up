@@ -1,4 +1,3 @@
-import Skeleton from "react-loading-skeleton";
 import InfiniteScroll from "react-infinite-scroll-component";
 //external
 import usePaginatedPosts from "../../hooks/usePaginatedPosts";
@@ -28,13 +27,14 @@ export default function Posts() {
 
   return (
     <>
-      <div className="postsList w-full md:w-1/2 mt-[12vh]  ">
+      <div className="postsList w-full md:w-1/2 mt-[12vh] min-h-screen ">
         <InfiniteScroll
+          style={{ overflow: "hidden" }} // 👈 hides scrollbars
           dataLength={postLists.length} //This is important field to render the next data
           next={fetchMorePosts}
           hasMore={hasMore}
           loader={
-            <div className="h-screen w-full bg-transparent p-2  ">
+            <div className="h-20 flex justify-center items-center">
               <Loader />
             </div>
           }

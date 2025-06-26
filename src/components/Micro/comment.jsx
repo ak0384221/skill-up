@@ -3,7 +3,6 @@ import useUserProfile from "../../hooks/useUserProfile";
 
 export default function Comment({ data }) {
   const { user, userPosts } = useUserProfile(data.uid);
-  console.log(user);
 
   return (
     <>

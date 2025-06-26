@@ -87,7 +87,7 @@ export default function CreatePost() {
                 htmlFor="fileInput"
                 className="cursor-pointer inline-block"
               >
-                <RiUploadCloud2Fill className="mt-4 text-5xl p-2 rounded-full border-3 border-blue-500  hover:bg-[#fcfcfc] hover:text-[#181818] transition-all" />
+                <RiUploadCloud2Fill className="mt-4 text-5xl p-2 rounded-full bg-[#696365]  hover:bg-[#fcfcfc] hover:text-[#181818] transition-all hover:border-0 active:scale-120" />
               </label>
               <br />
               <input
