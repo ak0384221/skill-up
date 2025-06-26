@@ -60,21 +60,18 @@ export default function User() {
     <div className="w-full min-h-screen mt-[12vh]">
       {user ? (
         <div className="w-full  ">
-          <div className="cover bg-[#000000] dp w-full md:w-2/3 lg:1/2  h-[40vh] md:h-[40vh] lg:h-[50vh]  mx-auto relative">
+          <div className="cover bg-[rgb(7,7,7)] dp w-full md:w-2/3 lg:1/2  h-[40vh] md:h-[40vh] lg:h-[50vh]  mx-auto relative">
             <img
-              className={`h-full w-full object-cover  ${
-                cover && "border-4 border-purple-400"
-              } `}
+              className={`h-full w-full object-cover  `}
               src={
                 coverPreview ||
-                user?.coverPic?.[user.coverPic.length - 1]?.pictureUrl ||
-                "https://t3.ftcdn.net/jpg/04/42/47/52/360_F_442475292_5ouemiiJiArGyNKSWgUpkRR8lmep6jgM.jpg"
+                user?.coverPic?.[user.coverPic.length - 1]?.pictureUrl
               }
               alt=""
             />
             {currentUser.uid === id && (
               <div className="addCover  ">
-                <div className="add absolute bottom-2 right-2   flex  items-center cursor-pointer opacity-50 transition-opacity  p-1.5 hover:opacity-100 bg-white border-blue-500 rounded-full">
+                <div className="add absolute bottom-2 gap-[10vh] right-2   flex  items-center cursor-pointer opacity-50 transition-opacity  p-1.5 hover:opacity-100 b border-blue-500 rounded-full">
                   {cover ? (
                     <>
                       <IoCloseCircle
@@ -83,11 +80,11 @@ export default function User() {
                           setCoverPreview(null);
                           console.log("cliced cancel");
                         }}
-                        className="text-3xl text-red-600 cursor-pointer"
+                        className="text-3xl text-red-600 cursor-pointer bg-white rounded-full hover:scale-110 transition-all"
                       />
 
                       <FaCheckCircle
-                        className="text-blue-500 text-2xl cursor-pointer"
+                        className="text-blue-500 text-3xl   cursor-pointer bg-white rounded-full hover:scale-110 transition-all"
                         onClick={async (e) => {
                           await updateUserImageArray(id, cover, "coverPic");
                           setCover(null);
@@ -99,7 +96,7 @@ export default function User() {
                       htmlFor="coverInput"
                       className="cursor-pointer inline-block"
                     >
-                      <FaUpload className="text-2xl  text-blue-600 cursor-pointer" />
+                      <FaUpload className="text-4xl  text-blue-600 cursor-pointer bg-white rounded-full p-1" />
                     </label>
                   )}
 

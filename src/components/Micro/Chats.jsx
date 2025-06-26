@@ -66,12 +66,12 @@ export default function Chats() {
               scrollbarWidth: "none", // Firefox
               msOverflowStyle: "none", // IE and Edge
             }}
-            className={`w-full bg-[#1E201E] overflow-y-scroll -green-500 ${
+            className={`w-full flex items-end bg-[#1E201E] overflow-y-scroll -green-500 ${
               rows > 1 ? "h-[70vh]" : "h-[75vh]"
             }
             `}
           >
-            <div className="w-full my-5 space-y-3 px-8 ">
+            <div className="w-full my-5  space-y-3 px-8 ">
               {Messages?.map((msg) => (
                 <div
                   className={`flex ${
