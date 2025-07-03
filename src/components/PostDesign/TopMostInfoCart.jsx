@@ -5,13 +5,14 @@ import { AuthContext } from "../../Context/AuthContext";
 //local
 import { CiTimer } from "react-icons/ci";
 import { BsThreeDots } from "react-icons/bs";
-
+import { motion } from "motion/react";
 import { RxCross2 } from "react-icons/rx";
 import { RiEdit2Fill } from "react-icons/ri";
 import { LiaUndoAltSolid } from "react-icons/lia";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import { AnimatePresence } from "motion/react";
 //external
 export default function TopMostInfoCard({ post, isEditing, setIsEditing }) {
   const { removePost } = useContext(FetchingContext);
@@ -41,51 +42,64 @@ export default function TopMostInfoCard({ post, isEditing, setIsEditing }) {
         </div>
       </div>
 
-      <div className="right   gap-2  relative   ">
+      <motion.div
+        initial={{ opacity: 0, scale: 0 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        transition={{ ease: "backInOut", duration: 1 }}
+        className="right cursor-pointer  gap-2  relative   "
+      >
         <BsThreeDots
           onClick={() => {
             setOpenOptions(!openOptions);
           }}
           className="text-3xl mx-4  text-white active:text-2xl transition-all"
         />
-        {openOptions ? (
-          <div className="box  rounded-md absolute  top-[5vh] min-w-max w-[55vw] md:w-[30vw] lg:w-[20vw] right-0  bg-[#1b1b1b] text-white border border-[#7a7979]">
-            <ul className="w-full">
-              {currentUser.uid === post.uid && (
-                <li
-                  onClick={() => {
-                    setIsEditing(!isEditing);
-                    setOpenOptions(!openOptions);
-                  }}
-                  className="py-3  cursor-pointer  flex justify-center w-full  "
-                >
-                  Edit post
-                </li>
-              )}
+        <AnimatePresence>
+          {openOptions ? (
+            <motion.div
+              exit={{ filter: "blur(10px)", opacity: 0, scale: 0.8 }}
+              initial={{ filter: "blur(10px)", opacity: 0, scale: 0.8 }}
+              animate={{ filter: "blur(0px)", opacity: 1, scale: 1 }}
+              transition={{ ease: "easeInOut", duration: 0.3 }}
+              className="box  rounded-md absolute  top-[5vh] min-w-max w-[55vw] md:w-[30vw] lg:w-[20vw] right-0  bg-[#1b1b1b] text-white border border-[#7a7979]"
+            >
+              <ul className="w-full">
+                {currentUser.uid === post.uid && (
+                  <li
+                    onClick={() => {
+                      setIsEditing(!isEditing);
+                      setOpenOptions(!openOptions);
+                    }}
+                    className="py-3 hover:bg-[#242424] transition-colors   cursor-pointer  flex justify-center w-full  "
+                  >
+                    Edit post
+                  </li>
+                )}
 
-              <li className="py-3 hover:bg-[#242424] transition-colors cursor-pointer  flex justify-center ">
-                Save post
-              </li>
-              <li className="py-3 hover:bg-[#242424] transition-colors cursor-pointer  flex justify-center ">
-                Unfollow user
-              </li>
-              <li className="py-3 hover:bg-[#242424] transition-colors cursor-pointer  flex justify-center ">
-                Block user
-              </li>
-              {currentUser.uid == post.uid && (
-                <li
-                  onClick={() => {
-                    removePost(post.id, post.pictureURL);
-                  }}
-                  className="py-3 hover:bg-[#242424] transition-colors cursor-pointer  flex justify-center "
-                >
-                  Delete post
+                <li className="py-3 hover:bg-[#242424] transition-colors cursor-pointer  flex justify-center ">
+                  Save post
                 </li>
-              )}
-            </ul>
-          </div>
-        ) : null}
-      </div>
+                <li className="py-3 hover:bg-[#242424] transition-colors cursor-pointer  flex justify-center ">
+                  Unfollow user
+                </li>
+                <li className="py-3 hover:bg-[#242424] transition-colors cursor-pointer  flex justify-center ">
+                  Block user
+                </li>
+                {currentUser.uid == post.uid && (
+                  <li
+                    onClick={() => {
+                      removePost(post.id, post.pictureURL);
+                    }}
+                    className="py-3 hover:bg-[#242424] transition-colors cursor-pointer  flex justify-center "
+                  >
+                    Delete post
+                  </li>
+                )}
+              </ul>
+            </motion.div>
+          ) : null}
+        </AnimatePresence>
+      </motion.div>
     </div>
   );
 }

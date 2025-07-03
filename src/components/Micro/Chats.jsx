@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { IoArrowBack } from "react-icons/io5";
 import useUserProfile from "../../hooks/useUserProfile";
 import { IoSendSharp } from "react-icons/io5";
+import { motion } from "motion/react";
 
 export default function Chats() {
   const [Messages, setMessages] = useState();
@@ -49,7 +50,7 @@ export default function Chats() {
     <>
       <>
         {/* Chat Area */}
-        <main className="flex flex-col justify-between min-h-[90vh] w-full overflow-hidden  ">
+        <main className="flex flex-col justify-between min-h-[90vh] w-full overflow-y-hidden   ">
           {/* Header */}
           <header className="  bg-[#2A2C2A]  w-full flex  gap-2 h-max py-3 backdrop-blur-2xl text-white font-bold items-center px-5 ">
             <img
@@ -62,36 +63,37 @@ export default function Chats() {
 
           {/* Messages */}
           <section
-            style={{
-              scrollbarWidth: "none", // Firefox
-              msOverflowStyle: "none", // IE and Edge
-            }}
-            className={`w-full flex items-end bg-[#1E201E] overflow-y-scroll -green-500 ${
+            className={`w-full ${
               rows > 1 ? "h-[70vh]" : "h-[75vh]"
-            }
-            `}
+            } bg-[#1c1d1c]`}
           >
-            <div className="w-full my-5  space-y-3 px-8 ">
-              {Messages?.map((msg) => (
-                <div
-                  className={`flex ${
-                    msg?.senderId === currentUser?.uid
-                      ? "justify-end "
-                      : "justify-start"
-                  }   `}
-                >
+            <div className="flex flex-col   h-full overflow-y-auto   px-4 py-2">
+              <div className=" mt-auto  space-y-3">
+                {Messages?.map((msg) => (
                   <div
-                    className={` ${
+                    key={msg.id}
+                    className={`flex ${
                       msg?.senderId === currentUser?.uid
-                        ? "bg-[#263d86] text-white "
-                        : "bg-[#383838] text-white"
-                    } p-3 rounded-xl max-w-xs  text-gray-800`}
+                        ? "justify-end"
+                        : "justify-start"
+                    }`}
                   >
-                    {msg.textMsg}
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ ease: "easeInOut", duration: 0.2 }}
+                      className={`${
+                        msg?.senderId === currentUser?.uid
+                          ? "bg-[#263d86] text-white"
+                          : "bg-[#383838] text-white"
+                      } p-3 rounded-xl max-w-xs`}
+                    >
+                      {msg.textMsg}
+                    </motion.div>
                   </div>
-                </div>
-              ))}
-              <div ref={bottomRef}></div>
+                ))}
+                <div ref={bottomRef}></div>
+              </div>
             </div>
           </section>
 
