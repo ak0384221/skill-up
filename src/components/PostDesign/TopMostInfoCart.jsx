@@ -52,7 +52,7 @@ export default function TopMostInfoCard({ post, isEditing, setIsEditing }) {
           onClick={() => {
             setOpenOptions(!openOptions);
           }}
-          className="text-3xl mx-4  text-white active:text-2xl transition-all"
+          className="text-3xl  mx-4  text-white active:text-2xl transition-all"
         />
         <AnimatePresence>
           {openOptions ? (

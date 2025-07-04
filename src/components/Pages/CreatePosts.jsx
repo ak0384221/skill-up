@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { RiUploadCloud2Fill } from "react-icons/ri";
 import { Form } from "react-router-dom";
 //built-in
@@ -10,6 +10,7 @@ import { AuthContext } from "../../Context/AuthContext";
 //local
 
 export default function CreatePost() {
+  console.log("create post page");
   const { uploadPost, postLoading, crudError } = useContext(FetchingContext);
   const titleRef = useRef(null);
 
@@ -19,13 +20,16 @@ export default function CreatePost() {
   const [files, setFiles] = useState(null);
   const [preview, setPreview] = useState(null);
 
-  function handleOnchangePicture(evt) {
-    setFiles(evt.target.files[0]);
-    const file = evt.target.files[0];
-    if (!file) return;
-    const objUrl = URL.createObjectURL(file);
-    setPreview(objUrl);
-  }
+  const handleOnchangePicture = useCallback(
+    (evt) => {
+      setFiles(evt.target.files[0]);
+      const file = evt.target.files[0];
+      if (!file) return;
+      const objUrl = URL.createObjectURL(file);
+      setPreview(objUrl);
+    },
+    [files]
+  );
 
   useEffect(() => {
     return () => {

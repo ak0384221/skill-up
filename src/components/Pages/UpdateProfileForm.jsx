@@ -29,10 +29,9 @@ export default function UpdateProfileForm() {
   }, [user]);
 
   const handleSubmit = (evt) => {
-    handleUpdateProfile(
-      evt,
-      { nickName, location, worksAt, wentTo, bio },
-      navigate
+    evt.preventDefault();
+    handleUpdateProfile(evt, { nickName, location, worksAt, wentTo, bio }, () =>
+      navigate(-1)
     );
   };
 

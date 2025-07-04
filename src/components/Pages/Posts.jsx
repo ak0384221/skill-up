@@ -10,6 +10,7 @@ import PostSkeleton from "../PostSkeleton/postSkeleton";
 //local
 
 export default function Posts() {
+  console.log("post page");
   const {
     postLists,
     hasMore,
