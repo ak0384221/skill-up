@@ -5,6 +5,7 @@ import "./index.css";
 import App from "./App.jsx";
 import ProtectedRoutes from "./routes/ProtectedRoutes.jsx";
 import ParentContextProvider from "./Context/ParentContext.jsx";
+import Loader from "./components/shared/loader.jsx";
 const Chats = lazy(() => import("./components/Micro/Chats.jsx"));
 const Messenger = lazy(() => import("./components/Pages/Messenger.jsx"));
 const Posts = lazy(() => import("./components/Pages/Posts.jsx"));
@@ -48,7 +49,11 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Suspense
       fallback={
-        <div className="text-white text-xl font-cookie p-5">loading...</div>
+        <div className="relative w-full h-screen text-white">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20">
+            <Loader />
+          </div>
+        </div>
       }
     >
       <RouterProvider router={routes} />

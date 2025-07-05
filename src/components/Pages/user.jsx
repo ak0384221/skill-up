@@ -1,14 +1,13 @@
 import { useParams } from "react-router-dom";
 import PageLoader from "../shared/pageLoader";
-
+//icons
 import { FaUpload } from "react-icons/fa6";
 import { FaCheckCircle } from "react-icons/fa";
 import { IoCloseCircle } from "react-icons/io5";
-
+//
 import SinglePostCard from "../PostDesign/CompleteSinglePostItem";
 import useUserProfile from "../../hooks/useUserProfile";
 import ShowProfileInfo from "../Micro/showProfileInfo";
-import { GrUploadOption } from "react-icons/gr";
 import { useContext, useEffect } from "react";
 
 import { useState } from "react";

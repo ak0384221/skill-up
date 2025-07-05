@@ -42,12 +42,7 @@ export default function TopMostInfoCard({ post, isEditing, setIsEditing }) {
         </div>
       </div>
 
-      <motion.div
-        initial={{ opacity: 0, scale: 0 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        transition={{ ease: "backInOut", duration: 1 }}
-        className="right cursor-pointer  gap-2  relative   "
-      >
+      <div className="right cursor-pointer  gap-2  relative   ">
         <BsThreeDots
           onClick={() => {
             setOpenOptions(!openOptions);
@@ -99,7 +94,7 @@ export default function TopMostInfoCard({ post, isEditing, setIsEditing }) {
             </motion.div>
           ) : null}
         </AnimatePresence>
-      </motion.div>
+      </div>
     </div>
   );
 }

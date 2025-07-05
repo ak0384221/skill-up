@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
-import { Navigate, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
-import Loader from "../components/shared/loader";
 import PageLoader from "../components/shared/pageLoader";
 import Login from "../components/Pages/Login";
 

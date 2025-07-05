@@ -1,5 +1,5 @@
-import FetchingContextProvider from "./FetchingContext";
 import AuthContextProvider from "./AuthContext";
+import FetchingContextProvider from "./FetchingContext";
 import ChatContextProvider from "./ChatContext";
 
 export default function ParentContextProvider({ children }) {

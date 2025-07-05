@@ -28,7 +28,7 @@ export default function BottomMostCard({ post }) {
           onClick={() => {
             updateLike(post);
           }}
-          className={` flex justify-center hover:bg-[#282b28] rounded-md items-center w-1/5   cursor-pointer h-full    transition-colors 
+          className={` flex justify-center hover:bg-[#282b28] rounded-md items-center w-1/3   cursor-pointer h-full    transition-colors 
             `}
         >
           {hasReacted ? (
@@ -43,14 +43,9 @@ export default function BottomMostCard({ post }) {
           onClick={() => {
             setClickedComment(!clickedComment);
           }}
-          className={` flex justify-center items-center w-1/5   cursor-pointer h-full    transition-colors text-2xl hover:bg-[#282b28] rounded-md `}
+          className={` flex justify-center items-center w-1/3   cursor-pointer h-full    transition-colors text-2xl hover:bg-[#282b28] rounded-md `}
         >
           <TfiComment />
-        </span>
-        <span
-          className={`  flex justify-center items-center w-1/5  cursor-pointer h-full    transition-colors hover:bg-[#282b28] rounded-md `}
-        >
-          <CiShare2 className=" text-3xl " />
         </span>
       </div>
       <div className="commentList ">
