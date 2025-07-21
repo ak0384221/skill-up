@@ -48,6 +48,10 @@ export default function FetchingContextProvider({ children }) {
   useEffect(() => {
     let unsubscribe = () => {};
     if (currentUser) {
+      dispatchPostsContent({
+        type: "SET_LOADING",
+        payload: { postLoading: true },
+      });
       const postsQuery = query(
         postDataRef,
         orderBy("createdAt", "desc"),
@@ -59,11 +63,17 @@ export default function FetchingContextProvider({ children }) {
           id: document.id,
           ...document.data(),
         }));
+
+        console.log(postLists);
         addInitialPosts(
           postslist,
           lastVisible,
           snapshot.docs.length === POSTS_LIMIT
         );
+        dispatchPostsContent({
+          type: "SET_LOADING",
+          payload: { postLoading: false },
+        });
       });
     } else {
       console.log("Not authorized....");

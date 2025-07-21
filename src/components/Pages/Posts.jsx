@@ -14,6 +14,7 @@ export default function Posts() {
   const {
     postLists,
     hasMore,
+    postLoading,
     lastDoc,
     POSTS_LIMIT,
     postDataRef,
@@ -25,7 +26,7 @@ export default function Posts() {
     postDataRef,
     dispatchPostsContent,
   });
-
+  console.log(postLoading);
   return (
     <>
       <div className="postsList w-full md:w-1/2 mt-[12vh] min-h-screen ">
@@ -40,16 +41,12 @@ export default function Posts() {
             </div>
           }
           endMessage={
-            <p className="text-2xl text-center text-purple-600 font-Fugaz font-light">
-              Yay! You have seen it all
+            <p className="text-2xl text-[#000000] text-center font-Roboto font-medium my-10">
+              No more post
             </p>
           }
         >
-          {postLists.length === 0 && (
-            <div className="">
-              <PostSkeleton />
-            </div>
-          )}
+          {postLoading && <PostSkeleton />}
 
           {postLists.map((post) => {
             return <SinglePostCard key={post.id} post={post} />;

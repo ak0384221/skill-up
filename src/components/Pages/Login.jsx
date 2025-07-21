@@ -90,8 +90,6 @@ export default function Login() {
             }}
             className="size-6 cursor-pointer hover:scale-115 transition-all "
           />
-          <SiFacebook className="size-6 cursor-pointer hover:scale-115 transition-all " />
-          <AiFillGithub className="size-6 cursor-pointer hover:scale-115 transition-all " />
         </div>
       </div>
     </div>

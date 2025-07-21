@@ -13,6 +13,8 @@ import { useContext, useEffect } from "react";
 import { useState } from "react";
 import { FetchingContext } from "../../Context/FetchingContext";
 import { AuthContext } from "../../Context/AuthContext";
+import PostSkeleton from "../PostSkeleton/postSkeleton";
+import Loader from "../shared/loader";
 
 export default function User() {
   const { updateUserImageArray } = useContext(FetchingContext);
@@ -57,9 +59,9 @@ export default function User() {
 
   return (
     <div className="w-full min-h-screen mt-[12vh]">
-      {user ? (
+      {user && (
         <div className="w-full  ">
-          <div className="cover bg-[rgb(7,7,7)] dp w-full md:w-2/3 lg:1/2  h-[40vh] md:h-[40vh] lg:h-[50vh]  mx-auto relative">
+          <div className="cover bg-[rgb(90,89,89)] dp w-full md:w-2/3 lg:1/2  h-[40vh] md:h-[40vh] lg:h-[50vh]  mx-auto relative">
             <img
               className={`h-full w-full object-cover  `}
               src={
@@ -121,24 +123,26 @@ export default function User() {
                 } `}
               />
               {currentUser.uid === id && (
-                <div className="add absolute bottom-0 right-0 rounded-full  flex justify-center items-center opacity-50 transition-opacity  p-1.5 hover:opacity-100 bg-white">
+                <div className="add absolute bottom-0 right-0   flex justify-center items-center  ">
                   {files ? (
                     <>
-                      <IoCloseCircle
-                        onClick={() => {
-                          setFiles(null);
-                          setPreview(null);
-                        }}
-                        className="text-3xl text-red-600 cursor-pointer"
-                      />
+                      <div className=" space-y-10">
+                        <IoCloseCircle
+                          onClick={() => {
+                            setFiles(null);
+                            setPreview(null);
+                          }}
+                          className="text-3xl text-red-600 cursor-pointer hover:scale-110 transition-all"
+                        />
 
-                      <FaCheckCircle
-                        className="text-blue-500 text-2xl cursor-pointer"
-                        onClick={async (e) => {
-                          await updateUserImageArray(id, files, "profilePic");
-                          setFiles(null);
-                        }}
-                      />
+                        <FaCheckCircle
+                          className="text-blue-500 text-2xl cursor-pointer hover:scale-110 transition-all"
+                          onClick={async (e) => {
+                            await updateUserImageArray(id, files, "profilePic");
+                            setFiles(null);
+                          }}
+                        />
+                      </div>
                     </>
                   ) : (
                     <label
@@ -185,10 +189,6 @@ export default function User() {
               })}
             </div>
           }
-        </div>
-      ) : (
-        <div className="size-[10rem] mx-auto mt-10 ">
-          <PageLoader />
         </div>
       )}
     </div>

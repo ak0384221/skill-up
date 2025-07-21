@@ -1,6 +1,8 @@
-import { useContext, useRef } from "react";
+import { useContext, useRef, useState } from "react";
 import { Form, Link } from "react-router-dom";
 //built-in
+import { FaEye } from "react-icons/fa";
+
 import Button from "../shared/Button";
 import { signUpFormHandler } from "../../utils/helperFunctions";
 import { AuthContext } from "../../Context/AuthContext";
@@ -13,6 +15,8 @@ export default function SignUpForm() {
   const userNameRef = useRef();
   const passRef = useRef();
   const confirmPassRef = useRef();
+  const [showPass, setShowPass] = useState(false);
+  const [confirmShowPass, SetconfirmShowPass] = useState(false);
 
   return (
     <div className=" mt-[15vh] flex items-start justify-center  rounded-sm w-full text-white     ">
@@ -40,6 +44,9 @@ export default function SignUpForm() {
           <label className="text-sm font-[500] mb-1">Username</label>
           <input
             type="text"
+            min={4}
+            max={20}
+            required
             ref={userNameRef}
             className="border-1 border-[#c7c7c7]  rounded-md px-2 py-2 focus:outline-none   font-light "
           />
@@ -50,31 +57,48 @@ export default function SignUpForm() {
           </label>
           <input
             id="email"
+            required
             ref={emailRef}
             type="email"
             className="w-full px-4 py-2 border-1 border-[#c7c7c7] rounded-sm focus:outline-none font-light "
           />
         </div>
 
-        <div className="flex flex-col mb-2">
+        <div className="flex flex-col mb-2 ">
           <label className="text-smfont-[500] mb-1">Password</label>
-          {/* 01911244297 */}
-          <input
-            ref={passRef}
-            type="password"
-            className="border-1 border-[#c7c7c7]  rounded-md px-2 py-2 focus:outline-none   font-light  placeholder:font-bold"
-            placeholder="••••••••"
-          />
+
+          <div className=" w-full  flex items-center relative">
+            <input
+              ref={passRef}
+              type={showPass ? "text" : "password"}
+              className="border-1 w-full border-[#c7c7c7]  rounded-md px-2 py-2 focus:outline-none   font-light  placeholder:font-bold"
+              placeholder="••••••••"
+            />
+            <FaEye
+              onClick={() => {
+                setShowPass(!showPass);
+              }}
+              className="absolute right-0 text-xl mx-2"
+            />
+          </div>
         </div>
 
         <div className="flex flex-col mb-2">
           <label className="text-sm font-[500] mb-1">Confirm Password</label>
-          <input
-            ref={confirmPassRef}
-            type="password"
-            className="border-1 border-[#c7c7c7]  rounded-md px-2 py-2 focus:outline-none   font-light  placeholder:font-bold"
-            placeholder="••••••••"
-          />
+          <div className=" w-full  flex items-center relative">
+            <input
+              ref={confirmPassRef}
+              type={confirmShowPass ? "text" : "password"}
+              className="border-1 w-full border-[#c7c7c7]  rounded-md px-2 py-2 focus:outline-none   font-light  placeholder:font-bold"
+              placeholder="••••••••"
+            />
+            <FaEye
+              onClick={() => {
+                SetconfirmShowPass(!confirmShowPass);
+              }}
+              className="absolute right-0 text-xl mx-2"
+            />
+          </div>
         </div>
         {authError && (
           <div className="w-full mt-3 border min-h-10 h-max border-red-300 font-bold text-red-500 text-sm px-2 py-1 rounded-sm">
