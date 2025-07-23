@@ -84,10 +84,6 @@ export default function FetchingContextProvider({ children }) {
   //Functions of Uploading Post combined with prev posts
   async function uploadPost(postObj) {
     console.log(postObj);
-    dispatchPostsContent({
-      type: "SET_LOADING",
-      payload: { postLoading: true },
-    });
 
     const postWithTimestamp = {
       ...postObj,

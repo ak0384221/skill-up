@@ -11,7 +11,8 @@ import { AuthContext } from "../../Context/AuthContext";
 
 export default function CreatePost() {
   console.log("create post page");
-  const { uploadPost, postLoading, crudError } = useContext(FetchingContext);
+  const { uploadPost, postLoading, crudError, dispatchPostsContent } =
+    useContext(FetchingContext);
   const titleRef = useRef(null);
 
   const pictureUrlRef = useRef(null);
@@ -49,6 +50,10 @@ export default function CreatePost() {
           action="#"
           method="post"
           onSubmit={(evt) => {
+            dispatchPostsContent({
+              type: "SET_LOADING",
+              payload: { postLoading: true },
+            });
             uploadPostFormHandler(
               evt,
               titleRef,
