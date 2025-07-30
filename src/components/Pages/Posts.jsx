@@ -5,7 +5,6 @@ import { useContext } from "react";
 import SinglePostCard from "../PostDesign/CompleteSinglePostItem";
 import { FetchingContext } from "../../Context/FetchingContext";
 import Loader from "../shared/loader";
-import "react-loading-skeleton/dist/skeleton.css";
 import PostSkeleton from "../PostSkeleton/postSkeleton";
 //local
 

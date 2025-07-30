@@ -1,17 +1,24 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { use, useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../../Context/AuthContext";
 import { ChatContext } from "../../Context/ChatContext";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { IoArrowBack } from "react-icons/io5";
+import { IoArrowBack, IoCloseCircleSharp } from "react-icons/io5";
 import useUserProfile from "../../hooks/useUserProfile";
 import { IoSendSharp } from "react-icons/io5";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
+import EmojiPicker from "emoji-picker-react";
+import { BsEmojiSmileFill, BsFillImageFill } from "react-icons/bs";
+import { uploadFilesViaSupabase } from "../../utils/helperFunctions";
+import { img } from "framer-motion/client";
 
 export default function Chats() {
   const [Messages, setMessages] = useState();
+  const [text, setText] = useState("");
+  const [selectedMedia, setSelectedMedia] = useState(null);
+  const [imgPreview, setImgPreview] = useState(null);
   const [rows, setRows] = useState(1);
-
+  const [showPicker, setShowPicker] = useState(false);
   const { currentUser } = useContext(AuthContext);
   const { sendMsgToServer, listenMessagesRealtime } = useContext(ChatContext);
   const { receiverId } = useParams(); // this will be user.id from the URL
@@ -21,17 +28,49 @@ export default function Chats() {
   let textMsgRef = useRef();
   const convId = [currentUser?.uid, receiverId].sort().join("_");
 
-  function sendMsg() {
-    if (textMsgRef.current.value != "") {
+  async function sendMsg(e) {
+    setShowPicker(false);
+    if (!selectedMedia && !text) {
+      return "empty";
+    }
+
+    if (selectedMedia) {
+      setSelectedMedia(null);
+      setImgPreview(null);
+      const imgUrl = await uploadFilesViaSupabase(selectedMedia);
+      console.log(imgUrl);
+      const imageObj = {
+        imgUrl: imgUrl,
+        senderId: currentUser.uid,
+        receiverId: receiverId,
+        convId: convId,
+      };
+      await sendMsgToServer(imageObj);
       const msgObj = {
-        textMsg: textMsgRef.current.value,
+        textMsg: text,
         senderId: currentUser.uid,
         receiverId: receiverId,
         convId: convId,
       };
       sendMsgToServer(msgObj);
-      textMsgRef.current.value = "";
+      setText("");
+    } else {
+      const msgObj = {
+        textMsg: text,
+        senderId: currentUser.uid,
+        receiverId: receiverId,
+        convId: convId,
+      };
+
+      sendMsgToServer(msgObj);
+      setText("");
     }
+  }
+  function handleImageUpload(evt) {
+    evt.preventDefault();
+    setSelectedMedia(evt.target.files[0]);
+    const preview = URL.createObjectURL(evt.target.files[0]);
+    setImgPreview(preview);
   }
 
   useEffect(() => {
@@ -78,27 +117,65 @@ export default function Chats() {
                         : "justify-start"
                     }`}
                   >
-                    <motion.div
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ ease: "easeInOut", duration: 0.2 }}
-                      className={`${
-                        msg?.senderId === currentUser?.uid
-                          ? "bg-[#263d86] text-white"
-                          : "bg-[#383838] text-white"
-                      } p-3 rounded-xl max-w-xs`}
-                    >
-                      {msg.textMsg}
-                    </motion.div>
+                    {msg?.textMsg && (
+                      <motion.div
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        transition={{ ease: "easeInOut", duration: 0.2 }}
+                        className={`${
+                          msg?.senderId === currentUser?.uid
+                            ? "bg-[#263d86] text-white"
+                            : "bg-[#383838] text-white"
+                        } p-3 rounded-xl max-w-xs`}
+                      >
+                        {msg.textMsg}
+                      </motion.div>
+                    )}
+                    {msg?.imgUrl && (
+                      <img
+                        src={msg?.imgUrl?.url}
+                        className="w-[60vw] h-auto md:w-[60vw] md:h-auto object-cover lg:w-[40vw]"
+                      />
+                    )}
                   </div>
                 ))}
                 <div ref={bottomRef}></div>
               </div>
             </div>
           </section>
+          {selectedMedia && (
+            <div className="imagePreview  px-5">
+              <div className="image size-20 relative">
+                <IoCloseCircleSharp
+                  onClick={() => {
+                    setSelectedMedia(false);
+                    setPreview(false);
+                  }}
+                  className="absolute top-0 -right-7 text-3xl text-white"
+                />
+
+                <img
+                  src={imgPreview}
+                  className="w-full h-full object-cover"
+                  alt=""
+                />
+              </div>
+            </div>
+          )}
 
           {/* Input area */}
-          <footer className="h-max py-2 pt-3   px-4 w-full   flex items-center justify-center  gap-4 ">
+          <footer className="h-max py-2 pt-3   px-4 w-full   flex items-center justify-center  gap-4 relative ">
+            {showPicker && (
+              <div className="emojis w-4/5   absolute -top-[70vh] h-[70vh] flex justify-center items-center">
+                <EmojiPicker
+                  onEmojiClick={(data, evt) => {
+                    const newText = text + data.emoji;
+                    setText(newText);
+                  }}
+                />
+              </div>
+            )}
+
             <IoArrowBack
               onClick={() => navigate(-1)}
               className="   text-2xl text-white bg-black rounded-full size-8 p-1 hover:bg-white hover:text-black  active:scale-85 transition-all"
@@ -107,10 +184,27 @@ export default function Chats() {
               onFocus={() => setRows(3)}
               onBlur={() => setRows(1)}
               required
-              ref={textMsgRef}
+              value={text}
+              onChange={(e) => {
+                setText(e.target.value);
+                setShowPicker(false);
+              }}
               rows={rows}
               className="resize-none rounded-3xl border  border-gray-400 focus:outline-none w-3/4 md:w-1/2 py-3 px-4 text-white "
               placeholder="Type a message..."
+            />
+            <input
+              type="file"
+              id="sendMedia"
+              className="border hidden"
+              onChange={handleImageUpload}
+            />
+            <label htmlFor="sendMedia">
+              <BsFillImageFill className="size-8 cursor-pointer text-white" />
+            </label>
+            <BsEmojiSmileFill
+              onClick={() => setShowPicker(!showPicker)}
+              className="size-8 cursor-pointer text-[yellow]"
             />
 
             <IoSendSharp

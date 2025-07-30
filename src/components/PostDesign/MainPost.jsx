@@ -5,7 +5,7 @@ import { FetchingContext } from "../../Context/FetchingContext";
 import { RxCross2 } from "react-icons/rx";
 
 import { IoCloudDoneSharp } from "react-icons/io5";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion } from "framer-motion";
 //external
 export default function MainPost({ post, isEditing, setIsEditing }) {
   const { updatepost } = useContext(FetchingContext);

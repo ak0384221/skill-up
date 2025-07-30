@@ -5,14 +5,14 @@ import { AuthContext } from "../../Context/AuthContext";
 //local
 import { CiTimer } from "react-icons/ci";
 import { BsThreeDots } from "react-icons/bs";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import { RxCross2 } from "react-icons/rx";
 import { RiEdit2Fill } from "react-icons/ri";
 import { LiaUndoAltSolid } from "react-icons/lia";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { AnimatePresence } from "motion/react";
+import { AnimatePresence } from "framer-motion";
 //external
 export default function TopMostInfoCard({ post, isEditing, setIsEditing }) {
   const { removePost } = useContext(FetchingContext);

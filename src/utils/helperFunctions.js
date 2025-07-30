@@ -87,6 +87,7 @@ async function uploadFilesViaSupabase(files) {
   }
 
   try {
+    console.log(files);
     const filename = `public/${Date.now()}-${files.name}`;
     const { error } = await supabase.storage
       .from("vibehive")

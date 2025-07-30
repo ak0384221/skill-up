@@ -4,7 +4,6 @@ import BottomMostCard from "./BottomMostCard";
 import MainPost from "./MainPost";
 import TopMostInfoCard from "./TopMostInfoCart";
 //external
-import { motion } from "motion/react";
 export default function SinglePostCard({ post }) {
   const [isEditing, setIsEditing] = useState(false);
 
