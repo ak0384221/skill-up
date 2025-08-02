@@ -1,5 +1,4 @@
 import { useParams } from "react-router-dom";
-import PageLoader from "../shared/pageLoader";
 //icons
 import { FaUpload } from "react-icons/fa6";
 import { FaCheckCircle } from "react-icons/fa";
@@ -9,17 +8,13 @@ import SinglePostCard from "../PostDesign/CompleteSinglePostItem";
 import useUserProfile from "../../hooks/useUserProfile";
 import ShowProfileInfo from "../Micro/showProfileInfo";
 import { useContext, useEffect } from "react";
-
 import { useState } from "react";
-import { FetchingContext } from "../../Context/FetchingContext";
 import { AuthContext } from "../../Context/AuthContext";
-import PostSkeleton from "../PostSkeleton/postSkeleton";
-import Loader from "../shared/loader";
+import { updateUserImageArray } from "../../utils/postsCRUD";
+//
 
 export default function User() {
-  const { updateUserImageArray } = useContext(FetchingContext);
-  const { currentUser } = useContext(AuthContext);
-
+  const { authData } = useContext(AuthContext);
   const { id } = useParams();
   const { user, userPosts } = useUserProfile(id);
   const [files, setFiles] = useState(null);
@@ -32,16 +27,15 @@ export default function User() {
     setFiles(evt.target.files[0]);
     const file = evt.target.files[0];
     if (!file) return;
-
     const objUrl = URL.createObjectURL(file);
     setPreview(objUrl);
   }
+
   function handleOnchangeImgCover(evt) {
     evt.preventDefault();
     setCover(evt.target.files[0]);
     const file = evt.target.files[0];
     if (!file) return;
-
     const objUrl = URL.createObjectURL(file);
     setCoverPreview(objUrl);
   }
@@ -70,7 +64,7 @@ export default function User() {
               }
               alt=""
             />
-            {currentUser.uid === id && (
+            {authData?.currentUser?.uid === id && (
               <div className="addCover  ">
                 <div className="add absolute bottom-2 gap-[10vh] right-2   flex  items-center cursor-pointer opacity-50 transition-opacity  p-1.5 hover:opacity-100 b border-blue-500 rounded-full">
                   {cover ? (
@@ -122,7 +116,7 @@ export default function User() {
                   files && "border-4 border-purple-400"
                 } `}
               />
-              {currentUser.uid === id && (
+              {authData?.currentUser?.uid === id && (
                 <div className="add absolute bottom-0 right-0   flex justify-center items-center  ">
                   {files ? (
                     <>

@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 //built-in
 import { FetchingContext } from "../../Context/FetchingContext";
 import { AuthContext } from "../../Context/AuthContext";
+
 //local
 import { CiTimer } from "react-icons/ci";
 import { BsThreeDots } from "react-icons/bs";
@@ -13,10 +14,10 @@ import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { AnimatePresence } from "framer-motion";
+import { removePost } from "../../utils/postsCRUD";
 //external
 export default function TopMostInfoCard({ post, isEditing, setIsEditing }) {
-  const { removePost } = useContext(FetchingContext);
-  const { currentUser } = useContext(AuthContext);
+  const { authData } = useContext(AuthContext);
   const [openOptions, setOpenOptions] = useState(false);
   dayjs.extend(relativeTime);
 
@@ -59,7 +60,7 @@ export default function TopMostInfoCard({ post, isEditing, setIsEditing }) {
               className="box  rounded-md absolute  top-[5vh] min-w-max w-[55vw] md:w-[30vw] lg:w-[20vw] right-0  bg-[#1b1b1b] text-white border border-[#7a7979]"
             >
               <ul className="w-full">
-                {currentUser.uid === post.uid && (
+                {authData?.currentUser.uid === post.uid && (
                   <li
                     onClick={() => {
                       setIsEditing(!isEditing);
@@ -80,7 +81,7 @@ export default function TopMostInfoCard({ post, isEditing, setIsEditing }) {
                 <li className="py-3 hover:bg-[#242424] transition-colors cursor-pointer  flex justify-center ">
                   Block user
                 </li>
-                {currentUser.uid == post.uid && (
+                {authData?.currentUser.uid === post.uid && (
                   <li
                     onClick={() => {
                       removePost(post.id, post.pictureURL);

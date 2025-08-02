@@ -1,35 +1,54 @@
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { RiUploadCloud2Fill } from "react-icons/ri";
-import { Form } from "react-router-dom";
+import { Form, useNavigate } from "react-router-dom";
+import imageCompression from "browser-image-compression";
+
 //built-in
 import Button from "../shared/Button";
 import { FetchingContext } from "../../Context/FetchingContext";
-import { uploadPostFormHandler } from "../../utils/helperFunctions";
+import { uploadPostFormHandler } from "../../utils/uploadRelated";
 import Loader from "../shared/loader";
+
 import { AuthContext } from "../../Context/AuthContext";
 //local
 
 export default function CreatePost() {
-  console.log("create post page");
-  const { uploadPost, postLoading, crudError, dispatchPostsContent } =
+  const { postLoading, crudError, dispatchPostsContent } =
     useContext(FetchingContext);
   const titleRef = useRef(null);
+  const navigate = useNavigate();
 
   const pictureUrlRef = useRef(null);
-  const { currentUser } = useContext(AuthContext);
-  const username = currentUser.displayName;
+  const { authData } = useContext(AuthContext);
+  const username = authData?.currentUser.displayName;
   const [files, setFiles] = useState(null);
   const [preview, setPreview] = useState(null);
 
   const handleOnchangePicture = useCallback(
-    (evt) => {
-      setFiles(evt.target.files[0]);
+    async (evt) => {
       const file = evt.target.files[0];
       if (!file) return;
-      const objUrl = URL.createObjectURL(file);
-      setPreview(objUrl);
+
+      // Compression options
+      const options = {
+        maxSizeMB: 1, // maximum size in MB
+        maxWidthOrHeight: 1080, // resize image if it's larger
+        useWebWorker: true,
+      };
+
+      try {
+        // Compress the image
+        const compressedFile = await imageCompression(file, options);
+
+        // Set file and preview
+        setFiles(compressedFile);
+        const objUrl = URL.createObjectURL(compressedFile);
+        setPreview(objUrl);
+      } catch (error) {
+        console.error("Image compression failed:", error);
+      }
     },
-    [files]
+    [setFiles, setPreview]
   );
 
   useEffect(() => {
@@ -58,10 +77,10 @@ export default function CreatePost() {
               evt,
               titleRef,
               pictureUrlRef,
-              uploadPost,
               username,
               files,
-              currentUser.uid
+              authData?.currentUser.uid,
+              navigate
             );
           }}
           className="w-full mx-auto  rounded-sm  p-2 "

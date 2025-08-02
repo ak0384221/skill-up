@@ -9,16 +9,15 @@ import { AuthContext } from "../../Context/AuthContext";
 import { FetchingContext } from "../../Context/FetchingContext";
 import Comment from "../Micro/comment";
 import Button from "../shared/Button";
-
+import { updateLike, addComment } from "../../utils/postsCRUD";
 //external
 
 export default function BottomMostCard({ post }) {
-  const { currentUser } = useContext(AuthContext);
-  const { updateLike, addComment } = useContext(FetchingContext);
+  const { authData } = useContext(AuthContext);
   const [clickedComment, setClickedComment] = useState(false);
   const commentsRef = useRef();
   const hasReacted = post?.reactions?.some(
-    (reaction) => reaction?.uid === currentUser.uid
+    (reaction) => reaction?.uid === authData?.currentUser.uid
   );
 
   return (
@@ -26,7 +25,7 @@ export default function BottomMostCard({ post }) {
       <div className="lower  h-[3.5rem]  p-2 text-white flex justify-evenly items-center  w-full mx-auto ">
         <span
           onClick={() => {
-            updateLike(post);
+            updateLike(post, authData);
           }}
           className={` flex justify-center hover:bg-[#282b28] rounded-md items-center w-1/3   cursor-pointer h-full    transition-colors 
             `}
@@ -69,7 +68,7 @@ export default function BottomMostCard({ post }) {
             variant="createPost"
             className="my-2"
             onClick={() => {
-              addComment(commentsRef.current.value, post);
+              addComment(commentsRef.current.value, post, authData);
               setClickedComment(false);
             }}
           >

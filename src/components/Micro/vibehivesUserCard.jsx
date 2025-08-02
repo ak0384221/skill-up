@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../Context/AuthContext";
 
 export default function VibeHivesUserCard({ user }) {
-  const { currentUser } = useContext(AuthContext);
+  const { authData } = useContext(AuthContext);
 
   return (
     <>
@@ -11,7 +11,7 @@ export default function VibeHivesUserCard({ user }) {
         alt=""
         className="size-10 object-cover rounded-full"
       />
-      <h3>{currentUser.uid === user?.id ? "You" : user?.username}</h3>
+      <h3>{authData?.currentUser.uid === user?.id ? "You" : user?.username}</h3>
     </>
   );
 }

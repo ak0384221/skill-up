@@ -1,24 +1,17 @@
 import { FcGoogle } from "react-icons/fc";
-import { SiFacebook } from "react-icons/si";
-import { AiFillGithub } from "react-icons/ai";
-import { Form, Link } from "react-router-dom";
+import { Form, Link, useNavigate } from "react-router-dom";
 import { useContext, useRef } from "react";
 //built-in
 import { AuthContext } from "../../Context/AuthContext";
 import Button from "../shared/Button";
-import { logInFormHandler } from "../../utils/helperFunctions";
+import { logInFormHandler, logInWithGoogle } from "../../utils/authRelated";
 import Loader from "../shared/loader";
 //local
 export default function Login() {
-  const {
-    authError,
-    logInAuth,
-    passLoadingDispatch,
-    logInWithGoogle,
-    authLoading,
-  } = useContext(AuthContext);
+  const { authData, setAuthData } = useContext(AuthContext);
   const emailRef = useRef();
   const passRef = useRef();
+  const navigate = useNavigate();
   return (
     <div className="mt-[15vh] text-white  flex items-start justify-center  rounded-sm w-full   ">
       <div className=" w-[90%]  md:w-2/3 lg:w-3/5 xl:w-1/3 rounded-2xl  px-3  py-4 border-1 border-[#ce7ece57] ">
@@ -28,8 +21,11 @@ export default function Login() {
           method="post"
           action="#"
           onSubmit={(evt) => {
-            passLoadingDispatch(true);
-            logInFormHandler(evt, emailRef, passRef, logInAuth);
+            evt.preventDefault();
+            setAuthData((data) => {
+              return { ...data, isLoading: true };
+            });
+            logInFormHandler(evt, emailRef, passRef, navigate);
           }}
           className="space-y-5  w-full mx-auto px-1  "
         >
@@ -59,9 +55,9 @@ export default function Login() {
               placeholder="••••••••"
             />
           </div>
-          {authError && (
+          {authData?.isError && (
             <div className="w-full border min-h-10 h-max border-red-300 font-bold text-red-500 text-sm px-2 py-1 rounded-sm">
-              {authError.message}
+              {authData?.isError}
             </div>
           )}
           <div className="flex items-center justify-between text-sm">
@@ -73,7 +69,9 @@ export default function Login() {
               Forgot password?
             </a>
           </div>
-          <Button variant="light">{authLoading ? <Loader /> : "Log in"}</Button>
+          <Button variant="light">
+            {authData.isLoading ? <Loader /> : "Log in"}
+          </Button>
         </Form>
 
         <p className="mt-6 text-center text-sm text-[#ffffff]">
@@ -85,8 +83,10 @@ export default function Login() {
         <div className=" flex  gap-2 justify-center my-2">
           <FcGoogle
             onClick={() => {
-              passLoadingDispatch(true);
-              logInWithGoogle();
+              setAuthData((data) => {
+                return { ...data, isLoading: true };
+              });
+              logInWithGoogle(navigate, setAuthData);
             }}
             className="size-6 cursor-pointer hover:scale-115 transition-all "
           />

@@ -10,10 +10,11 @@ import { HiLogout } from "react-icons/hi";
 import { FaUser } from "react-icons/fa";
 import { SlFeed } from "react-icons/sl";
 import { FaFacebookMessenger } from "react-icons/fa6";
-
+import { logOutAuth } from "../../utils/authRelated";
 //external
 export default function Header() {
-  const { logOutAuth, currentUser } = useContext(AuthContext);
+  const { authData } = useContext(AuthContext);
+  console.log(authData);
   const [showModal, setShowModal] = useState(false);
   const handleLogout = () => {
     logOutAuth(); // or your logout logic
@@ -28,7 +29,7 @@ export default function Header() {
 
         {/* Navigation */}
 
-        {currentUser && (
+        {authData?.currentUser && (
           <nav className="flex space-x-2">
             <NavLink
               to="/"
@@ -59,7 +60,7 @@ export default function Header() {
             </NavLink>
 
             <NavLink
-              to={`/vibehives/user/${currentUser.uid}`}
+              to={`/vibehives/user/${authData?.currentUser?.uid}`}
               title="user profile"
               className={({ isActive }) =>
                 `size-9 bg-gradient-to-r from-[#faa94d] to-[#ff0f06] flex justify-center items-center rounded-full active:scale-115 transition-all ${

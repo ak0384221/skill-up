@@ -5,7 +5,7 @@ import PageLoader from "../components/shared/pageLoader";
 import Login from "../components/Pages/Login";
 
 export default function ProtectedRoutes() {
-  const { currentUser } = useContext(AuthContext);
+  const { authData } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export default function ProtectedRoutes() {
     );
   }
 
-  if (currentUser) {
+  if (authData?.currentUser) {
     return <Outlet />;
   } else {
     return <Login />;

@@ -1,13 +1,13 @@
 import { Form, useNavigate } from "react-router-dom";
 import Button from "../shared/Button";
 import { useContext, useEffect, useState } from "react";
-import { handleUpdateProfile } from "../../utils/helperFunctions";
+import { handleUpdateProfile } from "../../utils/uploadRelated";
 import { AuthContext } from "../../Context/AuthContext";
 import useUserProfile from "../../hooks/useUserProfile";
 
 export default function UpdateProfileForm() {
-  const { currentUser } = useContext(AuthContext);
-  const { user } = useUserProfile(currentUser.uid);
+  const { authData } = useContext(AuthContext);
+  const { user } = useUserProfile(authData?.currentUser.uid);
   const navigate = useNavigate();
 
   // Form state

@@ -1,16 +1,17 @@
 import { useContext, useRef, useState } from "react";
-import { Form, Link } from "react-router-dom";
+import { Form, Link, useNavigate } from "react-router-dom";
 //built-in
 import { FaEye } from "react-icons/fa";
 
 import Button from "../shared/Button";
-import { signUpFormHandler } from "../../utils/helperFunctions";
+import { signUpFormHandler } from "../../utils/authRelated";
 import { AuthContext } from "../../Context/AuthContext";
 import Loader from "../shared/loader";
 //local
 export default function SignUpForm() {
-  const { signUpAuth, authLoading, passLoadingDispatch, authError } =
-    useContext(AuthContext);
+  const { authData, setAuthData } = useContext(AuthContext);
+  const navigate = useNavigate();
+
   const emailRef = useRef();
   const userNameRef = useRef();
   const passRef = useRef();
@@ -24,14 +25,19 @@ export default function SignUpForm() {
         method="post"
         action="#"
         onSubmit={(evt) => {
-          passLoadingDispatch(true);
+          evt.preventDefault();
+          console.log(evt);
+          setAuthData((data) => {
+            return { ...data, isLoading: true };
+          });
           signUpFormHandler(
             evt,
             userNameRef,
             emailRef,
             passRef,
             confirmPassRef,
-            signUpAuth
+
+            navigate
           );
         }}
         className="w-[90%] md:w-2/3 lg:w-3/5 xl:w-1/3  rounded-lg  p-6 border-1 border-[#ce7ece73]"
@@ -100,14 +106,14 @@ export default function SignUpForm() {
             />
           </div>
         </div>
-        {authError && (
+        {authData?.isError && (
           <div className="w-full mt-3 border min-h-10 h-max border-red-300 font-bold text-red-500 text-sm px-2 py-1 rounded-sm">
-            {authError.message}
+            {authData?.isError}
           </div>
         )}
 
         <Button variant="light" className="w-full h-10 mt-3">
-          {authLoading ? <Loader /> : "Sign up"}
+          {authData?.isLoading ? <Loader /> : "Sign up"}
         </Button>
         <p className="font-medium my-2 text-sm text-center  ">
           Already have an account ?

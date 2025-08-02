@@ -5,7 +5,7 @@ import { AuthContext } from "../../Context/AuthContext";
 import { FaAngleDoubleRight } from "react-icons/fa";
 
 export default function ShowProfileInfo({ user, id }) {
-  const { currentUser } = useContext(AuthContext);
+  const { authData } = useContext(AuthContext);
 
   return (
     <div className="w-full px-5 md:w-1/2 mx-auto space-y-4 my-[5vh] text-[#e7e4e4]">
@@ -46,7 +46,7 @@ export default function ShowProfileInfo({ user, id }) {
         )}
       </ul>
 
-      {currentUser?.uid === id && (
+      {authData?.currentUser?.uid === id && (
         <Link
           to="/updateProfile"
           className="bg-white w-full text-center font-semibold text-2xl"

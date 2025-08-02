@@ -2,46 +2,16 @@ import { supabase } from "../Config/supabase";
 import { auth } from "../Config/firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import { userDataRef } from "../Config/firebase"; // your Firestore collection reference
-
-// src/utils/updateProfileInDb.js
-
-function signUpFormHandler(
-  evt,
-  userNameRef,
-  emailRef,
-  passRef,
-  confirmPassRef,
-  signUpAuth
-) {
-  evt.preventDefault();
-  const email = emailRef.current.value;
-  const userName = userNameRef.current.value;
-  const password = passRef.current.value;
-  const confirmPassword = confirmPassRef.current.value;
-  if (password === confirmPassword) {
-    console.log(true);
-    signUpAuth(userName, email, password);
-  } else {
-    console.log(false);
-    alert("pass didnt match");
-  }
-}
-
-function logInFormHandler(evt, emailRef, passRef, logInAuth) {
-  evt.preventDefault();
-  const email = emailRef.current.value;
-  const password = passRef.current.value;
-  logInAuth(email, password);
-}
+import { uploadPost } from "./postsCRUD";
 
 async function uploadPostFormHandler(
   evt,
   titleRef,
   pictureUrlRef,
-  uploadPost,
   username,
   files,
-  uid
+  uid,
+  navigate
 ) {
   evt.preventDefault();
 
@@ -60,7 +30,7 @@ async function uploadPostFormHandler(
         pictureURL: pictureUrl,
         uid: uid,
       };
-      uploadPost(postObj);
+      uploadPost(postObj, navigate);
 
       // waits for upload
       console.log("Uploaded URL:", pictureUrl);
@@ -80,7 +50,6 @@ async function uploadPostFormHandler(
     }
   }
 }
-
 async function uploadFilesViaSupabase(files) {
   if (!files) {
     return { error: "no file selected" };
@@ -131,8 +100,6 @@ async function handleUpdateProfile(
 }
 
 export {
-  signUpFormHandler,
-  logInFormHandler,
   uploadPostFormHandler,
   handleUpdateProfile,
   uploadFilesViaSupabase,
