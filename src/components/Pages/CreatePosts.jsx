@@ -69,10 +69,8 @@ export default function CreatePost() {
           action="#"
           method="post"
           onSubmit={(evt) => {
-            dispatchPostsContent({
-              type: "SET_LOADING",
-              payload: { postLoading: true },
-            });
+            evt.preventDefault();
+
             uploadPostFormHandler(
               evt,
               titleRef,
