@@ -6,7 +6,7 @@ import { CiShare2 } from "react-icons/ci";
 import { CiHeart } from "react-icons/ci";
 import { IoMdHeart } from "react-icons/io";
 import { AuthContext } from "../../Context/AuthContext";
-import { FetchingContext } from "../../Context/FetchingContext";
+// import { FetchingContext } from "../../Context/FetchingContext";
 import Comment from "../Micro/comment";
 import Button from "../shared/Button";
 import { updateLike, addComment } from "../../utils/postsCRUD";

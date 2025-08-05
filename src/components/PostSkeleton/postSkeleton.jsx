@@ -11,7 +11,7 @@ export default function PostSkeleton() {
       </div>
 
       {/* Middle Section */}
-      <div className="middle w-full h-[76%] bg-[#3a3b3b]  "></div>
+      <div className="middle w-full h-[20%] bg-[#3a3b3b]  "></div>
 
       {/* Bottom Section */}
       <div className="bottom h-[12%] bg-[#2A2C2A] flex justify-evenly items-center  ">

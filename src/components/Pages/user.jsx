@@ -11,6 +11,7 @@ import { useContext, useEffect } from "react";
 import { useState } from "react";
 import { AuthContext } from "../../Context/AuthContext";
 import { updateUserImageArray } from "../../utils/postsCRUD";
+import UserProfileSkeleton from "../PostSkeleton/userProfileSkeleton";
 //
 
 export default function User() {
@@ -53,7 +54,7 @@ export default function User() {
 
   return (
     <div className="w-full min-h-screen mt-[12vh]">
-      {user && (
+      {user ? (
         <div className="w-full  ">
           <div className="cover bg-[rgb(90,89,89)] dp w-full md:w-2/3 lg:1/2  h-[40vh] md:h-[40vh] lg:h-[50vh]  mx-auto relative">
             <img
@@ -184,6 +185,8 @@ export default function User() {
             </div>
           }
         </div>
+      ) : (
+        <UserProfileSkeleton />
       )}
     </div>
   );

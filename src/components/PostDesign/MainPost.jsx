@@ -1,14 +1,13 @@
 import { useContext, useState } from "react";
 //built in
 import { updatepost } from "../../utils/postsCRUD";
-import { FetchingContext } from "../../Context/FetchingContext";
 //local
 import { RxCross2 } from "react-icons/rx";
 import { IoCloudDoneSharp } from "react-icons/io5";
 import { AnimatePresence, motion } from "framer-motion";
 //external
 export default function MainPost({ post, isEditing, setIsEditing }) {
-  const { dispatchPostsContent } = useContext(FetchingContext);
+  // const { dispatchPostsContent } = useContext(FetchingContext);
   const [editTitle, setEditTitle] = useState(post.title);
 
   function handleTitleChange(evt) {

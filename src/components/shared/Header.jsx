@@ -14,7 +14,6 @@ import { logOutAuth } from "../../utils/authRelated";
 //external
 export default function Header() {
   const { authData } = useContext(AuthContext);
-  console.log(authData);
   const [showModal, setShowModal] = useState(false);
   const handleLogout = () => {
     logOutAuth(); // or your logout logic

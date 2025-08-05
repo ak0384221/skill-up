@@ -1,9 +1,9 @@
 const postsInitialState = {
-  postLists: [],
-  postLoading: false,
+  posts: [],
+  isLoading: false,
   lastDoc: null,
   hasMore: true,
-  crudError: null,
+  isError: null,
 };
 
 function postsContentReducerMethod(currValue, action) {
@@ -12,7 +12,7 @@ function postsContentReducerMethod(currValue, action) {
   if (action.type === "ADD_INITIAL_POSTS") {
     newValue = {
       ...currValue,
-      postLists: action.payload.postLists,
+      posts: action.payload.posts,
       lastDoc: action.payload.lastDoc,
       hasMore: action.payload.hasMore,
     };
@@ -20,7 +20,7 @@ function postsContentReducerMethod(currValue, action) {
   if (action.type === "SET_LOADING") {
     newValue = {
       ...currValue,
-      postLoading: action.payload.postLoading,
+      isLoading: action.payload.isLoading,
     };
   }
   if (action.type === "SET_CRUD_ERROR") {
@@ -32,15 +32,13 @@ function postsContentReducerMethod(currValue, action) {
   if (action.type === "REMOVE_ITEM") {
     newValue = {
       ...currValue,
-      postLists: newValue.postLists.filter(
-        (post) => post.id !== action.payload.postId
-      ),
+      posts: newValue.posts.filter((post) => post.id !== action.payload.postId),
     };
   }
   if (action.type === "UPDATE_ITEM") {
     newValue = {
       ...currValue,
-      postLists: currValue.postLists.map((post) =>
+      posts: currValue.posts.map((post) =>
         post.id === action.payload.postId
           ? { ...post, ...action.payload.updatedData }
           : post
@@ -51,9 +49,10 @@ function postsContentReducerMethod(currValue, action) {
   if (action.type === "FETCH_MORE_ITEM") {
     newValue = {
       ...currValue,
-      postLists: [...currValue.postLists, ...action.payload.newPosts],
+      posts: [...currValue.posts, ...action.payload.posts],
       lastDoc: action.payload.lastDoc,
       hasMore: action.payload.hasMore,
+      isLoading: false,
     };
   }
   if (action.type === "SET_HAS_MORE") {

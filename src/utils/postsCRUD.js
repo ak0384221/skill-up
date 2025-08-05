@@ -137,11 +137,8 @@ async function updateLike(post, authData) {
     });
   }
 }
-async function addComment(comment, post, authData) {
-  console.log(post);
-  console.log(comment);
-  console.log(authData.currentUser);
 
+async function addComment(comment, post, authData) {
   const commentObj = {
     uid: authData.currentUser.uid,
     comment: comment.trim(),

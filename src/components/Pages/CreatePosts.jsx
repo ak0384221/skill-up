@@ -2,22 +2,15 @@ import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { RiUploadCloud2Fill } from "react-icons/ri";
 import { Form, useNavigate } from "react-router-dom";
 import imageCompression from "browser-image-compression";
-
 //built-in
 import Button from "../shared/Button";
-import { FetchingContext } from "../../Context/FetchingContext";
 import { uploadPostFormHandler } from "../../utils/uploadRelated";
-import Loader from "../shared/loader";
-
 import { AuthContext } from "../../Context/AuthContext";
 //local
 
 export default function CreatePost() {
-  const { postLoading, crudError, dispatchPostsContent } =
-    useContext(FetchingContext);
   const titleRef = useRef(null);
   const navigate = useNavigate();
-
   const pictureUrlRef = useRef(null);
   const { authData } = useContext(AuthContext);
   const username = authData?.currentUser.displayName;
@@ -136,13 +129,13 @@ export default function CreatePost() {
           </div>
 
           <Button className="font-Rochester text-lg" variant="light">
-            {postLoading ? <Loader /> : "Upload"}
+            Upload
           </Button>
-          {crudError && (
+          {/* {crudError && (
             <div className="w-full h-10 border border-red-300 my-2 font-bold text-red-500">
               {crudError}
             </div>
-          )}
+          )} */}
         </Form>
       </div>
     </>

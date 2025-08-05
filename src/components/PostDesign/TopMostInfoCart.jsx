@@ -1,6 +1,5 @@
 import { useContext, useState } from "react";
 //built-in
-import { FetchingContext } from "../../Context/FetchingContext";
 import { AuthContext } from "../../Context/AuthContext";
 
 //local

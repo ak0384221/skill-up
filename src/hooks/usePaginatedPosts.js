@@ -1,14 +1,8 @@
 import { query, orderBy, startAfter, limit, getDocs } from "firebase/firestore";
 
-function usePaginatedPosts({
-  lastDoc,
-  POSTS_LIMIT,
-  postDataRef,
-  dispatchPostsContent,
-}) {
+function usePaginatedPosts({ lastDoc, POSTS_LIMIT, postDataRef, dispatch }) {
   async function fetchMorePosts() {
     if (!lastDoc) return;
-
     const nextQuery = query(
       postDataRef,
       orderBy("createdAt", "desc"),
@@ -17,35 +11,25 @@ function usePaginatedPosts({
     );
 
     const snapshot = await getDocs(nextQuery);
+    console.log("snapshot");
 
-    if (snapshot.empty) {
-      dispatchPostsContent({
-        type: "SET_HAS_MORE",
-        payload: { hasMore: false },
+    if (!snapshot.empty) {
+      const newPosts = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      const newLastDoc = snapshot.docs[snapshot.docs.length - 1];
+      const hasMore = newPosts.length === POSTS_LIMIT;
+
+      dispatch({
+        type: "FETCH_MORE_ITEM",
+        payload: {
+          posts: newPosts,
+          lastDoc: newLastDoc,
+          hasMore: hasMore,
+        },
       });
-      return;
     }
-
-    const newPosts = snapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
-
-    const newLastDoc = snapshot.docs[snapshot.docs.length - 1];
-    const hasMore = newPosts.length === POSTS_LIMIT;
-
-    addMorePostsToState(newPosts, newLastDoc, hasMore);
-  }
-
-  function addMorePostsToState(newPosts, lastDoc, hasMore) {
-    dispatchPostsContent({
-      type: "FETCH_MORE_ITEM",
-      payload: {
-        newPosts,
-        lastDoc,
-        hasMore,
-      },
-    });
   }
 
   return { fetchMorePosts };
