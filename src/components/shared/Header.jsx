@@ -20,15 +20,15 @@ export default function Header() {
   };
   return (
     <>
-      <header className="p-4 mb-[10vh] flex justify-between items-center overflow-hidden w-full bg-[#2a2c2a]">
-        {/* Logo */}
-        <Link to="/" className="text-4xl f  font-cookie text-gradient-purple">
-          Vibehive
-        </Link>
+      {authData?.currentUser && (
+        <header className="p-4 mb-[10vh] flex justify-between items-center overflow-hidden w-full bg-[#2a2c2a]">
+          {/* Logo */}
+          <Link to="/" className="text-4xl f  font-cookie text-white">
+            Vibehive
+          </Link>
 
-        {/* Navigation */}
+          {/* Navigation */}
 
-        {authData?.currentUser && (
           <nav className="flex space-x-2">
             <NavLink
               to="/"
@@ -101,8 +101,8 @@ export default function Header() {
               ></LogoutModal>
             </div>
           </nav>
-        )}
-      </header>
+        </header>
+      )}
     </>
   );
 }

@@ -72,14 +72,9 @@ export default function TopMostInfoCard({ post, isEditing, setIsEditing }) {
                 )}
 
                 <li className="py-3 hover:bg-[#242424] transition-colors cursor-pointer  flex justify-center ">
-                  Save post
+                  Remove for me
                 </li>
-                <li className="py-3 hover:bg-[#242424] transition-colors cursor-pointer  flex justify-center ">
-                  Unfollow user
-                </li>
-                <li className="py-3 hover:bg-[#242424] transition-colors cursor-pointer  flex justify-center ">
-                  Block user
-                </li>
+
                 {authData?.currentUser.uid === post.uid && (
                   <li
                     onClick={() => {

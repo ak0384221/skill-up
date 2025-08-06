@@ -41,7 +41,7 @@ export default function Posts() {
         hasMore={PostsData?.hasMore}
         loader={<PostSkeleton />}
         endMessage={
-          <p className="text-2xl text-[#000000] text-center font-Roboto font-medium my-10">
+          <p className="text-2xl text-[#696969] text-center font-Roboto font-medium my-10">
             No more post
           </p>
         }

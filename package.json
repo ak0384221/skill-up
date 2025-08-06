@@ -19,6 +19,7 @@
     "emoji-picker-react": "^4.13.2",
     "firebase": "^11.6.1",
     "framer-motion": "^12.23.9",
+    "ldrs": "^1.1.7",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.62.0",

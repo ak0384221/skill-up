@@ -11,7 +11,6 @@ const Messenger = lazy(() => import("./components/Pages/Messenger.jsx"));
 const Posts = lazy(() => import("./components/Pages/Posts.jsx"));
 const CreatePost = lazy(() => import("./components/Pages/CreatePosts.jsx"));
 const Login = lazy(() => import("./components/Pages/Login.jsx"));
-const SignUpForm = lazy(() => import("./components/Pages/SignUp.jsx"));
 
 const User = lazy(() => import("./components/Pages/user.jsx"));
 const UpdateProfileForm = lazy(() =>
@@ -28,7 +27,6 @@ const routes = createBrowserRouter([
     ),
     children: [
       { path: "/login", element: <Login /> },
-      { path: "/signup", element: <SignUpForm /> },
 
       {
         element: <ProtectedRoutes />,

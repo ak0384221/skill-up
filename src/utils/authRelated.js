@@ -7,10 +7,10 @@ import {
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { userDataRef, auth } from "../Config/firebase";
 //
-async function signUpAuthHandler(data, navigate, setSignupErr) {
+async function signUpAuthHandler(data, setAuthData, navigate) {
   const email = data.email;
   const password = data.password;
-  const username = data.fullName;
+  const username = data.name;
   try {
     const userCredential = await createUserWithEmailAndPassword(
       auth,
@@ -27,15 +27,19 @@ async function signUpAuthHandler(data, navigate, setSignupErr) {
       username: username,
       joinedOn: serverTimestamp(),
     });
+    setAuthData((data) => {
+      return { ...data, isLoading: false, isError: null };
+    });
     navigate("/");
   } catch (err) {
-    setSignupErr(err);
-
+    setAuthData((data) => {
+      return { ...data, isLoading: false, isError: err };
+    });
     return err;
   }
 }
 
-async function logInAuthHandler(data, navigate, setAuthData, setLoginErr) {
+async function logInAuthHandler(data, setAuthData, navigate) {
   const email = data.email;
   const password = data.password;
 
@@ -45,9 +49,11 @@ async function logInAuthHandler(data, navigate, setAuthData, setLoginErr) {
       email,
       password
     );
+    setAuthData((data) => {
+      return { ...data, isLoading: false, isError: null };
+    });
     navigate("/");
   } catch (err) {
-    setLoginErr(err);
     setAuthData((data) => {
       return { ...data, isLoading: false, isError: err };
     });

@@ -20,7 +20,7 @@ function App() {
           <Header />
         </div>
       )}
-      <div className="flex justify-center bg-[#1E201E]">
+      <div className="flex justify-center ">
         <ScrollToTop />
         <Outlet />
       </div>

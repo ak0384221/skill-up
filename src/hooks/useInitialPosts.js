@@ -4,6 +4,7 @@ import { query, orderBy, limit, onSnapshot } from "firebase/firestore";
 function useInitialPosts({ authData, postDataRef, POSTS_LIMIT, dispatch }) {
   useEffect(() => {
     dispatch({ type: "SET_LOADING", payload: { isLoading: true } });
+
     let unsubscribe = () => {};
 
     if (authData.currentUser) {

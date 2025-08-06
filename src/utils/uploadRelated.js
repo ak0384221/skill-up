@@ -8,15 +8,15 @@ async function uploadPostFormHandler(
   evt,
   titleRef,
   pictureUrlRef,
-  username,
   files,
-  uid,
+  authData,
+  setUploadData,
   navigate
 ) {
-  evt.preventDefault();
-
   const title = titleRef.current.value;
   let pictureUrl = pictureUrlRef.current.value;
+  const username = authData?.currentUser?.displayName;
+  const uid = authData?.currentUser?.uid;
 
   if (files) {
     console.log(files);
@@ -31,22 +31,37 @@ async function uploadPostFormHandler(
         uid: uid,
       };
       uploadPost(postObj, navigate);
+      setUploadData((prev) => {
+        return { ...prev, isUploading: false };
+      });
 
       // waits for upload
       console.log("Uploaded URL:", pictureUrl);
     } catch (err) {
       console.error("Upload failed:", err);
+      setUploadData((prev) => {
+        return { ...prev, isUploading: false, isError: err };
+      });
       return; // Stop if upload fails
     }
   } else {
     if (title || pictureUrl) {
-      const postObj = {
-        username: username,
-        title: title,
-        pictureURL: pictureUrl,
-        uid: uid,
-      };
-      uploadPost(postObj);
+      try {
+        const postObj = {
+          username: username,
+          title: title,
+          pictureURL: pictureUrl,
+          uid: uid,
+        };
+        uploadPost(postObj);
+        setUploadData((prev) => {
+          return { ...prev, isUploading: false };
+        });
+      } catch (err) {
+        setUploadData((prev) => {
+          return { ...prev, isUploading: false };
+        });
+      }
     }
   }
 }

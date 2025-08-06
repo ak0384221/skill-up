@@ -1,14 +1,14 @@
-export default function Loader() {
+export default function Loader({ variant = "dark" }) {
   return (
     <>
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="w-full h-full p-2"
+        className="w-full h-full p-3"
         viewBox="0 0 300 150"
       >
         <path
           fill="none"
-          stroke="white"
+          stroke={`${variant === "dark" ? "black" : "white"}`}
           strokeWidth="15"
           strokeLinecap="round"
           strokeDasharray="300 385"

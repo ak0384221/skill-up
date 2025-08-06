@@ -6,6 +6,7 @@ import imageCompression from "browser-image-compression";
 import Button from "../shared/Button";
 import { uploadPostFormHandler } from "../../utils/uploadRelated";
 import { AuthContext } from "../../Context/AuthContext";
+import Loader from "../shared/loader";
 //local
 
 export default function CreatePost() {
@@ -16,7 +17,11 @@ export default function CreatePost() {
   const username = authData?.currentUser.displayName;
   const [files, setFiles] = useState(null);
   const [preview, setPreview] = useState(null);
-
+  const [uploadData, setUploadData] = useState({
+    isUploading: false,
+    isError: null,
+  });
+  console.log(authData);
   const handleOnchangePicture = useCallback(
     async (evt) => {
       const file = evt.target.files[0];
@@ -64,13 +69,17 @@ export default function CreatePost() {
           onSubmit={(evt) => {
             evt.preventDefault();
 
+            setUploadData((prev) => {
+              return { ...prev, isUploading: true };
+            });
+
             uploadPostFormHandler(
               evt,
               titleRef,
               pictureUrlRef,
-              username,
               files,
-              authData?.currentUser.uid,
+              authData,
+              setUploadData,
               navigate
             );
           }}
@@ -129,13 +138,13 @@ export default function CreatePost() {
           </div>
 
           <Button className="font-Rochester text-lg" variant="light">
-            Upload
+            {uploadData?.isUploading ? <Loader variant="white" /> : "Upload"}
           </Button>
-          {/* {crudError && (
+          {uploadData?.isError && (
             <div className="w-full h-10 border border-red-300 my-2 font-bold text-red-500">
-              {crudError}
+              {uploadData?.isError?.message}
             </div>
-          )} */}
+          )}
         </Form>
       </div>
     </>

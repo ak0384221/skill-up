@@ -15,6 +15,7 @@ function postsContentReducerMethod(currValue, action) {
       posts: action.payload.posts,
       lastDoc: action.payload.lastDoc,
       hasMore: action.payload.hasMore,
+      isLoading: false,
     };
   }
   if (action.type === "SET_LOADING") {
