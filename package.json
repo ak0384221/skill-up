@@ -13,7 +13,6 @@
     "@hookform/resolvers": "^5.2.1",
     "@supabase/supabase-js": "^2.49.4",
     "@tailwindcss/vite": "^4.1.5",
-    "bootstrap": "^5.3.6",
     "browser-image-compression": "^2.0.2",
     "dayjs": "^1.11.13",
     "emoji-picker-react": "^4.13.2",

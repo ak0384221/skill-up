@@ -8,7 +8,7 @@ export default function Login() {
   const [authType, setAuthType] = useState("login");
   const { authData, setAuthData } = useContext(AuthContext);
   return (
-    <div className="w-3/4 md:w-2/6  h-[85vh]  text-sm mx-auto rounded-xl    border-[#6b6a6a] mt-[8vh] bg-radial-ocean p-1">
+    <div className="w-3/4 md:w-1/2 lg:w-2/6  h-[85vh]  text-sm mx-auto rounded-xl    border-[#6b6a6a] mt-[8vh] bg-radial-ocean p-1">
       <div className=" h-full bg-black w-  full  border-white p-3 ">
         {/* Logo */}
         <div className="text-center  size-14 mx-auto border-2 border-[#2b2b2b] rounded-full p-2 ">
