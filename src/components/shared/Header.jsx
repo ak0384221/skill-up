@@ -21,7 +21,7 @@ export default function Header() {
   return (
     <>
       {authData?.currentUser && (
-        <header className="p-4 mb-[10vh] flex justify-between items-center overflow-hidden w-full bg-[#2a2c2a]">
+        <header className="p-4 mb-[10vh] flex justify-between items-center overflow-hidden w-full bg-[#141414]">
           {/* Logo */}
           <Link to="/" className="text-4xl f  font-cookie text-white">
             Vibehive

@@ -37,24 +37,12 @@
     @apply bg-gradient-to-r from-pink-600 via-red-500 to-yellow-400 bg-clip-text text-transparent;
   }
 
-  .text-radial-ocean {
-    background-image: radial-gradient(
-      circle at center,
-      #3b82f6,
-      #06b6d4,
-      #10b981
-    );
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-
   .bg-radial-ocean {
     background-image: radial-gradient(
       circle at center,
-      #3b82f6,
-      #06b6d4,
-      #10b981
+      #2c5dac,
+      #0dbedd,
+      rgb(164, 124, 202)
     );
   }
 }
