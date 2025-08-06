@@ -35,7 +35,7 @@ export default function SignupForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="placeholder:text-xs placeholder:text-neutral-600  w-5/6 mx-auto   text-white  py-3 space-y-1  rounded-lg "
+      className="placeholder:text-xs placeholder:text-neutral-600  w-full mx-auto   text-white  py-3 space-y-1  rounded-lg "
     >
       {/* Name */}
 

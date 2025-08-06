@@ -35,7 +35,7 @@ export default function LoginForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="space-y-2 py-2  text-white w-5/6 mx-auto   mt-3  "
+      className="space-y-2 py-2  text-white mx-auto   w-full mt-3  "
     >
       {/* Email */}
       <div className=" w-full ">
