@@ -53,7 +53,7 @@ export default function LoginForm() {
         <input
           {...register("email")}
           placeholder="abc@gmail.com"
-          className="input-dark px-2 focus:outline-0 rounded-sm bg-[#080808] h-12  w-full "
+          className="input-dark px-2 focus:outline-0 rounded-sm bg-[#080808] h-10  w-full "
         />
       </div>
 
@@ -74,7 +74,7 @@ export default function LoginForm() {
             {...register("password")}
             type={showPassword ? "text" : "password"}
             placeholder="Enter your password"
-            className="input-dark px-2 h-12 rounded-sm focus:outline-0 w-full bg-[#080808]  "
+            className="input-dark px-2 h-10 rounded-sm focus:outline-0 w-full bg-[#080808]  "
           />
           <span
             onClick={() => setShowPassword(!showPassword)}
