@@ -138,7 +138,7 @@ export default function SignupForm() {
 
       <button
         type="submit"
-        className="h-12  text-black w-full rounded-3xl font-bold hover:bg-[#868686] transition-colors cursor-pointer bg-[#dbdbdb] flex justify-center items-center gap-2 my-3 "
+        className="h-12 active:scale-95  text-black w-full rounded-3xl font-bold hover:bg-[#868686] transition-all cursor-pointer bg-[#dbdbdb] flex justify-center items-center gap-2 my-3 p-1 "
       >
         {authData?.isError ? (
           <span className="text-xs">{authData?.isError.message}</span>

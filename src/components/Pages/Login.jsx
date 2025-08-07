@@ -8,7 +8,7 @@ export default function Login() {
   const [authType, setAuthType] = useState("login");
   const { authData, setAuthData } = useContext(AuthContext);
   return (
-    <div className="w-[90%] md:w-1/2 lg:w-2/6  h-max  text-sm mx-auto      mt-[8vh] bg-radial-ocean p-[2px] rounded-xl">
+    <div className="w-[90%] md:w-1/2 lg:w-2/6  h-max  text-sm mx-auto      mt-[8vh] bg-radial-ocean p-[2px] shadow-[0_0_20px_#2c5dac] rounded-xl">
       <div className=" h-full bg-black w-full   rounded-xl  p-5  ">
         {/* Logo */}
         <div className="text-center  size-14 mx-auto border-2 border-[#2b2b2b] rounded-full p-2 ">
@@ -20,7 +20,7 @@ export default function Login() {
         </div>
 
         {/* Toggle */}
-        <div className="flex justify-center   bg-[#141414] h-10  w-full  mx-auto ">
+        <div className="flex justify-center   bg-[#141414] h-10  w-full  mx-auto rounded-sm">
           <button
             onClick={() => {
               setAuthType("login");

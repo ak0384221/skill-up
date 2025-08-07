@@ -97,7 +97,7 @@ export default function LoginForm() {
 
       <button
         type="submit"
-        className="h-12  text-black w-full rounded-3xl font-bold hover:bg-[#868686] transition-colors cursor-pointer bg-[#dbdbdb] flex justify-center items-center gap-2 "
+        className="h-12 active:scale-95   text-black w-full rounded-3xl font-bold hover:bg-[#868686] transition-all cursor-pointer bg-[#dbdbdb] flex justify-center items-center gap-2 p-1 "
       >
         {authData?.isError ? (
           <span className="text-xs">{authData?.isError.message}</span>
@@ -109,17 +109,6 @@ export default function LoginForm() {
           </>
         )}
       </button>
-      <p className="text-xs text-center text-gray-400 mt-4">
-        By signing in, you agree to our{" "}
-        <span className="font-bold text-white cursor-pointer ">
-          Terms of Service
-        </span>{" "}
-        and{" "}
-        <span className="font-bold text-white cursor-pointer ">
-          Privacy Policy
-        </span>
-        .
-      </p>
     </form>
   );
 }
