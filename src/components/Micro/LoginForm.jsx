@@ -8,7 +8,6 @@ import { AuthContext } from "../../Context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import { CiMail } from "react-icons/ci";
 import Loader from "../shared/loader";
-import { span } from "framer-motion/client";
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);

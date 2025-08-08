@@ -47,7 +47,9 @@ export default function Posts() {
         }
       >
         {PostsData?.posts?.map((post) => {
-          return <SinglePostCard key={post.id} post={post} />;
+          return (
+            <SinglePostCard key={post.id} post={post} dispatch={dispatch} />
+          );
         })}
 
         {PostsData?.isLoading && <PostSkeleton />}

@@ -12,7 +12,6 @@ import Loader from "../shared/loader";
 export default function CreatePost() {
   const titleRef = useRef(null);
   const navigate = useNavigate();
-  const pictureUrlRef = useRef(null);
   const { authData } = useContext(AuthContext);
   const username = authData?.currentUser.displayName;
   const [files, setFiles] = useState(null);
@@ -59,93 +58,81 @@ export default function CreatePost() {
 
   return (
     <>
-      <div className="w-full md:w-2/3 lg:w-2/5 my-4 text-white p-5 mt-[12vh]">
-        <p className="text-5xl text-center my-5  w-max mx-auto font-cookie">
-          Create a post
-        </p>
-        <Form
-          action="#"
-          method="post"
-          onSubmit={(evt) => {
-            evt.preventDefault();
+      <div className="w-5/6 md:w-2/3 lg:w-2/5  text-white  bg-radial-ocean  shadow-[0_0_20px_#2c5dac] rounded-xl mt-[15vh] border-2 border-[#adadc7] ">
+        <div className="w-full h-full bg-black rounded-xl px-4 py-5">
+          <p className="text-5xl text-center  w-max mx-auto font-cookie pt-4 py-8">
+            Create a post
+          </p>
+          <Form
+            action="#"
+            method="post"
+            onSubmit={(evt) => {
+              evt.preventDefault();
 
-            setUploadData((prev) => {
-              return { ...prev, isUploading: true };
-            });
+              setUploadData((prev) => {
+                return { ...prev, isUploading: true };
+              });
 
-            uploadPostFormHandler(
-              evt,
-              titleRef,
-              pictureUrlRef,
-              files,
-              authData,
-              setUploadData,
-              navigate
-            );
-          }}
-          className="w-full mx-auto  rounded-sm  p-2 "
-        >
-          <div className="mb-4">
-            <label className="block mb-1 text-[#fffffff6] ">
-              What's on your mind?
-            </label>
-            <textarea
-              rows="3"
-              ref={titleRef}
-              className="w-full p-2 border font-normal border-[#adadad] rounded resize-none placeholder:text-[#838181] placeholder:font-light placeholder: placeholder:text-sm focus:outline-0 "
-              placeholder="Write something..."
-            ></textarea>
-          </div>
-
-          <div className="mb-4">
-            <label className="block mb-1 text-[#fffffff6]   ">
-              Picture url
-            </label>
-            <textarea
-              rows="2"
-              placeholder="Paste the picture url"
-              ref={pictureUrlRef}
-              className="w-full p-2 border font-normal border-[#adadad] rounded resize-none placeholder:text-[#838181] placeholder:font-light placeholder: placeholder:text-sm focus:outline-0"
-            ></textarea>
-          </div>
-          <center>Or</center>
-          <div className="mb-4">
-            <center>
-              <label
-                htmlFor="fileInput"
-                className="cursor-pointer inline-block"
-              >
-                <RiUploadCloud2Fill className="mt-4 text-5xl p-2 rounded-full bg-[#696365]  hover:bg-[#fcfcfc] hover:text-[#181818] transition-all hover:border-0 active:scale-120" />
+              uploadPostFormHandler(
+                titleRef,
+                files,
+                authData,
+                setUploadData,
+                navigate
+              );
+            }}
+            className="w-full mx-auto  rounded-sm  p-2 "
+          >
+            <div className="mb-4">
+              <label className="block mb-1 text-[#fffffff6] ">
+                What's on your mind?
               </label>
-              <br />
-              <input
-                className=" w-full font-cookie text-2xl  p-1 px-3 "
-                onChange={handleOnchangePicture}
-                id="fileInput"
-                type="file"
-                accept="image/*"
-              />
-            </center>
-            {preview && (
-              <div className="picyPreview    h-auto min-h-[30vh] my-5 ">
-                <img
-                  src={preview}
-                  alt=""
-                  className="w-full h-full object-cover rounded-md"
+              <textarea
+                rows="3"
+                ref={titleRef}
+                className="w-full p-2 border font-normal border-[#adadad] rounded resize-none placeholder:text-[#838181] placeholder:font-light placeholder: placeholder:text-sm focus:outline-0 "
+                placeholder="Write something..."
+              ></textarea>
+            </div>
+
+            <div className="mb-4">
+              <center>
+                <label
+                  htmlFor="fileInput"
+                  className="cursor-pointer inline-block"
+                >
+                  <RiUploadCloud2Fill className="mt-4 text-5xl p-2 rounded-full bg-[#696365]  hover:bg-[#fcfcfc] hover:text-[#181818] transition-all hover:border-0 active:scale-120" />
+                </label>
+                <br />
+                <input
+                  className=" w-full font-cookie text-2xl  p-1 px-3 "
+                  onChange={handleOnchangePicture}
+                  id="fileInput"
+                  type="file"
+                  accept="image/*"
                 />
+              </center>
+              {preview && (
+                <div className="picyPreview    h-auto min-h-[30vh] my-5 ">
+                  <img
+                    src={preview}
+                    alt=""
+                    className="w-full h-full object-cover rounded-md"
+                  />
+                </div>
+              )}
+            </div>
+
+            <Button className="font-Rochester text-lg" variant="light">
+              {uploadData?.isUploading ? <Loader variant="white" /> : "Upload"}
+            </Button>
+            {uploadData?.isError && (
+              <div className="w-full h-10 border border-red-300 my-2 font-bold text-red-500">
+                {uploadData?.isError?.message}
               </div>
             )}
-          </div>
-
-          <Button className="font-Rochester text-lg" variant="light">
-            {uploadData?.isUploading ? <Loader variant="white" /> : "Upload"}
-          </Button>
-          {uploadData?.isError && (
-            <div className="w-full h-10 border border-red-300 my-2 font-bold text-red-500">
-              {uploadData?.isError?.message}
-            </div>
-          )}
-        </Form>
+          </Form>
+        </div>
       </div>
     </>
   );

@@ -6,8 +6,7 @@ import { RxCross2 } from "react-icons/rx";
 import { IoCloudDoneSharp } from "react-icons/io5";
 import { AnimatePresence, motion } from "framer-motion";
 //external
-export default function MainPost({ post, isEditing, setIsEditing }) {
-  // const { dispatchPostsContent } = useContext(FetchingContext);
+export default function MainPost({ post, isEditing, setIsEditing, dispatch }) {
   const [editTitle, setEditTitle] = useState(post.title);
 
   function handleTitleChange(evt) {
@@ -16,7 +15,7 @@ export default function MainPost({ post, isEditing, setIsEditing }) {
 
   function handleSave() {
     // Replace this with your actual Firestore update function
-    updatepost(post.id, { title: editTitle }, dispatchPostsContent)
+    updatepost(post.id, { title: editTitle }, dispatch)
       .then(() => {
         setIsEditing(false);
       })

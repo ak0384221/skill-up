@@ -13,7 +13,7 @@ import { supabase } from "../Config/supabase";
 import { postDataRef, userDataRef } from "../Config/firebase";
 import { uploadFilesViaSupabase } from "./uploadRelated";
 
-async function uploadPost(postObj, navigate) {
+async function uploadPost(postObj) {
   console.log(postObj);
 
   const postWithTimestamp = {
@@ -23,8 +23,6 @@ async function uploadPost(postObj, navigate) {
   try {
     await addDoc(postDataRef, postWithTimestamp);
     console.log("post uploaded");
-
-    navigate("/");
   } catch (err) {
     console.log(err);
   }
@@ -49,18 +47,18 @@ async function removePost(postId, picUrl) {
     console.log(err);
   }
 }
-async function updatepost(postId, updatedData, dispatchPostsContent) {
+async function updatepost(postId, updatedData, dispatch) {
   const singlePostRef = doc(postDataRef, postId);
   try {
     await updateDoc(singlePostRef, updatedData);
-    dispatchPostsContent({
+    dispatch({
       type: "UPDATE_ITEM",
       payload: { postId: postId, updatedData: updatedData, crudError: null },
     });
     console.log("post sucessfully updated");
   } catch (err) {
     console.log(err);
-    dispatchPostsContent({
+    dispatch({
       type: "SET_CRUD_ERROR",
       payload: {
         crudError: err.message,

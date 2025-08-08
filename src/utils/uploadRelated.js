@@ -5,35 +5,31 @@ import { userDataRef } from "../Config/firebase"; // your Firestore collection r
 import { uploadPost } from "./postsCRUD";
 
 async function uploadPostFormHandler(
-  evt,
   titleRef,
-  pictureUrlRef,
   files,
   authData,
   setUploadData,
   navigate
 ) {
-  const title = titleRef.current.value;
-  let pictureUrl = pictureUrlRef.current.value;
-  const username = authData?.currentUser?.displayName;
-  const uid = authData?.currentUser?.uid;
-
   if (files) {
-    console.log(files);
     try {
       const res = await uploadFilesViaSupabase(files);
-      pictureUrl = res.url;
+      let pictureUrl = res.url;
       console.log(res);
       const postObj = {
-        username: username,
-        title: title,
+        username: authData?.currentUser?.displayName,
+        title: titleRef.current.value,
         pictureURL: pictureUrl,
-        uid: uid,
+        uid: authData?.currentUser?.uid,
       };
-      uploadPost(postObj, navigate);
-      setUploadData((prev) => {
-        return { ...prev, isUploading: false };
-      });
+      uploadPost(postObj)
+        .then(() => {
+          navigate("/");
+          setUploadData((prev) => {
+            return { ...prev, isUploading: false };
+          });
+        })
+        .catch((error) => console.log(error));
 
       // waits for upload
       console.log("Uploaded URL:", pictureUrl);
@@ -44,25 +40,33 @@ async function uploadPostFormHandler(
       });
       return; // Stop if upload fails
     }
-  } else {
-    if (title || pictureUrl) {
-      try {
-        const postObj = {
-          username: username,
-          title: title,
-          pictureURL: pictureUrl,
-          uid: uid,
-        };
-        uploadPost(postObj);
-        setUploadData((prev) => {
-          return { ...prev, isUploading: false };
-        });
-      } catch (err) {
-        setUploadData((prev) => {
-          return { ...prev, isUploading: false };
-        });
-      }
+  } else if (titleRef.current.value) {
+    try {
+      const postObj = {
+        username: authData?.currentUser?.displayName,
+        title: titleRef.current.value,
+        uid: authData?.currentUser?.uid,
+      };
+      uploadPost(postObj)
+        .then(() => {
+          navigate("/");
+          setUploadData((prev) => {
+            return { ...prev, isUploading: false };
+          });
+        })
+        .catch((error) => console.log(error));
+    } catch (err) {
+      setUploadData((prev) => {
+        return { ...prev, isUploading: false };
+      });
     }
+    console.log(titleRef.current.value);
+  } else {
+    setUploadData((prev) => {
+      console.log("title shouldnt be wmpty");
+
+      return { ...prev, isUploading: false, isError: "empty" };
+    });
   }
 }
 async function uploadFilesViaSupabase(files) {
@@ -80,9 +84,7 @@ async function uploadFilesViaSupabase(files) {
       return { err: error.message };
     }
 
-    const { data } = await supabase.storage
-      .from("vibehive")
-      .getPublicUrl(filename);
+    const { data } = supabase.storage.from("vibehive").getPublicUrl(filename);
     return { url: data.publicUrl };
   } catch (err) {
     return { error: err };
