@@ -4,7 +4,7 @@ import { TfiComment } from "react-icons/tfi";
 import { useContext, useRef, useState } from "react";
 import { CiShare2 } from "react-icons/ci";
 import { CiHeart } from "react-icons/ci";
-import { IoMdHeart } from "react-icons/io";
+import { IoMdHeart, IoMdSend } from "react-icons/io";
 import { AuthContext } from "../../Context/AuthContext";
 // import { FetchingContext } from "../../Context/FetchingContext";
 import Comment from "../Micro/comment";
@@ -57,23 +57,20 @@ export default function BottomMostCard({ post }) {
           clickedComment ? " min-h-[5rem] h-max " : "h-0"
         } overflow-hidden`}
       >
-        <div className="send comment px-5">
+        <div className="send comment flex justify-evenly items-center">
           <textarea
             ref={commentsRef}
             type="text"
             placeholder="Enter your comment"
-            className="border-b-1 text-white my-2 border-[#707070] resize-none w-full  px-5 focus:outline-0 placeholder:text-[#9c9c9c]"
+            className="border-b text-white my-2 border-[#707070] resize-none w-5/6  px-2 focus:outline-0 placeholder:text-[#9c9c9c]"
           />
-          <Button
-            variant="createPost"
-            className="my-2"
+          <IoMdSend
             onClick={() => {
-              addComment(commentsRef.current.value, post, authData);
               setClickedComment(false);
+              addComment(commentsRef.current.value, post, authData);
             }}
-          >
-            Send
-          </Button>
+            className=" text-white text-[2rem] active:scale-85 cursor-pointer transition-all "
+          />
         </div>
       </div>
     </div>

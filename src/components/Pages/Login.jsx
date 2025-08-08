@@ -8,8 +8,8 @@ export default function Login() {
   const [authType, setAuthType] = useState("login");
   const { authData, setAuthData } = useContext(AuthContext);
   return (
-    <div className="w-[88%] md:w-1/2 lg:w-2/6  h-max  text-sm mx-auto      mt-[10vh] bg-radial-ocean p-1 shadow-[0_0_20px_#2c5dac] rounded-xl">
-      <div className=" h-full  bg-black w-full   rounded-xl  px-8 py-5 border-2 border-[#6188d1]  ">
+    <div className="w-[88%] md:w-1/2 lg:w-2/6  h-max  text-sm mx-auto      mt-[10vh]  bg-radial-ocean p-1.25  shadow-[0_0_20px_#2c5dac]  rounded-xl">
+      <div className=" h-full  bg-black w-full   rounded-xl  px-8 py-5   ">
         {/* Logo */}
         <div className="text-center  size-14 mx-auto border-2 border-[#2b2b2b] rounded-full p-2">
           <img src="/logo.png" className="w-full h-full" alt="" />
@@ -29,7 +29,7 @@ export default function Login() {
               });
             }}
             className={`h-full w-1/2 rounded-sm  text-sm font-medium ${
-              authType === "login" ? "bg-white text-black" : "text-white"
+              authType === "login" ? "bg-[#c5c3c3] text-black" : "text-white"
             }`}
           >
             Login
@@ -42,7 +42,7 @@ export default function Login() {
               });
             }}
             className={`h-full w-1/2 rounded-sm  text-sm font-medium ${
-              authType === "signup" ? "bg-white text-black" : "text-white"
+              authType === "signup" ? "bg-[#c5c3c3] text-black" : "text-white"
             }`}
           >
             Signup

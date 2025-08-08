@@ -1,11 +1,12 @@
 export default function Button({
   children,
   variant,
-
+  onClick = "",
   className = "",
 }) {
   return (
     <button
+      onClick={onClick}
       type="submit"
       className={`h-12 active:scale-95  text-sm w-full my-2 rounded-3xl font-bold   cursor-pointer  flex justify-center items-center gap-2 p-1 ${
         variant === "dark"

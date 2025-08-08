@@ -12,6 +12,8 @@ import { useState } from "react";
 import { AuthContext } from "../../Context/AuthContext";
 import { updateUserImageArray } from "../../utils/postsCRUD";
 import UserProfileSkeleton from "../PostSkeleton/userProfileSkeleton";
+import { GrGallery } from "react-icons/gr";
+import { GoUpload } from "react-icons/go";
 //
 
 export default function User() {
@@ -67,7 +69,7 @@ export default function User() {
             />
             {authData?.currentUser?.uid === id && (
               <div className="addCover  ">
-                <div className="add absolute bottom-2 gap-[10vh] right-2   flex  items-center cursor-pointer opacity-50 transition-opacity  p-1.5 hover:opacity-100 b border-blue-500 rounded-full">
+                <div className="add absolute bottom-2 gap-[7vh] right-2   flex  items-center cursor-pointer opacity-80 transition-opacity  p-1.5 hover:opacity-100 rounded-full">
                   {cover ? (
                     <>
                       <IoCloseCircle
@@ -80,7 +82,7 @@ export default function User() {
                       />
 
                       <FaCheckCircle
-                        className="text-blue-500 text-3xl   cursor-pointer bg-white rounded-full hover:scale-110 transition-all"
+                        className="text-blue-500 text-3xl p-[2.5px]  cursor-pointer bg-white rounded-full hover:scale-110 transition-all"
                         onClick={async (e) => {
                           await updateUserImageArray(id, cover, "coverPic");
                           setCover(null);
@@ -92,7 +94,7 @@ export default function User() {
                       htmlFor="coverInput"
                       className="cursor-pointer inline-block"
                     >
-                      <FaUpload className="text-4xl  text-blue-600 cursor-pointer bg-white rounded-full p-1" />
+                      <GrGallery className="text-3xl  cursor-pointer text-white" />
                     </label>
                   )}
 
@@ -144,7 +146,7 @@ export default function User() {
                       htmlFor="fileInput"
                       className="cursor-pointer inline-block"
                     >
-                      <FaUpload className="text-2xl  text-blue-500 cursor-pointer" />
+                      <GoUpload className="text-2xl  text-white cursor-pointer" />
                     </label>
                   )}
 

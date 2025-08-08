@@ -99,7 +99,7 @@ export default function LoginForm() {
         {authData?.isError ? (
           <span className="text-xs">{authData?.isError.message}</span>
         ) : authData?.isLoading ? (
-          <Loader variant="black" />
+          <Loader variant="dark" />
         ) : (
           <>
             <CiMail className="text-lg" /> Login

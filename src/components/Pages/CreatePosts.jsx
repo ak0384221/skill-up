@@ -60,7 +60,7 @@ export default function CreatePost() {
 
   return (
     <>
-      <div className="w-5/6 md:w-2/3 lg:w-2/5  text-white  bg-radial-ocean  shadow-[0_0_20px_#2c5dac] rounded-xl mt-[15vh] border-2 border-[#adadc7] ">
+      <div className="w-5/6 md:w-2/3 lg:w-2/5 p-1.25 text-white  bg-radial-ocean  shadow-[0_0_20px_#2c5dac] rounded-xl mt-[15vh] ">
         <div className="w-full h-full bg-black rounded-xl px-4 py-5">
           <p className="text-5xl text-center  w-max mx-auto font-cookie pt-4 py-8">
             Create a post

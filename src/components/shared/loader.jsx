@@ -3,7 +3,7 @@ export default function Loader({ variant = "dark" }) {
     <>
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className=" w-full h-full p-1 "
+        className=" w-full h-full p-2 "
         viewBox="0 0 300 150"
       >
         <path

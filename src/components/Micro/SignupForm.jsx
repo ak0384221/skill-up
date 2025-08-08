@@ -141,10 +141,10 @@ export default function SignupForm() {
         {authData?.isError ? (
           <span className="text-xs">{authData?.isError.message}</span>
         ) : authData?.isLoading ? (
-          <Loader />
+          <Loader variant="dark" />
         ) : (
           <>
-            <CiMail className="text-lg" /> Signup
+            <CiMail className="text-lg" /> Sign up
           </>
         )}
       </Button>

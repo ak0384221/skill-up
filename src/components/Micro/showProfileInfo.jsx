@@ -47,12 +47,14 @@ export default function ShowProfileInfo({ user, id }) {
       </ul>
 
       {authData?.currentUser?.uid === id && (
-        <Link
-          to="/updateProfile"
-          className="bg-white w-full text-center font-semibold text-2xl"
-        >
-          <p className="my-6">Click to Update your Profile</p>
-        </Link>
+        <div className="bg-radial-ocean w-max  flex justify-center items-center rounded-2xl p-[2px]">
+          <Link
+            to="/updateProfile"
+            className="bg-black h-full w-full rounded-2xl px-2 py-1"
+          >
+            Click to Update your Profile
+          </Link>
+        </div>
       )}
     </div>
   );

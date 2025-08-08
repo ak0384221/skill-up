@@ -31,10 +31,10 @@ export default function MainPost({ post, isEditing, setIsEditing, dispatch }) {
           {isEditing ? (
             <>
               <motion.textarea
-                initial={{ opacity: 0, filter: "blur(10px)" }}
-                animate={{ opacity: 1, filter: "blur(0px)" }}
-                transition={{ ease: "easeInOut", duration: 0.3 }}
-                exit={{ opacity: 1, filter: "blur(0px)" }}
+                exit={{ opacity: 0 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ ease: "easeInOut", duration: 0.2 }}
                 rows="2"
                 className="mx-3 w-[95%]   p-1 border-1 text-white border-gray-500 rounded-md"
                 placeholder="Write something..."
