@@ -8,6 +8,7 @@ import { AuthContext } from "../../Context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import { CiMail } from "react-icons/ci";
 import Loader from "../shared/loader";
+import Button from "../shared/Button";
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -94,20 +95,17 @@ export default function LoginForm() {
         </Link>
       </div>
 
-      <button
-        type="submit"
-        className="h-12 active:scale-95   text-black w-full rounded-3xl font-bold hover:bg-[#868686] transition-all cursor-pointer bg-[#dbdbdb] flex justify-center items-center gap-2 p-1 "
-      >
+      <Button>
         {authData?.isError ? (
           <span className="text-xs">{authData?.isError.message}</span>
         ) : authData?.isLoading ? (
-          <Loader />
+          <Loader variant="black" />
         ) : (
           <>
             <CiMail className="text-lg" /> Login
           </>
         )}
-      </button>
+      </Button>
     </form>
   );
 }

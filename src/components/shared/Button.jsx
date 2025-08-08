@@ -1,15 +1,17 @@
 export default function Button({
   children,
+  variant,
 
   className = "",
-  onClick = "",
-  ...props
 }) {
   return (
     <button
       type="submit"
-      {...(onClick && { onClick })}
-      className={`cursor-pointer rounded-sm bg-gradient-to-r from-[#888585] via-[#6b6b6b] to-[#333333] w-full py-2 text-white font-[500] active:scale-99 transition-all  tracking-wide hover:opacity-90   ${className}`}
+      className={`h-12 active:scale-95  text-sm w-full my-2 rounded-3xl font-bold   cursor-pointer  flex justify-center items-center gap-2 p-1 ${
+        variant === "dark"
+          ? "bg-[#1b1b1b] text-white"
+          : "bg-[#c2c2c2] text-black"
+      } hover:opacity-75 transition-opacity`}
     >
       {children}
     </button>

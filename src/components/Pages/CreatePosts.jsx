@@ -7,6 +7,8 @@ import Button from "../shared/Button";
 import { uploadPostFormHandler } from "../../utils/uploadRelated";
 import { AuthContext } from "../../Context/AuthContext";
 import Loader from "../shared/loader";
+import { FiUpload } from "react-icons/fi";
+import { AiFillPicture } from "react-icons/ai";
 //local
 
 export default function CreatePost() {
@@ -84,13 +86,13 @@ export default function CreatePost() {
             className="w-full mx-auto  rounded-sm  p-2 "
           >
             <div className="mb-4">
-              <label className="block mb-1 text-[#fffffff6] ">
+              <label className="block mb-1 text-[#b1afaff6] font-light ">
                 What's on your mind?
               </label>
               <textarea
                 rows="3"
                 ref={titleRef}
-                className="w-full p-2 border font-normal border-[#adadad] rounded resize-none placeholder:text-[#838181] placeholder:font-light placeholder: placeholder:text-sm focus:outline-0 "
+                className="w-full p-2 border font-normal border-[#3a3a3a] rounded resize-none placeholder:text-[#838181] placeholder:font-light placeholder: placeholder:text-sm focus:outline-0 "
                 placeholder="Write something..."
               ></textarea>
             </div>
@@ -99,9 +101,9 @@ export default function CreatePost() {
               <center>
                 <label
                   htmlFor="fileInput"
-                  className="cursor-pointer inline-block"
+                  className="cursor-pointer  bg-[#181818] w-max px-5 h-10 flex justify-center items-center rounded-3xl border-2 border-[#2848a1] hover:bg-[#0e0e0e] transition-colors font-light font-Roboto"
                 >
-                  <RiUploadCloud2Fill className="mt-4 text-5xl p-2 rounded-full bg-[#696365]  hover:bg-[#fcfcfc] hover:text-[#181818] transition-all hover:border-0 active:scale-120" />
+                  Select file
                 </label>
                 <br />
                 <input
@@ -123,14 +125,19 @@ export default function CreatePost() {
               )}
             </div>
 
-            <Button className="font-Rochester text-lg" variant="light">
-              {uploadData?.isUploading ? <Loader variant="white" /> : "Upload"}
+            <Button variant={"dark"}>
+              {uploadData?.isError ? (
+                <span className=" text-red-700">
+                  {uploadData?.isError.message}
+                </span>
+              ) : uploadData?.isUploading ? (
+                <Loader />
+              ) : (
+                <>
+                  <FiUpload className="text-lg" /> Upload
+                </>
+              )}
             </Button>
-            {uploadData?.isError && (
-              <div className="w-full h-10 border border-red-300 my-2 font-bold text-red-500">
-                {uploadData?.isError?.message}
-              </div>
-            )}
           </Form>
         </div>
       </div>

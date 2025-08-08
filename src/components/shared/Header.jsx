@@ -11,6 +11,7 @@ import { FaUser } from "react-icons/fa";
 import { SlFeed } from "react-icons/sl";
 import { FaFacebookMessenger } from "react-icons/fa6";
 import { logOutAuth } from "../../utils/authRelated";
+import { MdOutbound } from "react-icons/md";
 //external
 export default function Header() {
   const { authData } = useContext(AuthContext);
@@ -87,12 +88,12 @@ export default function Header() {
             </NavLink>
 
             <div className="cursor-pointer ">
-              <HiLogout
+              <MdOutbound
                 onClick={() => {
                   setShowModal(true);
                 }}
                 title="Log out"
-                className="size-9 text-white  flex justify-center items-center rounded-sm bg-gradient-to-r from-[#f3cb5e] to-[#f04a4a]"
+                className="size-10 text-white  flex justify-center items-center rounded-sm active:scale-85 transition-all"
               />
               <LogoutModal
                 isOpen={showModal}

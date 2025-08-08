@@ -9,6 +9,7 @@ import { signUpAuthHandler } from "../../utils/authRelated";
 import { AuthContext } from "../../Context/AuthContext";
 import Loader from "../shared/loader";
 import { useNavigate } from "react-router-dom";
+import Button from "../shared/Button";
 
 export default function SignupForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -136,20 +137,17 @@ export default function SignupForm() {
         </span>
       </div>
 
-      <button
-        type="submit"
-        className="h-12 active:scale-95  text-black w-full rounded-3xl font-bold hover:bg-[#868686] transition-all cursor-pointer bg-[#dbdbdb] flex justify-center items-center gap-2 my-3 p-1 "
-      >
+      <Button>
         {authData?.isError ? (
           <span className="text-xs">{authData?.isError.message}</span>
         ) : authData?.isLoading ? (
           <Loader />
         ) : (
           <>
-            <CiMail className="text-lg" /> Sign up
+            <CiMail className="text-lg" /> Login
           </>
         )}
-      </button>
+      </Button>
       <p className="placeholder:text-xs placeholder:text-neutral-600 text-xs text-center text-gray-400 ">
         By signing in, you agree to our{" "}
         <span className="placeholder:text-xs placeholder:text-neutral-600 font-bold text-white cursor-pointer ">

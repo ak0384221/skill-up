@@ -52,7 +52,13 @@ export default function Posts() {
           );
         })}
 
-        {PostsData?.isLoading && <PostSkeleton />}
+        {PostsData?.isLoading && (
+          <>
+            <PostSkeleton />
+            <PostSkeleton />
+            <PostSkeleton />
+          </>
+        )}
       </InfiniteScroll>
     </div>
   );

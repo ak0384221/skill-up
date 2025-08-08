@@ -3,6 +3,7 @@ import { auth } from "../Config/firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import { userDataRef } from "../Config/firebase"; // your Firestore collection reference
 import { uploadPost } from "./postsCRUD";
+import imageCompression from "browser-image-compression";
 
 async function uploadPostFormHandler(
   titleRef,
@@ -14,31 +15,23 @@ async function uploadPostFormHandler(
   if (files) {
     try {
       const res = await uploadFilesViaSupabase(files);
-      let pictureUrl = res.url;
-      console.log(res);
       const postObj = {
         username: authData?.currentUser?.displayName,
         title: titleRef.current.value,
-        pictureURL: pictureUrl,
+        pictureURL: res.url,
         uid: authData?.currentUser?.uid,
       };
-      uploadPost(postObj)
-        .then(() => {
-          navigate("/");
-          setUploadData((prev) => {
-            return { ...prev, isUploading: false };
-          });
-        })
-        .catch((error) => console.log(error));
-
+      await uploadPost(postObj);
+      navigate("/");
+      setUploadData((prev) => {
+        return { ...prev, isUploading: false };
+      });
       // waits for upload
       console.log("Uploaded URL:", pictureUrl);
-    } catch (err) {
-      console.error("Upload failed:", err);
+    } catch (error) {
       setUploadData((prev) => {
-        return { ...prev, isUploading: false, isError: err };
+        return { ...prev, isUploading: false, isError: error };
       });
-      return; // Stop if upload fails
     }
   } else if (titleRef.current.value) {
     try {
@@ -47,28 +40,27 @@ async function uploadPostFormHandler(
         title: titleRef.current.value,
         uid: authData?.currentUser?.uid,
       };
-      uploadPost(postObj)
-        .then(() => {
-          navigate("/");
-          setUploadData((prev) => {
-            return { ...prev, isUploading: false };
-          });
-        })
-        .catch((error) => console.log(error));
-    } catch (err) {
+      await uploadPost(postObj);
+      navigate("/");
       setUploadData((prev) => {
         return { ...prev, isUploading: false };
       });
+    } catch (error) {
+      setUploadData((prev) => {
+        return { ...prev, isUploading: false, isError: error };
+      });
     }
-    console.log(titleRef.current.value);
   } else {
     setUploadData((prev) => {
-      console.log("title shouldnt be wmpty");
+      console.log();
 
-      return { ...prev, isUploading: false, isError: "empty" };
+      return { ...prev, isUploading: false, isError: { message: "Empty" } };
     });
   }
+
+  0;
 }
+
 async function uploadFilesViaSupabase(files) {
   if (!files) {
     return { error: "no file selected" };
@@ -115,6 +107,28 @@ async function handleUpdateProfile(
     console.error("Error updating Firestore:", error.message);
   }
 }
+
+// async function imageCompression(file){
+
+//      const options = {
+//         maxSizeMB: 1, // maximum size in MB
+//         maxWidthOrHeight: 1080, // resize image if it's larger
+//         useWebWorker: true,
+//       };
+
+//         try {
+//               // Compress the image
+//               const compressedFile = await imageCompression(file, options);
+
+//               // Set file and preview
+//               setFiles(compressedFile);
+//               const objUrl = URL.createObjectURL(compressedFile);
+//               setPreview(objUrl);
+//             } catch (error) {
+//               console.error("Image compression failed:", error);
+//             }
+
+// }
 
 export {
   uploadPostFormHandler,
