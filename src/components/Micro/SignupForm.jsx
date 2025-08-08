@@ -144,7 +144,7 @@ export default function SignupForm() {
           <Loader />
         ) : (
           <>
-            <CiMail className="text-lg" /> Login
+            <CiMail className="text-lg" /> Signup
           </>
         )}
       </Button>
