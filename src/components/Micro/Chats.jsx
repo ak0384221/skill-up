@@ -12,7 +12,6 @@ import {
   sendMsgToServer,
   listenMessagesRealtime,
 } from "../../utils/chatRelated";
-const EmojiPicker = lazy(() => import("emoji-picker-react"));
 
 export default function Chats() {
   const [Messages, setMessages] = useState();
@@ -20,7 +19,6 @@ export default function Chats() {
   const [selectedMedia, setSelectedMedia] = useState(null);
   const [imgPreview, setImgPreview] = useState(null);
   const [rows, setRows] = useState(1);
-  const [showPicker, setShowPicker] = useState(false);
   const { authData } = useContext(AuthContext);
   const { receiverId } = useParams(); // this will be user.id from the URL
   const bottomRef = useRef();
@@ -29,7 +27,6 @@ export default function Chats() {
   let textMsgRef = useRef();
   const convId = [authData?.currentUser?.uid, receiverId].sort().join("_");
   async function sendMsg(e) {
-    setShowPicker(false);
     if (!selectedMedia && !text) {
       return "empty";
     }
@@ -167,19 +164,6 @@ export default function Chats() {
 
         {/* Input area */}
         <footer className="h-max py-2 pt-3   px-2 w-full   flex items-center justify-center  gap-1 relative ">
-          {showPicker && (
-            <div className="emojis w-4/5 absolute -top-[70vh] h-[70vh] flex justify-center items-center">
-              <Suspense fallback={<div>Loading emojis...</div>}>
-                <EmojiPicker
-                  onEmojiClick={(data) => {
-                    const newText = text + data.emoji;
-                    setText(newText);
-                  }}
-                />
-              </Suspense>
-            </div>
-          )}
-
           <IoArrowBack
             onClick={() => navigate(-1)}
             className="   text-2xl text-white bg-black rounded-full size-8 p-1 hover:bg-white hover:text-black  active:scale-85 transition-all"
