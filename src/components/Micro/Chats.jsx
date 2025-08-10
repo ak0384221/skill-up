@@ -1,19 +1,18 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { lazy, Suspense, useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../../Context/AuthContext";
-import { ChatContext } from "../../Context/ChatContext";
 import { Link, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { IoArrowBack, IoCloseCircleSharp } from "react-icons/io5";
 import useUserProfile from "../../hooks/useUserProfile";
 import { IoSendSharp } from "react-icons/io5";
 import { motion } from "framer-motion";
-import EmojiPicker from "emoji-picker-react";
 import { BsEmojiSmileFill, BsFillImageFill } from "react-icons/bs";
-import { uploadFilesViaSupabase } from "../../utils/uploadRelated";
+import { compressImg, uploadFilesViaSupabase } from "../../utils/uploadRelated";
 import {
   sendMsgToServer,
   listenMessagesRealtime,
 } from "../../utils/chatRelated";
+const EmojiPicker = lazy(() => import("emoji-picker-react"));
 
 export default function Chats() {
   const [Messages, setMessages] = useState();
@@ -29,7 +28,6 @@ export default function Chats() {
   const navigate = useNavigate();
   let textMsgRef = useRef();
   const convId = [authData?.currentUser?.uid, receiverId].sort().join("_");
-
   async function sendMsg(e) {
     setShowPicker(false);
     if (!selectedMedia && !text) {
@@ -39,7 +37,8 @@ export default function Chats() {
     if (selectedMedia) {
       setSelectedMedia(null);
       setImgPreview(null);
-      const imgUrl = await uploadFilesViaSupabase(selectedMedia);
+      const picture = await compressImg(selectedMedia);
+      const imgUrl = await uploadFilesViaSupabase(picture);
       console.log(imgUrl);
       const imageObj = {
         imgUrl: imgUrl,
@@ -169,13 +168,15 @@ export default function Chats() {
         {/* Input area */}
         <footer className="h-max py-2 pt-3   px-2 w-full   flex items-center justify-center  gap-1 relative ">
           {showPicker && (
-            <div className="emojis w-4/5   absolute -top-[70vh] h-[70vh] flex justify-center items-center">
-              <EmojiPicker
-                onEmojiClick={(data, evt) => {
-                  const newText = text + data.emoji;
-                  setText(newText);
-                }}
-              />
+            <div className="emojis w-4/5 absolute -top-[70vh] h-[70vh] flex justify-center items-center">
+              <Suspense fallback={<div>Loading emojis...</div>}>
+                <EmojiPicker
+                  onEmojiClick={(data) => {
+                    const newText = text + data.emoji;
+                    setText(newText);
+                  }}
+                />
+              </Suspense>
             </div>
           )}
 

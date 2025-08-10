@@ -5,16 +5,34 @@ import { userDataRef } from "../Config/firebase"; // your Firestore collection r
 import { uploadPost } from "./postsCRUD";
 import imageCompression from "browser-image-compression";
 
+async function compressImg(file) {
+  const options = {
+    maxSizeMB: 1, // maximum size in MB
+    maxWidthOrHeight: 1080, // resize image if it's larger
+    useWebWorker: true,
+  };
+
+  return imageCompression(file, options);
+}
+
 async function uploadPostFormHandler(
   titleRef,
   files,
   authData,
   setUploadData,
-  navigate
+  navigate,
+  isHd
 ) {
   if (files) {
+    console.log(isHd);
     try {
-      const res = await uploadFilesViaSupabase(files);
+      let picture = await compressImg(files);
+
+      if (isHd) {
+        picture = files;
+      }
+
+      const res = await uploadFilesViaSupabase(picture);
       const postObj = {
         username: authData?.currentUser?.displayName,
         title: titleRef.current.value,
@@ -27,7 +45,7 @@ async function uploadPostFormHandler(
         return { ...prev, isUploading: false };
       });
       // waits for upload
-      console.log("Uploaded URL:", pictureUrl);
+      console.log("Uploaded URL:");
     } catch (error) {
       setUploadData((prev) => {
         return { ...prev, isUploading: false, isError: error };
@@ -57,8 +75,6 @@ async function uploadPostFormHandler(
       return { ...prev, isUploading: false, isError: { message: "Empty" } };
     });
   }
-
-  0;
 }
 
 async function uploadFilesViaSupabase(files) {
@@ -135,4 +151,5 @@ export {
   handleUpdateProfile,
   uploadFilesViaSupabase,
   updateProfileInDb,
+  compressImg,
 };

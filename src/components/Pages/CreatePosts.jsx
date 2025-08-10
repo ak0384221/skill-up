@@ -1,14 +1,13 @@
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
-import { RiUploadCloud2Fill } from "react-icons/ri";
 import { Form, useNavigate } from "react-router-dom";
-import imageCompression from "browser-image-compression";
 //built-in
 import Button from "../shared/Button";
 import { uploadPostFormHandler } from "../../utils/uploadRelated";
 import { AuthContext } from "../../Context/AuthContext";
 import Loader from "../shared/loader";
 import { FiUpload } from "react-icons/fi";
-import { AiFillPicture } from "react-icons/ai";
+
+import { PiHighDefinitionFill } from "react-icons/pi";
 //local
 
 export default function CreatePost() {
@@ -18,30 +17,20 @@ export default function CreatePost() {
   const username = authData?.currentUser.displayName;
   const [files, setFiles] = useState(null);
   const [preview, setPreview] = useState(null);
+  const [isHd, setIsHd] = useState(false);
   const [uploadData, setUploadData] = useState({
     isUploading: false,
     isError: null,
   });
-  console.log(authData);
+
   const handleOnchangePicture = useCallback(
     async (evt) => {
       const file = evt.target.files[0];
       if (!file) return;
 
-      // Compression options
-      const options = {
-        maxSizeMB: 1, // maximum size in MB
-        maxWidthOrHeight: 1080, // resize image if it's larger
-        useWebWorker: true,
-      };
-
       try {
-        // Compress the image
-        const compressedFile = await imageCompression(file, options);
-
-        // Set file and preview
-        setFiles(compressedFile);
-        const objUrl = URL.createObjectURL(compressedFile);
+        setFiles(file);
+        const objUrl = URL.createObjectURL(file);
         setPreview(objUrl);
       } catch (error) {
         console.error("Image compression failed:", error);
@@ -80,7 +69,8 @@ export default function CreatePost() {
                 files,
                 authData,
                 setUploadData,
-                navigate
+                navigate,
+                isHd
               );
             }}
             className="w-full mx-auto  rounded-sm  p-2 "
@@ -115,11 +105,18 @@ export default function CreatePost() {
                 />
               </center>
               {preview && (
-                <div className="picyPreview    h-auto min-h-[30vh] my-5 ">
+                <div className="picyPreview  relative  h-auto min-h-[30vh] my-5 ">
                   <img
                     src={preview}
                     alt=""
                     className="w-full h-full object-cover rounded-md"
+                  />
+
+                  <PiHighDefinitionFill
+                    onClick={() => setIsHd(!isHd)}
+                    className={`absolute top-0 right-0 m-2 cursor-pointer text-4xl text-black p-[2px] transition-opacity ${
+                      isHd ? "opacity-100" : "opacity-50"
+                    }`}
                   />
                 </div>
               )}
@@ -131,7 +128,7 @@ export default function CreatePost() {
                   {uploadData?.isError.message}
                 </span>
               ) : uploadData?.isUploading ? (
-                <Loader />
+                <Loader variant="white" />
               ) : (
                 <>
                   <FiUpload className="text-lg" /> Upload
