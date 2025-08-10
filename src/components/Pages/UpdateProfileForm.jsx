@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { handleUpdateProfile } from "../../utils/uploadRelated";
 import { AuthContext } from "../../Context/AuthContext";
 import useUserProfile from "../../hooks/useUserProfile";
+import GradientWrapper from "../Micro/GradientWrapper";
 
 export default function UpdateProfileForm() {
   const { authData } = useContext(AuthContext);
@@ -36,76 +37,76 @@ export default function UpdateProfileForm() {
   };
 
   return (
-    <Form
-      onSubmit={handleSubmit}
-      className="mt-[14vh] w-5/6 md:w-1/2 mx-auto p-6 min-h-screen text-[#fffffff1] rounded-2xl space-y-4"
-    >
-      <h2 className="text-5xl text-center font-cookie w-max mx-auto ">
-        Update Profile
-      </h2>
-
-      <div className="flex flex-col">
-        <label className=" text-white font-medium mb-1 ">Nick Name</label>
-        <input
-          value={nickName}
-          onChange={(e) => setNickName(e.target.value)}
-          type="text"
-          placeholder="Enter your nick name"
-          className="border-1 border-[#d6d4dd] placeholder:text-[#acacac] rounded-sm p-2 focus:outline-0"
-        />
-      </div>
-
-      <div className="flex flex-col">
-        <label className=" text-white font-medium mb-1">Works At</label>
-        <input
-          value={worksAt}
-          onChange={(e) => setWorksAt(e.target.value)}
-          type="text"
-          placeholder="e.g., Facebook"
-          className="border-1 placeholder:text-[#acacac]  border-[#d6d4dd] rounded-sm p-2 focus:outline-0"
-        />
-      </div>
-
-      <div className="flex flex-col">
-        <label className=" text-white font-medium mb-1">Lives In</label>
-        <input
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
-          type="text"
-          placeholder="e.g., Uttara, Dhaka"
-          className="border-1 border-[#d6d4dd] rounded-sm p-2 placeholder:text-[#acacac] focus:outline-0"
-        />
-      </div>
-
-      <div className="flex flex-col">
-        <label className=" text-white font-medium mb-1">Went To</label>
-        <input
-          value={wentTo}
-          onChange={(e) => setWentTo(e.target.value)}
-          type="text"
-          placeholder="e.g., Uttara High School"
-          className="border-1 border-[#d6d4dd] placeholder:text-[#acacac] rounded-sm p-2 focus:outline-0"
-        />
-      </div>
-
-      <div className="flex flex-col">
-        <label className=" text-white font-medium mb-1">Bio</label>
-        <textarea
-          rows={3}
-          value={bio}
-          onChange={(e) => setBio(e.target.value)}
-          type="text"
-          placeholder="Enter your bio"
-          className="border-1 border-[#d6d4dd] placeholder:text-[#acacac] rounded-sm p-2 focus:outline-0"
-        />
-      </div>
-
-      <Button
-        variant="light"
-        className="w-full bg-blue-600 text-white py-2 rounded-sm hover:bg-blue-700 transition font-cookie text-lg"
+    <GradientWrapper>
+      <Form
+        onSubmit={handleSubmit}
+        className="p-6 mx-auto bg-black text-[#fffffff1] rounded-2xl max-w-xl space-y-6 text-sm"
       >
-        Save Changes
-      </Button>
-    </Form>
+        <h2 className="text-[3rem] text-center font-cookie w-max mx-auto">
+          Update Profile
+        </h2>
+
+        {/* Reusable row */}
+        <div className="flex items-center gap-4">
+          <label className="w-28 text-white font-medium">Nick Name</label>
+          <input
+            value={nickName}
+            onChange={(e) => setNickName(e.target.value)}
+            type="text"
+            placeholder="Enter your nick name"
+            className="flex-1 bg-neutral-900 placeholder:text-[#acacac] rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          />
+        </div>
+
+        <div className="flex items-center gap-4">
+          <label className="w-28 text-white font-medium">Works At</label>
+          <input
+            value={worksAt}
+            onChange={(e) => setWorksAt(e.target.value)}
+            type="text"
+            placeholder="e.g., Facebook"
+            className="flex-1 bg-neutral-900 placeholder:text-[#acacac] rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          />
+        </div>
+
+        <div className="flex items-center gap-4">
+          <label className="w-28 text-white font-medium">Lives In</label>
+          <input
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            type="text"
+            placeholder="e.g., Uttara, Dhaka"
+            className="flex-1 bg-neutral-900 placeholder:text-[#acacac] rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          />
+        </div>
+
+        <div className="flex items-center gap-4">
+          <label className="w-28 text-white font-medium">Went To</label>
+          <input
+            value={wentTo}
+            onChange={(e) => setWentTo(e.target.value)}
+            type="text"
+            placeholder="e.g., Uttara High School"
+            className="flex-1 bg-neutral-900 placeholder:text-[#acacac] rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          />
+        </div>
+
+        {/* For textarea, we can keep label inline but textarea bigger */}
+        <div className="flex items-start gap-4">
+          <label className="w-28 text-white font-medium pt-2">Bio</label>
+          <textarea
+            rows={3}
+            value={bio}
+            onChange={(e) => setBio(e.target.value)}
+            placeholder="Enter your bio"
+            className="flex-1 bg-neutral-900 placeholder:text-[#acacac] rounded-md p-2 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          />
+        </div>
+
+        <Button variant="dark" className="w-full ">
+          Save Changes
+        </Button>
+      </Form>
+    </GradientWrapper>
   );
 }

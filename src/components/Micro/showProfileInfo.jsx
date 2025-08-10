@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { FaBriefcase, FaHome, FaSchool } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
-import { FaAngleDoubleRight } from "react-icons/fa";
+import GradientBtn from "./Gradient button";
 
 export default function ShowProfileInfo({ user, id }) {
   const { authData } = useContext(AuthContext);
@@ -15,7 +15,7 @@ export default function ShowProfileInfo({ user, id }) {
             <FaBriefcase className="text-blue-500 text-lg" />
             <span>
               <span className="">Works at</span>
-              <span className=" px-2 py-0.5 rounded capitalize font-bold">
+              <span className=" px-1 py-0.5   ">
                 <span>{user?.worksAt}</span>
               </span>
             </span>
@@ -26,10 +26,8 @@ export default function ShowProfileInfo({ user, id }) {
           <li className="flex items-center gap-2">
             <FaHome className="text-blue-500 text-lg" />
             <span>
-              <span className="">Lives in</span>{" "}
-              <span className=" px-2 py-0.5 rounded capitalize font-bold">
-                {user?.location}
-              </span>
+              <span className="">Lives in</span>
+              <span className="px-1 py-0.5  ">{user?.location}</span>
             </span>
           </li>
         )}
@@ -37,24 +35,22 @@ export default function ShowProfileInfo({ user, id }) {
           <li className="flex items-center gap-2">
             <FaSchool className="text-blue-500 text-lg" />
             <span>
-              <span className="">Went to</span>{" "}
-              <span className=" px-2 py-0.5 rounded capitalize font-bold">
-                {user?.wentTo}
-              </span>
+              <span className="">Went to</span>
+              <span className="px-1 py-0.5   ">{user?.wentTo}</span>
             </span>
           </li>
         )}
       </ul>
 
       {authData?.currentUser?.uid === id && (
-        <div className="bg-radial-ocean w-max  flex justify-center items-center rounded-2xl p-[2px]">
+        <GradientBtn>
           <Link
             to="/updateProfile"
-            className="bg-black h-full w-full rounded-2xl px-2 py-1"
+            className="bg-black hover:bg-[#111111] transition-colors h-full w-full rounded-2xl px-2 py-1"
           >
             Click to Update your Profile
           </Link>
-        </div>
+        </GradientBtn>
       )}
     </div>
   );

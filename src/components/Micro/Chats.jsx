@@ -1,4 +1,4 @@
-import { lazy, Suspense, useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../../Context/AuthContext";
 import { Link, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -6,7 +6,7 @@ import { IoArrowBack, IoCloseCircleSharp } from "react-icons/io5";
 import useUserProfile from "../../hooks/useUserProfile";
 import { IoSendSharp } from "react-icons/io5";
 import { motion } from "framer-motion";
-import { BsEmojiSmileFill, BsFillImageFill } from "react-icons/bs";
+import { BsFillImageFill } from "react-icons/bs";
 import { compressImg, uploadFilesViaSupabase } from "../../utils/uploadRelated";
 import {
   sendMsgToServer,
@@ -163,10 +163,10 @@ export default function Chats() {
         )}
 
         {/* Input area */}
-        <footer className="h-max py-2 pt-3   px-2 w-full   flex items-center justify-center  gap-1 relative ">
+        <footer className="h-max py-2 pt-3   px-2 w-full   flex items-center justify-center   gap-1 relative ">
           <IoArrowBack
             onClick={() => navigate(-1)}
-            className="   text-2xl text-white bg-black rounded-full size-8 p-1 hover:bg-white hover:text-black  active:scale-85 transition-all"
+            className="   text-2xl text-white rounded-full size-8 p-1   active:scale-85"
           />
           <textarea
             onFocus={() => setRows(3)}
@@ -190,10 +190,6 @@ export default function Chats() {
           <label htmlFor="sendMedia">
             <BsFillImageFill className="size-8 cursor-pointer text-white" />
           </label>
-          <BsEmojiSmileFill
-            onClick={() => setShowPicker(!showPicker)}
-            className="size-8 cursor-pointer text-[yellow]"
-          />
 
           <IoSendSharp
             onMouseDown={(e) => e.preventDefault()}

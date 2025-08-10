@@ -6,7 +6,6 @@ import { AuthContext } from "../../Context/AuthContext";
 import LogoutModal from "../Modal/logOUtModal";
 //local
 import { FaHeartCirclePlus } from "react-icons/fa6";
-import { HiLogout } from "react-icons/hi";
 import { FaUser } from "react-icons/fa";
 import { SlFeed } from "react-icons/sl";
 import { FaFacebookMessenger } from "react-icons/fa6";

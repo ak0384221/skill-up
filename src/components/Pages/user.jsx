@@ -164,16 +164,15 @@ export default function User() {
 
           <div className="font-Inter  text-4xl font-extrabold bg-gradient-to-r from-pink-600 via-red-500 to-yellow-400 bg-clip-text text-transparent  border-black w-max  p-2 mt-10 mx-auto ">
             <h2 className="font-Inter  text-4xl font-extrabold bg-gradient-to-r from-pink-600 via-red-500 to-yellow-400 bg-clip-text text-transparent  border-black w-max inline-block ">
-              {" "}
-              {user && user.username}{" "}
+              {user && user.username}
             </h2>
-            <b className="capitalize  font-Rochester tracking-wider  text-white text-[16px] mx-2">
+            <b className="capitalize  font-Roboto  font-extralight   text-[16px] mx-2">
               {user && user.nickName}
-            </b>{" "}
+            </b>
           </div>
 
           {user && (
-            <p className="mx-auto text-lg font-playwright text-center w-full md:w-1/2 text-white">
+            <p className="mx-auto text-md font-extralight text-center w-full md:w-1/2 text-[#e0e0e0]">
               {user.bio}
             </p>
           )}

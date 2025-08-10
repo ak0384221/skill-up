@@ -3,9 +3,12 @@ import { auth } from "../Config/firebase";
 import { doc, updateDoc } from "firebase/firestore";
 import { userDataRef } from "../Config/firebase"; // your Firestore collection reference
 import { uploadPost } from "./postsCRUD";
-import imageCompression from "browser-image-compression";
 
 async function compressImg(file) {
+  const { default: imageCompression } = await import(
+    "browser-image-compression"
+  );
+
   const options = {
     maxSizeMB: 1, // maximum size in MB
     maxWidthOrHeight: 1080, // resize image if it's larger

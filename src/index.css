@@ -6,26 +6,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Rochester&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Cookie&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Kings&display=swap");
-
 @import "tailwindcss";
-@font-face {
-  font-family: "Cormorant";
-  src: url("/fonts/CormorantRegular.ttf") format("ttf");
-  font-weight: 700;
-  font-style: normal;
-}
 
 @theme {
   --font-cormorant: [ "Cormorant", "serif"];
   --font-Inter: "Inter", sans-serif;
   --font-Roboto: "Roboto", sans-serif;
-  --font-kings: "Kings", "cursive";
-
   --font-Bebas: "Bebas Neue", sans-serif;
   --font-Fugaz: "Fugaz One", sans-serif;
   --font-Rochester: "Rochester", "cursive";
   --font-cookie: "Cookie", cursive;
-
   --font-playwright: "Playwrite US Modern", "cursive";
 }
 
