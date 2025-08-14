@@ -1,15 +1,17 @@
 import { createContext, useEffect, useState } from "react";
-import { auth } from "../Config/firebase";
+import { auth, userDataRef } from "../Config/firebase";
 import { onAuthStateChanged } from "firebase/auth";
+import { onSnapshot } from "firebase/firestore";
 
-export const AuthContext = createContext([]);
+export const ContextAPI = createContext([]);
 
-export default function AuthContextProvider({ children }) {
+export default function ContextAPIprovider({ children }) {
   const [authData, setAuthData] = useState({
     currentUser: null,
     isLoading: false,
     isError: false,
   });
+  const [vibehiveUser, setVibehiveUser] = useState([]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -27,15 +29,27 @@ export default function AuthContextProvider({ children }) {
       unsubscribe();
     };
   }, []);
+  useEffect(() => {
+    const unsubscribe = onSnapshot(userDataRef, (snapshot) => {
+      const userList = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setVibehiveUser(userList);
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   return (
-    <AuthContext.Provider
+    <ContextAPI.Provider
       value={{
         authData,
         setAuthData,
+        vibehiveUser,
       }}
     >
       {children}
-    </AuthContext.Provider>
+    </ContextAPI.Provider>
   );
 }

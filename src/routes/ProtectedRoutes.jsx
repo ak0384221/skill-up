@@ -1,12 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
-import { AuthContext } from "../Context/AuthContext";
 import PageLoader from "../components/shared/pageLoader";
 import Login from "../components/Pages/Login";
+import { ContextAPI } from "../Context/ContextAPI";
 
 export default function ProtectedRoutes() {
-  const { authData } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
+  const { authData } = useContext(ContextAPI);
 
   useEffect(() => {
     const timeout = setTimeout(() => {

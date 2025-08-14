@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { useContext, useState } from "react";
 //built-in
-import { AuthContext } from "../../Context/AuthContext";
+import { ContextAPI } from "../../Context/ContextAPI";
 import LogoutModal from "../Modal/logOUtModal";
 //local
 import { FaHeartCirclePlus } from "react-icons/fa6";
@@ -13,7 +13,7 @@ import { logOutAuth } from "../../utils/authRelated";
 import { MdOutbound } from "react-icons/md";
 //external
 export default function Header() {
-  const { authData } = useContext(AuthContext);
+  const { authData } = useContext(ContextAPI);
   const [showModal, setShowModal] = useState(false);
   const handleLogout = () => {
     logOutAuth(); // or your logout logic

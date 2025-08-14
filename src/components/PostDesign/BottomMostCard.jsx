@@ -3,14 +3,14 @@ import { TfiComment } from "react-icons/tfi";
 import { useContext, useRef, useState } from "react";
 import { CiHeart } from "react-icons/ci";
 import { IoMdHeart, IoMdSend } from "react-icons/io";
-import { AuthContext } from "../../Context/AuthContext";
+import { ContextAPI } from "../../Context/ContextAPI";
 // import { FetchingContext } from "../../Context/FetchingContext";
 import Comment from "../Micro/comment";
 import { updateLike, addComment } from "../../utils/postsCRUD";
 //external
 
 export default function BottomMostCard({ post }) {
-  const { authData } = useContext(AuthContext);
+  const { authData } = useContext(ContextAPI);
   const [clickedComment, setClickedComment] = useState(false);
   const commentsRef = useRef();
   const hasReacted = post?.reactions?.some(

@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { AuthContext } from "../../Context/AuthContext";
+import { ContextAPI } from "../../Context/ContextAPI";
 import { Link, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { IoArrowBack, IoCloseCircleSharp } from "react-icons/io5";
@@ -19,7 +19,7 @@ export default function Chats() {
   const [selectedMedia, setSelectedMedia] = useState(null);
   const [imgPreview, setImgPreview] = useState(null);
   const [rows, setRows] = useState(1);
-  const { authData } = useContext(AuthContext);
+  const { authData } = useContext(ContextAPI);
   const { receiverId } = useParams(); // this will be user.id from the URL
   const bottomRef = useRef();
   const { user, userPosts } = useUserProfile(receiverId);
@@ -166,7 +166,7 @@ export default function Chats() {
         <footer className="h-max py-2 pt-3   px-2 w-full   flex items-center justify-center   gap-1 relative ">
           <IoArrowBack
             onClick={() => navigate(-1)}
-            className="   text-2xl text-white rounded-full size-8 p-1   active:scale-85"
+            className="  border-2 border-neutral-400 text-2xl text-neutral-200 rounded-full size-8 p-1   active:scale-85"
           />
           <textarea
             onFocus={() => setRows(3)}
@@ -175,7 +175,6 @@ export default function Chats() {
             value={text}
             onChange={(e) => {
               setText(e.target.value);
-              setShowPicker(false);
             }}
             rows={rows}
             className="resize-none rounded-3xl border  border-gray-400 focus:outline-none w-3/4 md:w-1/2 py-3 px-4 text-white "

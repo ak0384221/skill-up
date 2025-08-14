@@ -2,12 +2,12 @@ import { useContext, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import LoginForm from "../Micro/LoginForm";
 import SignupForm from "../Micro/SignupForm";
-import { AuthContext } from "../../Context/AuthContext";
+import { ContextAPI } from "../../Context/ContextAPI";
 import GradientWrapper from "../Micro/GradientWrapper";
 
 export default function Login() {
   const [authType, setAuthType] = useState("login");
-  const { authData, setAuthData } = useContext(AuthContext);
+  const { authData, setAuthData } = useContext(ContextAPI);
   return (
     <GradientWrapper noSpace="true">
       <div className=" h-full  bg-black w-full   rounded-xl  px-8 py-5   ">

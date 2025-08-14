@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 //icons
-import { FaUpload } from "react-icons/fa6";
 import { FaCheckCircle } from "react-icons/fa";
 import { IoCloseCircle } from "react-icons/io5";
 //
@@ -9,7 +8,7 @@ import useUserProfile from "../../hooks/useUserProfile";
 import ShowProfileInfo from "../Micro/showProfileInfo";
 import { useContext, useEffect } from "react";
 import { useState } from "react";
-import { AuthContext } from "../../Context/AuthContext";
+import { ContextAPI } from "../../Context/ContextAPI";
 import { updateUserImageArray } from "../../utils/postsCRUD";
 import UserProfileSkeleton from "../PostSkeleton/userProfileSkeleton";
 import { GrGallery } from "react-icons/gr";
@@ -17,7 +16,7 @@ import { GoUpload } from "react-icons/go";
 //
 
 export default function User() {
-  const { authData } = useContext(AuthContext);
+  const { authData } = useContext(ContextAPI);
   const { id } = useParams();
   const { user, userPosts } = useUserProfile(id);
   const [files, setFiles] = useState(null);

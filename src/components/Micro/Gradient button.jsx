@@ -5,7 +5,7 @@ export default function GradientBtn({
 }) {
   return (
     <div
-      onClick={onClick}
+      {...(onClick && { onClick })}
       className={`bg-radial-ocean w-max  flex justify-center items-center rounded-2xl p-[2px] ${className}`}
     >
       {children}

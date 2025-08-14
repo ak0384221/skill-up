@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { AuthContext } from "../../Context/AuthContext";
+import { ContextAPI } from "../../Context/ContextAPI";
 
 export default function VibeHivesUserCard({ user }) {
-  const { authData } = useContext(AuthContext);
+  const { authData } = useContext(ContextAPI);
 
   return (
     <>

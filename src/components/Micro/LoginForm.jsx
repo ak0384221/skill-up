@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "../../schemas/authSchemas";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { logInAuthHandler } from "../../utils/authRelated";
-import { AuthContext } from "../../Context/AuthContext";
+import { ContextAPI } from "../../Context/ContextAPI";
 import { Link, useNavigate } from "react-router-dom";
 import { CiMail } from "react-icons/ci";
 import Loader from "../shared/loader";
@@ -12,7 +12,7 @@ import Button from "../shared/Button";
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
-  const { authData, setAuthData } = useContext(AuthContext);
+  const { authData, setAuthData } = useContext(ContextAPI);
 
   const navigate = useNavigate();
 

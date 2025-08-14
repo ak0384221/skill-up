@@ -3,10 +3,9 @@ import { Form, useNavigate } from "react-router-dom";
 //built-in
 import Button from "../shared/Button";
 import { uploadPostFormHandler } from "../../utils/uploadRelated";
-import { AuthContext } from "../../Context/AuthContext";
+import { ContextAPI } from "../../Context/ContextAPI";
 import Loader from "../shared/loader";
 import { FiUpload } from "react-icons/fi";
-
 import { PiHighDefinitionFill } from "react-icons/pi";
 import GradientWrapper from "../Micro/GradientWrapper";
 //local
@@ -14,7 +13,7 @@ import GradientWrapper from "../Micro/GradientWrapper";
 export default function CreatePost() {
   const titleRef = useRef(null);
   const navigate = useNavigate();
-  const { authData } = useContext(AuthContext);
+  const { authData } = useContext(ContextAPI);
   const username = authData?.currentUser.displayName;
   const [files, setFiles] = useState(null);
   const [preview, setPreview] = useState(null);

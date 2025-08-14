@@ -4,8 +4,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import App from "./App.jsx";
 import ProtectedRoutes from "./routes/ProtectedRoutes.jsx";
-import ParentContextProvider from "./Context/ParentContext.jsx";
 import Loader from "./components/shared/loader.jsx";
+import ContextAPIprovider from "./Context/ContextAPI.jsx";
 const Chats = lazy(() => import("./components/Micro/Chats.jsx"));
 const Messenger = lazy(() => import("./components/Pages/Messenger.jsx"));
 const Posts = lazy(() => import("./components/Pages/Posts.jsx"));
@@ -21,9 +21,9 @@ const routes = createBrowserRouter([
   {
     path: "/",
     element: (
-      <ParentContextProvider>
+      <ContextAPIprovider>
         <App />
-      </ParentContextProvider>
+      </ContextAPIprovider>
     ),
     children: [
       { path: "/login", element: <Login /> },

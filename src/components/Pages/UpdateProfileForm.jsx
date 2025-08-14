@@ -2,12 +2,12 @@ import { Form, useNavigate } from "react-router-dom";
 import Button from "../shared/Button";
 import { useContext, useEffect, useState } from "react";
 import { handleUpdateProfile } from "../../utils/uploadRelated";
-import { AuthContext } from "../../Context/AuthContext";
+import { ContextAPI } from "../../Context/ContextAPI";
 import useUserProfile from "../../hooks/useUserProfile";
 import GradientWrapper from "../Micro/GradientWrapper";
 
 export default function UpdateProfileForm() {
-  const { authData } = useContext(AuthContext);
+  const { authData } = useContext(ContextAPI);
   const { user } = useUserProfile(authData?.currentUser.uid);
   const navigate = useNavigate();
 

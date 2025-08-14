@@ -4,7 +4,7 @@ import SinglePostCard from "../PostDesign/CompleteSinglePostItem";
 import PostSkeleton from "../PostSkeleton/postSkeleton";
 import { useContext, useReducer } from "react";
 import { postDataRef } from "../../Config/firebase";
-import { AuthContext } from "../../Context/AuthContext";
+import { ContextAPI } from "../../Context/ContextAPI";
 import {
   postsContentReducerMethod,
   postsInitialState,
@@ -12,7 +12,7 @@ import {
 import useInitialPosts from "../../hooks/useInitialPosts";
 
 export default function Posts() {
-  const { authData } = useContext(AuthContext);
+  const { authData } = useContext(ContextAPI);
   const POSTS_LIMIT = 10;
   const [PostsData, dispatch] = useReducer(
     postsContentReducerMethod,

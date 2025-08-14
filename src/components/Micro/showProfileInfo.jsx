@@ -1,11 +1,11 @@
 import { useContext } from "react";
 import { FaBriefcase, FaHome, FaSchool } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../Context/AuthContext";
+import { ContextAPI } from "../../Context/ContextAPI";
 import GradientBtn from "./Gradient button";
 
 export default function ShowProfileInfo({ user, id }) {
-  const { authData } = useContext(AuthContext);
+  const { authData } = useContext(ContextAPI);
 
   return (
     <div className="w-full px-5 md:w-1/2 mx-auto space-y-4 my-[5vh] text-[#e7e4e4]">

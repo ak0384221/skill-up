@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 // built-in
-import { AuthContext } from "../../Context/AuthContext";
+import { ContextAPI } from "../../Context/ContextAPI";
 
 // local
 import { CiTimer } from "react-icons/ci";
@@ -13,7 +13,7 @@ import { removePost } from "../../utils/postsCRUD";
 
 // external
 export default function TopMostInfoCard({ post, isEditing, setIsEditing }) {
-  const { authData } = useContext(AuthContext);
+  const { authData } = useContext(ContextAPI);
   const [openOptions, setOpenOptions] = useState(false);
 
   dayjs.extend(relativeTime);

@@ -1,20 +1,19 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signupSchema } from "../../schemas/authSchemas";
-import { z } from "zod";
 import { useContext, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { CiMail } from "react-icons/ci";
 import { signUpAuthHandler } from "../../utils/authRelated";
-import { AuthContext } from "../../Context/AuthContext";
 import Loader from "../shared/loader";
 import { useNavigate } from "react-router-dom";
 import Button from "../shared/Button";
+import { ContextAPI } from "../../Context/ContextAPI";
 
 export default function SignupForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const { authData, setAuthData } = useContext(AuthContext);
+  const { authData, setAuthData } = useContext(ContextAPI);
   const navigate = useNavigate();
 
   const {

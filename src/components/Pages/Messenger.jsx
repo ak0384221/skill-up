@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { ChatContext } from "../../Context/ChatContext";
 import ChatList from "../Micro/chatlist";
+import { ContextAPI } from "../../Context/ContextAPI";
 export default function Messenger() {
-  const { vibehiveUser } = useContext(ChatContext);
+  const { vibehiveUser } = useContext(ContextAPI);
 
   return (
     <div className="messenger  w-4/5  text-white mt-[12vh] h-max">
