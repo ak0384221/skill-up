@@ -11,8 +11,8 @@ export default function ContextAPIprovider({ children }) {
     isLoading: false,
     isError: false,
   });
-  const [vibehiveUser, setVibehiveUser] = useState([]);
 
+  const [vibehiveUser, setVibehiveUser] = useState([]);
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {

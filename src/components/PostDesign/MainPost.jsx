@@ -6,7 +6,7 @@ import { RxCross2 } from "react-icons/rx";
 import { IoCloudDoneSharp } from "react-icons/io5";
 import { AnimatePresence, motion } from "framer-motion";
 //external
-export default function MainPost({ post, isEditing, setIsEditing, dispatch }) {
+export default function MainPost({ post, isEditing, setIsEditing }) {
   const [editTitle, setEditTitle] = useState(post.title);
 
   function handleTitleChange(evt) {

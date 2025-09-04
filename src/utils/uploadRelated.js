@@ -127,28 +127,6 @@ async function handleUpdateProfile(
   }
 }
 
-// async function imageCompression(file){
-
-//      const options = {
-//         maxSizeMB: 1, // maximum size in MB
-//         maxWidthOrHeight: 1080, // resize image if it's larger
-//         useWebWorker: true,
-//       };
-
-//         try {
-//               // Compress the image
-//               const compressedFile = await imageCompression(file, options);
-
-//               // Set file and preview
-//               setFiles(compressedFile);
-//               const objUrl = URL.createObjectURL(compressedFile);
-//               setPreview(objUrl);
-//             } catch (error) {
-//               console.error("Image compression failed:", error);
-//             }
-
-// }
-
 export {
   uploadPostFormHandler,
   handleUpdateProfile,

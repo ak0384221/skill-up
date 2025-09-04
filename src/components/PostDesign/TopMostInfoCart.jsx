@@ -1,27 +1,21 @@
 import { useContext, useState } from "react";
-// built-in
 import { ContextAPI } from "../../Context/ContextAPI";
-
 // local
 import { CiTimer } from "react-icons/ci";
 import { BsThreeDots } from "react-icons/bs";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
+import { formatDistanceToNow } from "date-fns";
 import { removePost } from "../../utils/postsCRUD";
-
 // external
-export default function TopMostInfoCard({ post, isEditing, setIsEditing }) {
-  const { authData } = useContext(ContextAPI);
+export default function TopMostInfoCard(prop) {
+  const { post, isEditing, setIsEditing } = prop;
+
+  const { authData, dispatch } = useContext(ContextAPI);
   const [openOptions, setOpenOptions] = useState(false);
-
-  dayjs.extend(relativeTime);
-
-  const timeAgo = post?.createdAt?.toDate
-    ? dayjs(post.createdAt.toDate()).fromNow()
-    : "some time ago";
-
+  function relativeTime(timestamp) {
+    return formatDistanceToNow(timestamp?.toDate(), { addSuffix: true });
+  }
   return (
     <div className="upper-Info-Card flex w-full relative justify-between items-center bg-transparent px-2 mt-4 ">
       {/* Left */}
@@ -35,7 +29,8 @@ export default function TopMostInfoCard({ post, isEditing, setIsEditing }) {
           </Link>
 
           <span className="text-[10px] text-[#dfdfdf] font-playwright mx-2 inline-flex items-center">
-            <CiTimer className="inline-block text-[14px] mr-1" /> {timeAgo}
+            <CiTimer className="inline-block text-[14px] mr-1" />{" "}
+            {relativeTime(post?.createdAt)}
           </span>
         </div>
       </div>
@@ -77,7 +72,7 @@ export default function TopMostInfoCard({ post, isEditing, setIsEditing }) {
 
               {authData?.currentUser.uid === post.uid && (
                 <li
-                  onClick={() => removePost(post.id, post.pictureURL)}
+                  onClick={() => removePost(post.id, post.pictureURL, dispatch)}
                   className="py-3 px-4 hover:bg-[#3a0f0f] transition-colors cursor-pointer text-red-400"
                 >
                   Delete post

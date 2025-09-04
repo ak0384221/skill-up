@@ -4,7 +4,7 @@ import BottomMostCard from "./BottomMostCard";
 import MainPost from "./MainPost";
 import TopMostInfoCard from "./TopMostInfoCart";
 //external
-export default function SinglePostCard({ post, dispatch }) {
+export default function SinglePostCard({ post }) {
   const [isEditing, setIsEditing] = useState(false);
 
   return (
@@ -17,12 +17,7 @@ export default function SinglePostCard({ post, dispatch }) {
         isEditing={isEditing}
         setIsEditing={setIsEditing}
       />
-      <MainPost
-        post={post}
-        isEditing={isEditing}
-        setIsEditing={setIsEditing}
-        dispatch={dispatch}
-      />
+      <MainPost post={post} isEditing={isEditing} setIsEditing={setIsEditing} />
       <BottomMostCard post={post} />
     </div>
   );

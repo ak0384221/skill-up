@@ -1,41 +1,41 @@
-import { useEffect } from "react";
-import { query, orderBy, limit, onSnapshot } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { query, orderBy, onSnapshot } from "firebase/firestore";
 
-function useInitialPosts({ authData, postDataRef, POSTS_LIMIT, dispatch }) {
+function usePosts(postDataRef, currentUser) {
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   useEffect(() => {
-    dispatch({ type: "SET_LOADING", payload: { isLoading: true } });
-
-    let unsubscribe = () => {};
-
-    if (authData.currentUser) {
-      const postsQuery = query(
-        postDataRef,
-        orderBy("createdAt", "desc"),
-        limit(POSTS_LIMIT)
-      );
-
-      unsubscribe = onSnapshot(postsQuery, (snapshot) => {
-        const lastDoc = snapshot.docs[snapshot.docs.length - 1];
-        const postslist = snapshot.docs.map((document) => ({
-          id: document.id,
-          ...document.data(),
-        }));
-
-        dispatch({
-          type: "ADD_INITIAL_POSTS",
-          payload: {
-            posts: postslist,
-            lastDoc: lastDoc,
-            hasMore: postslist.length === POSTS_LIMIT,
-          },
-        });
-      });
-    } else {
-      console.log("Not authorized...");
+    if (!currentUser) {
+      setPosts([]);
+      setLoading(false);
+      return;
     }
 
+    const postsQuery = query(postDataRef, orderBy("createdAt", "desc"));
+
+    const unsubscribe = onSnapshot(
+      postsQuery,
+      (snapshot) => {
+        const postsList = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setPosts(postsList);
+        setLoading(false);
+      },
+      (err) => {
+        console.error("Error fetching posts:", err);
+        setError(err);
+        setLoading(false);
+      }
+    );
+
     return () => unsubscribe();
-  }, [authData.currentUser]);
+  }, [currentUser, postDataRef]);
+
+  return { posts, loading, error };
 }
 
-export default useInitialPosts;
+export default usePosts;
