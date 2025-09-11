@@ -66,9 +66,9 @@ export default function TopMostInfoCard(prop) {
                 </li>
               )}
 
-              <li className="py-3 px-4 hover:bg-[#242424] transition-colors cursor-pointer">
+              {/* <li className="py-3 px-4 hover:bg-[#242424] transition-colors cursor-pointer">
                 Remove for me
-              </li>
+              </li> */}
 
               {authData?.currentUser.uid === post.uid && (
                 <li

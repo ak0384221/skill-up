@@ -15,7 +15,7 @@ export default function MainPost({ post, isEditing, setIsEditing }) {
 
   function handleSave() {
     // Replace this with your actual Firestore update function
-    updatepost(post.id, { title: editTitle }, dispatch)
+    updatepost(post.id, { title: editTitle })
       .then(() => {
         setIsEditing(false);
       })
