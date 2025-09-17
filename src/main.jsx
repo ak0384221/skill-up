@@ -11,11 +11,19 @@ const Messenger = lazy(() => import("./components/Pages/Messenger.jsx"));
 const Posts = lazy(() => import("./components/Pages/Posts.jsx"));
 const CreatePost = lazy(() => import("./components/Pages/CreatePosts.jsx"));
 const Login = lazy(() => import("./components/Pages/Login.jsx"));
-
 const User = lazy(() => import("./components/Pages/user.jsx"));
 const UpdateProfileForm = lazy(() =>
   import("./components/Pages/UpdateProfileForm.jsx")
 );
+
+//sentry//
+import * as Sentry from "@sentry/react";
+Sentry.init({
+  dsn: "https://16063b996aeb041fbccab5de1ad94aa8@o4510036086423552.ingest.us.sentry.io/4510036104839168",
+  // Setting this option to true will send default PII data to Sentry.
+  // For example, automatic IP address collection on events
+  sendDefaultPii: true,
+});
 
 const routes = createBrowserRouter([
   {
