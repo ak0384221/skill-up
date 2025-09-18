@@ -2,6 +2,7 @@ import Header from "./components/shared/Header";
 import { Outlet } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
+import * as Sentry from "@sentry/react";
 
 function App() {
   const location = useLocation();
@@ -24,4 +25,4 @@ function App() {
   );
 }
 
-export default App;
+export default Sentry.withProfiler(App);

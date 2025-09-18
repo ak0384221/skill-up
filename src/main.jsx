@@ -19,7 +19,7 @@ const UpdateProfileForm = lazy(() =>
 //sentry//
 import * as Sentry from "@sentry/react";
 Sentry.init({
-  dsn: "https://16063b996aeb041fbccab5de1ad94aa8@o4510036086423552.ingest.us.sentry.io/4510036104839168",
+  dsn: "https://f22df04e29e8c961c3650aa5474c61ce@o4510038714155008.ingest.de.sentry.io/4510038759243856",
   // Setting this option to true will send default PII data to Sentry.
   // For example, automatic IP address collection on events
   sendDefaultPii: true,
