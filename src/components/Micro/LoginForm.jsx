@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "../../schemas/authSchemas";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { logInAuthHandler } from "../../utils/authRelated";
+import { logInAuthHandler, signUpAuthHandler } from "../../utils/authRelated";
 import { ContextAPI } from "../../Context/ContextAPI";
 import { Link, useNavigate } from "react-router-dom";
 import { CiMail } from "react-icons/ci";
@@ -19,6 +19,7 @@ export default function LoginForm() {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(loginSchema),
@@ -31,6 +32,12 @@ export default function LoginForm() {
     });
     logInAuthHandler(data, setAuthData, navigate);
   };
+
+  function handleGuestLogin() {
+    setValue("email", "guest001@gmail.com");
+    setValue("password", "guest001");
+    handleSubmit(onSubmit)();
+  }
 
   return (
     <form
@@ -105,6 +112,10 @@ export default function LoginForm() {
             <CiMail className="text-lg" /> Login
           </>
         )}
+      </Button>
+
+      <Button onClick={handleGuestLogin} className>
+        Continue as Guest
       </Button>
     </form>
   );
