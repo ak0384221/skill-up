@@ -54,30 +54,50 @@ export default function TopMostInfoCard(prop) {
             className="absolute top-full mt-2 right-2 bg-[#1b1b1b] text-white border border-[#7a7979] rounded-lg shadow-lg z-50 w-[55vw] md:w-[30vw] lg:w-[20vw] max-h-60 overflow-y-auto"
           >
             <ul className="divide-y divide-[#2b2b2b] ">
-              {authData?.currentUser.uid === post.uid && (
-                <li
-                  onClick={() => {
+              <li
+                title={`${
+                  authData.currentUser.uid === post.uid
+                    ? "edit post"
+                    : "you can only edit own posts"
+                }`}
+                onClick={() => {
+                  if (authData?.currentUser.uid === post.uid) {
                     setIsEditing(!isEditing);
                     setOpenOptions(false);
-                  }}
-                  className="py-3 px-4 hover:bg-[#242424] transition-colors cursor-pointer"
-                >
-                  Edit post
-                </li>
-              )}
+                  }
+                }}
+                className={`py-3 px-4 hover:bg-[#242424] transition-colors  ${
+                  authData?.currentUser.uid === post.uid
+                    ? "cursor-pointer"
+                    : "cursor-not-allowed disabled"
+                }`}
+              >
+                Edit post
+              </li>
 
               {/* <li className="py-3 px-4 hover:bg-[#242424] transition-colors cursor-pointer">
                 Remove for me
               </li> */}
 
-              {authData?.currentUser.uid === post.uid && (
-                <li
-                  onClick={() => removePost(post.id, post.pictureURL, dispatch)}
-                  className="py-3 px-4 hover:bg-[#3a0f0f] transition-colors cursor-pointer text-red-400"
-                >
-                  Delete post
-                </li>
-              )}
+              <li
+                title={`${
+                  authData.currentUser.uid === post.uid
+                    ? "remove post"
+                    : "you can only delete own posts"
+                }`}
+                onClick={() => {
+                  if (authData?.currentUser.uid === post.uid) {
+                    removePost(post.id, post.pictureURL, dispatch);
+                  }
+                }}
+                className={`py-3 px-4 hover:bg-[#3a0f0f] transition-colors  text-red-400 ${
+                  authData?.currentUser.uid === post.uid
+                    ? "cursor-pointer"
+                    : "cursor-not-allowed disabled"
+                }`}
+              >
+                Delete post
+              </li>
             </ul>
           </motion.div>
         )}
